@@ -10,7 +10,7 @@ namespace ConsoleApp3
     {
 
         // SubscriptionType is used in SubscribedUser class instead of Student and Family classes
-        // because the following input depends on the type of subscription
+        // because the following input (adjusted for either students or families) depends on the type of subscription
         protected string SubscriptionType;
 
         public string FirstName { get; set; }
@@ -24,6 +24,17 @@ namespace ConsoleApp3
 
             return $"User {FirstName} {LastName} (Email:{Email}) has borrowed a book\n";
         }
+
+        // Use of generics - the method is able to print out multiple pieces of information
+        // of different types (e.g. OIB is a string, ID is a guid)
+        public void ReturnListOfInfo<T>(T data)
+        {
+
+            Console.WriteLine(data);
+        }
+
+        
+        
 
     }
 }

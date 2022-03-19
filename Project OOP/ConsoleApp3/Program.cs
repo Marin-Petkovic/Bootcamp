@@ -27,6 +27,8 @@ namespace ConsoleApp3
                 Console.WriteLine("Enter book author: ");
                 book1.Author = Console.ReadLine();
 
+                inventory1.ListOfBooks.Add(book1);
+
                 // Checking for subscription type using a protected property
                 // which primarily belongs to "User" class, but is inherited by "SubscribedUser" class
                 subscribedUser1.GetSubscriptionType();
@@ -47,13 +49,32 @@ namespace ConsoleApp3
                     Console.WriteLine("Enter student's email: ");
                     student1.Email = Console.ReadLine();
 
-                    // As opposed to previous info, ID is taken through a method
+                    Console.WriteLine("Student ID has been created!");
+                    student1.StudentID = Guid.NewGuid();
+
+                    // As opposed to previous info, OIB is taken through a method
                     // because it's private (in this case, confidential info)
-                    student1.GetIdentificationNumber();
+                    student1.GetOIB();
 
                     Console.WriteLine("\n");
                     Console.WriteLine(student1.BorrowBook());
                     Console.WriteLine("\n");
+
+                    Console.WriteLine("Type 1 for user's ID\nType 2 for user's OIB\nType 3 to continue\n");
+                    string input = Console.ReadLine();
+                    if (input == "1")
+                    {
+                        student1.ReturnListOfInfo(student1.ReturnID());
+                    }
+                    else if (input == "2")
+                    {
+                        student1.ReturnListOfInfo(student1.ReturnStudentOIB());
+                    }
+                    else
+                    {
+
+                    }
+
                 }
                 else if (subscribedUser1.ReturnSubscriptionType().ToLower() == "f") 
                 {
@@ -66,16 +87,35 @@ namespace ConsoleApp3
                     Console.WriteLine("Enter family's email: ");
                     family1.Email = Console.ReadLine();
 
-                    family1.GetIdentificationNumber();
+                    Console.WriteLine("Family ID has been created!");
+                    family1.FamilyID = Guid.NewGuid();
+                    Console.WriteLine($"Family ID: {family1.FamilyID}");
+
+                    family1.GetOIB();
 
                     Console.WriteLine("\n");
                     Console.WriteLine(family1.BorrowBook());
                     Console.WriteLine("\n");
+
+                    Console.WriteLine("Type 1 for user's ID\nType 2 for user's OIB\nType 3 to continue\n");
+                    string input = Console.ReadLine();
+                    if (input == "1")
+                    {
+                        family1.ReturnListOfInfo(family1.ReturnID());
+                    }
+                    else if (input == "2")
+                    {
+                        family1.ReturnListOfInfo(family1.ReturnFamilyOIB());
+                    }
+                    else
+                    {
+
+                    }
                 }
 
+                
 
 
-                inventory1.ListOfBooks.Add(book1);
 
 
                 Console.WriteLine("Type 1 to end operation, or anything else to continue.");
@@ -85,13 +125,14 @@ namespace ConsoleApp3
             }
             while (EscapeKey != "1");
 
-            Console.WriteLine("List of borrowed books:\n");
+            Console.WriteLine("List of borrowed books:");
 
             foreach (Book book in inventory1.ListOfBooks)
             {
                 Console.WriteLine(book.InfoAboutBook());
             }
 
+            
 
 
 

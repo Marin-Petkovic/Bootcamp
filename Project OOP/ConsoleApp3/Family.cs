@@ -8,19 +8,29 @@ namespace ConsoleApp3
 {
     public class Family : User
     {
+        public Guid FamilyID { get; set; }
  
-        private string FamilyIdentificationNumber;
+        private string FamilyOIB;
 
         public override string BorrowBook() // overriden with appropriate data (no first name) which applies exclusively to families
         {
             return $"Family {LastName} (Email: {Email}) has borrowed a book.";
         }
 
-        public string GetIdentificationNumber()
+        public void GetOIB()
         {
             Console.WriteLine("Enter identification number: ");
-            FamilyIdentificationNumber = Console.ReadLine();
-            return FamilyIdentificationNumber;
+            FamilyOIB = Console.ReadLine();
+        }
+
+        public string ReturnFamilyOIB()
+        {
+            return FamilyOIB;
+        }
+
+        public Guid ReturnID()
+        {
+            return FamilyID;
         }
 
 

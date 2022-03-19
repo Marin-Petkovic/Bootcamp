@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp3
 {
-    internal class Student : User
+    public class Student : User
     {
 
-        private string StudentIdentificationNumber;
+        public Guid StudentID { get; set; }
+
+        private string StudentOIB;
 
         public string Major { get; set; }
 
@@ -18,12 +20,24 @@ namespace ConsoleApp3
             return $"Student {FirstName} {LastName} (Major: {Major}, Email: {Email}) has borrowed a book.";
         }
 
-        public string GetIdentificationNumber()
+        public void GetOIB()
         {
-            Console.WriteLine("Enter identification number: ");
-            StudentIdentificationNumber = Console.ReadLine();
-            return StudentIdentificationNumber;
+            Console.WriteLine("Enter OIB: ");
+            StudentOIB = Console.ReadLine();
+            
         }
+
+        public string ReturnStudentOIB()
+        {
+            return StudentOIB;
+        }
+        
+        public Guid ReturnID()
+        {
+            return StudentID;
+        }
+        
+
    
 
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp3
 {
-    public class SubscribedUser
+    public class SubscribedUser : User
     {
         protected string SubscriptionType { get; set; }
 

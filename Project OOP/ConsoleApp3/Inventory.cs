@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp3
 {
-    public class Inventory: Book
+    public class Inventory
     {
         public List<Book> ListOfBooks { get; set; }
+
     }
 }
