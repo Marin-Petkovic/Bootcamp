@@ -25,7 +25,7 @@ namespace ConsoleApp3
             return $"User {FirstName} {LastName} (Email:{Email}) has borrowed a book\n";
         }
 
-        // Use of generics - the method is able to print out multiple pieces of information
+        // Use of generics - the method is able to print out pieces of information
         // of different types (e.g. OIB is a string, ID is a guid)
         public void ReturnListOfInfo<T>(T data)
         {
@@ -33,6 +33,7 @@ namespace ConsoleApp3
             Console.WriteLine(data);
         }
 
+        
         
         
 

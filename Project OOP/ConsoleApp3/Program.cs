@@ -60,20 +60,25 @@ namespace ConsoleApp3
                     Console.WriteLine(student1.BorrowBook());
                     Console.WriteLine("\n");
 
-                    Console.WriteLine("Type 1 for user's ID\nType 2 for user's OIB\nType 3 to continue\n");
-                    string input = Console.ReadLine();
-                    if (input == "1")
+                    string input = "3";
+                    do
                     {
-                        student1.ReturnListOfInfo(student1.ReturnID());
-                    }
-                    else if (input == "2")
-                    {
-                        student1.ReturnListOfInfo(student1.ReturnStudentOIB());
-                    }
-                    else
-                    {
+                        Console.WriteLine("Type:\n1 for student's ID\n2 for user's OIB\n3 to continue\n");
+                        input = Console.ReadLine();
+                        if (input == "1")
+                        {
+                            student1.ReturnListOfInfo(student1.ReturnStudentID());
+                        }
+                        else if (input == "2")
+                        {
+                            student1.ReturnListOfInfo(student1.ReturnStudentOIB());
+                        }
+                        else
+                        {
 
+                        }
                     }
+                    while (input != "3");
 
                 }
                 else if (subscribedUser1.ReturnSubscriptionType().ToLower() == "f") 
@@ -89,7 +94,6 @@ namespace ConsoleApp3
 
                     Console.WriteLine("Family ID has been created!");
                     family1.FamilyID = Guid.NewGuid();
-                    Console.WriteLine($"Family ID: {family1.FamilyID}");
 
                     family1.GetOIB();
 
@@ -97,30 +101,29 @@ namespace ConsoleApp3
                     Console.WriteLine(family1.BorrowBook());
                     Console.WriteLine("\n");
 
-                    Console.WriteLine("Type 1 for user's ID\nType 2 for user's OIB\nType 3 to continue\n");
-                    string input = Console.ReadLine();
-                    if (input == "1")
+                    string input = "3";
+                    do
                     {
-                        family1.ReturnListOfInfo(family1.ReturnID());
-                    }
-                    else if (input == "2")
-                    {
-                        family1.ReturnListOfInfo(family1.ReturnFamilyOIB());
-                    }
-                    else
-                    {
+                        Console.WriteLine("Type:\n1 for family's ID\n2 for user's OIB\n3 to continue\n");
+                        input = Console.ReadLine();
+                        if (input == "1")
+                        {
+                            family1.ReturnListOfInfo(family1.ReturnID());
+                        }
+                        else if (input == "2")
+                        {
+                            family1.ReturnListOfInfo(family1.ReturnFamilyOIB());
+                        }
+                        else
+                        {
 
+                        }
                     }
+                    while (input != "3");
                 }
 
-                
-
-
-
-
-                Console.WriteLine("Type 1 to end operation, or anything else to continue.");
+                Console.WriteLine("Type 1 to see a list of borrowed books, or anything else to add another user.");
                 EscapeKey = Console.ReadLine();
-
 
             }
             while (EscapeKey != "1");
@@ -131,15 +134,6 @@ namespace ConsoleApp3
             {
                 Console.WriteLine(book.InfoAboutBook());
             }
-
-            
-
-
-
-
-
-
-
         }
     }
 }

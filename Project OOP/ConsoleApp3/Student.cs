@@ -32,7 +32,7 @@ namespace ConsoleApp3
             return StudentOIB;
         }
         
-        public Guid ReturnID()
+        public Guid ReturnStudentID()
         {
             return StudentID;
         }

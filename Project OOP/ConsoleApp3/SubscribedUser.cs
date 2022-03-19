@@ -8,12 +8,14 @@ namespace ConsoleApp3
 {
     public class SubscribedUser : User
     {
-        protected string SubscriptionType { get; set; }
-
         public void GetSubscriptionType()
         {
-            Console.WriteLine("Enter subscription type (\"s\" for student or \"f\" for family): ");
-            SubscriptionType = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("Enter subscription type (\"s\" for student or \"f\" for family): ");
+                SubscriptionType = Console.ReadLine();
+            }
+            while (SubscriptionType.ToLower() != "s" && SubscriptionType.ToLower() != "f");
         }
 
         public string ReturnSubscriptionType()

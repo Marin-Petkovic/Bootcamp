@@ -19,7 +19,7 @@ namespace ConsoleApp3
 
         public void GetOIB()
         {
-            Console.WriteLine("Enter identification number: ");
+            Console.WriteLine("Enter OIB: ");
             FamilyOIB = Console.ReadLine();
         }
 

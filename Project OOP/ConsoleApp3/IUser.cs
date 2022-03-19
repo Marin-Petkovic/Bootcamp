@@ -13,5 +13,8 @@ namespace ConsoleApp3
         string LastName { get; set; }
 
         string Email { get; set; }
+
+        string BorrowBook();
+        
     }
 }
