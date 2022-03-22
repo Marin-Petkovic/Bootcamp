@@ -43,7 +43,7 @@ namespace TestApplication.WebApi.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"No one is currently working on this project");
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"The project doesn't exist");
             }
         }
 
@@ -59,16 +59,16 @@ namespace TestApplication.WebApi.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, $"Developer not found");
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Developer not found");
             }     
         }
 
         
         [HttpDelete]
         [Route("api/DeleteDeveloper")]
-        public HttpResponseMessage DeleteDeveloperByID(Developer developer)
+        public HttpResponseMessage DeleteDeveloperByID(string id)
         {
-            Developer result = listOfDevelopers.Find(x => x.DeveloperID == developer.DeveloperID);
+            Developer result = listOfDevelopers.Find(x => x.DeveloperID == id);
             
             if (result != null)
             {
@@ -99,9 +99,9 @@ namespace TestApplication.WebApi.Controllers
 
         [HttpGet]
         [Route("api/RetrieveDeveloper")]
-        public HttpResponseMessage RetrieveDeveloperInfoByID([FromUri] Developer developer)
+        public HttpResponseMessage RetrieveDeveloperInfoByID(string id)
         {
-            Developer result = listOfDevelopers.Find(x => x.DeveloperID == developer.DeveloperID);
+            Developer result = listOfDevelopers.Find(x => x.DeveloperID == id);
             if (result != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, result);
@@ -119,10 +119,6 @@ namespace TestApplication.WebApi.Controllers
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string DeveloperID { get; set; }
-        public string WorkingOnProject { get; set; }
-        public string InfoAboutEmployee()
-        {
-            return $"ID: {DeveloperID} {FirstName} {LastName}, Branch: {WorkingOnProject} ";
-        }        
+        public string WorkingOnProject { get; set; }     
     }
 }

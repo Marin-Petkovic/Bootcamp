@@ -38,10 +38,10 @@ namespace TestApplication.WebApi.Controllers
         
 
         [HttpPut]
-        [Route()]
+        [Route("api/UpdateProject")]
         public HttpResponseMessage UpdateNumberOfDevsWorking(string id, string number)
         {
-            Project result = listOfProjects.Find(x => x.NumberOfDevsWorking == number);
+            Project result = listOfProjects.Find(x => x.ProjectID == id);
             if (result != null)
             {
                 result.NumberOfDevsWorking = number;
@@ -55,13 +55,14 @@ namespace TestApplication.WebApi.Controllers
    
 
         [HttpDelete]
-        public HttpResponseMessage DeleteByID(string id)
+        [Route("api/DeleteProject")]
+        public HttpResponseMessage DeleteProjectByID(string id)
         {
             Project result = listOfProjects.Find(x => x.ProjectID == id);
             if (result != null)
             {
                 listOfProjects.Remove(result);
-                return Request.CreateResponse(HttpStatusCode.OK, listOfProjects);
+                return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             else
             {
