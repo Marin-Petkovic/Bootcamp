@@ -3,7 +3,8 @@ CREATE TABLE Developer (
 DeveloperID int IDENTITY(100, 1) PRIMARY KEY,
 FirstName varchar(20),
 Lastname varchar(20),
-WorkingOnProjectID int
+ProjectID int,
+CONSTRAINT FK_ProjectDeveloper FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID)
 );
 
 CREATE TABLE Project (
@@ -15,20 +16,20 @@ StartDate date
 
 -- Add foreign key (after creating Project table because
 -- it has to have a reference)
-ALTER TABLE Developer
-ADD FOREIGN KEY(WorkingOnProjectID)
-REFERENCES Project(ProjectID)
-ON DELETE SET NULL;
+--ALTER TABLE Developer
+--ADD FOREIGN KEY(ProjectID)
+--REFERENCES Project(ProjectID)
+--ON DELETE SET NULL;
 
 
 
 
-INSERT INTO Developer (FirstName, LastName, WorkingOnProjectID) VALUES
-('John', 'Doe', '1'),
-('Oliver', 'Wilson', '1'),
-('Alma', 'Gomez', '2'),
-('Paula', 'Terry', '2'),
-('Jon', 'Joseph', '2');
+INSERT INTO Developer (FirstName, LastName, ProjectID) VALUES
+('John', 'Doe', 1),
+('Oliver', 'Wilson', 1),
+('Alma', 'Gomez', 2),
+('Paula', 'Terry', 2),
+('Jon', 'Joseph', 2);
 
 INSERT INTO Project VALUES
 (1, 'BookInventory', 'GISKO', '2022-03-23'),
@@ -40,34 +41,66 @@ INSERT INTO Project VALUES
 SELECT * FROM Developer;
 SELECT * FROM Project;
 
---select all devs (their names) working on a project
+--filtering, select all devs (their names) working on a project
 SELECT FirstName, LastName
 FROM Developer
-WHERE WorkingOnProjectID=1;
+WHERE ProjectID=1;
+
+--sorting
+SELECT * FROM Developer
+ORDER BY LastName DESC;
+
+--paging
+SELECT * FROM Developer
+ORDER BY LastName DESC
+OFFSET 0 ROWS
+FETCH NEXT 2 ROWS ONLY;
 
 
 DELETE FROM Project
 WHERE ProjectID=2;
 
---add another column
+
 ALTER TABLE Developer
 ADD Salary int;
 
 
 UPDATE Developer
 SET Salary=7000
-WHERE WorkingOnProjectID=1;
+WHERE ProjectID=1;
 
 UPDATE Developer
 SET Salary=5500
-WHERE WorkingOnProjectID=2;
+WHERE ProjectID=2;
 
 UPDATE Developer
 SET Salary=6000
 WHERE Salary<=5500;
 
 
+-- inner join, joins devs (their names) with respective project and client names
+SELECT Developer.Firstname, Developer.Lastname, Project.ProjectName, Project.ClientName
+FROM Developer
+INNER JOIN Project ON Developer.ProjectID=Project.ProjectID;
 
+--left join
+SELECT Developer.FirstName, Developer.LastName, Project.ProjectName
+FROM Developer
+LEFT JOIN Project
+ON Developer.ProjectID=Project.ProjectID;
 
+--right join
+SELECT Developer.FirstName, Developer.LastName, Project.ProjectName
+FROM Developer
+RIGHT JOIN Project
+ON Developer.ProjectID=Project.ProjectID;
+
+--index
+CREATE INDEX Index1 ON Developer (LastName DESC);
+
+SELECT * FROM Developer
+WHERE LastName = 'Joseph';
+
+DROP INDEX Index1 ON Project;
 DROP TABLE Developer;
 DROP TABLE Project;
