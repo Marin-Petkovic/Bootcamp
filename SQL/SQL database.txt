@@ -1,19 +1,20 @@
--- Create two tables
+-- Create two tables (Developer and Project)
 CREATE TABLE Developer (
-	DeveloperID int IDENTITY(100, 1) PRIMARY KEY,
-	FirstName varchar(20),
-	LastName varchar(20),
-	WorkingOnProjectID int
+DeveloperID int IDENTITY(100, 1) PRIMARY KEY,
+FirstName varchar(20),
+Lastname varchar(20),
+WorkingOnProjectID int
 );
 
 CREATE TABLE Project (
-	ProjectID int IDENTITY(1, 1) PRIMARY KEY,
-	ProjectName varchar(20),
-	ClientName varchar(20),
-	StartDate date
+ProjectID int PRIMARY KEY,
+ProjectName varchar(20),
+ClientName varchar(20),
+StartDate date
 );
 
-
+-- Add foreign key (after creating Project table because
+-- it has to have a reference)
 ALTER TABLE Developer
 ADD FOREIGN KEY(WorkingOnProjectID)
 REFERENCES Project(ProjectID)
@@ -21,7 +22,7 @@ ON DELETE SET NULL;
 
 
 
---Insert values
+
 INSERT INTO Developer (FirstName, LastName, WorkingOnProjectID) VALUES
 ('John', 'Doe', '1'),
 ('Oliver', 'Wilson', '1'),
@@ -29,38 +30,30 @@ INSERT INTO Developer (FirstName, LastName, WorkingOnProjectID) VALUES
 ('Paula', 'Terry', '2'),
 ('Jon', 'Joseph', '2');
 
-INSERT INTO Project(ProjectName, ClientName, StartDate) VALUES
-('BookInventory', 'GISKO', '2022-03-23'),
-('WebApp', 'GISKO', '2022-01-06'),
-('FitnessApp', 'PolleoSport', '2022-06-21');
+INSERT INTO Project VALUES
+(1, 'BookInventory', 'GISKO', '2022-03-23'),
+(2, 'WebApp', 'GISKO', '2022-01-06'),
+(3, 'FitnessApp', 'PolleoSport', '2022-06-21');
 
 
 
-
-
---Select
 SELECT * FROM Developer;
-DROP TABLE Developer;
-
 SELECT * FROM Project;
-DROP TABLE Project;
 
---Select names of devs working on some project
+--select all devs (their names) working on a project
 SELECT FirstName, LastName
 FROM Developer
 WHERE WorkingOnProjectID=1;
 
 
-
 DELETE FROM Project
 WHERE ProjectID=2;
 
-
---Add new column (Salary)
+--add another column
 ALTER TABLE Developer
 ADD Salary int;
 
---Update
+
 UPDATE Developer
 SET Salary=7000
 WHERE WorkingOnProjectID=1;
@@ -72,3 +65,9 @@ WHERE WorkingOnProjectID=2;
 UPDATE Developer
 SET Salary=6000
 WHERE Salary<=5500;
+
+
+
+
+DROP TABLE Developer;
+DROP TABLE Project;
