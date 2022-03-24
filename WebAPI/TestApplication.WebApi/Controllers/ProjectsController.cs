@@ -5,12 +5,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace TestApplication.WebApi.Controllers
 {
     public class ProjectsController : ApiController
     {
-        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
 
         //static List<Project> listOfProjects = new List<Project>();
      
@@ -57,14 +58,14 @@ namespace TestApplication.WebApi.Controllers
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            SqlCommand command = new SqlCommand($"INSERT INTO Project (ProjectID, ProjectName, ClientName) VALUES ({project.ProjectID}, '{project.ProjectName}', '{project.ClientName}')", connection);
+            //SqlCommand command = new SqlCommand($"INSERT INTO Project (ProjectID, ProjectName, ClientName) VALUES ({project.ProjectID}, '{project.ProjectName}', '{project.ClientName}')", connection);
+            //connection.Open();
+            //SqlDataReader reader = command.ExecuteReader();
+            //connection.Close();
 
-            connection.Open();
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            connection.Close();
-
+            SqlDataAdapter adapter = new SqlDataAdapter($"INSERT INTO Project (ProjectID, ProjectName, ClientName) VALUES ({project.ProjectID}, '{project.ProjectName}', '{project.ClientName}')", connection);
+            DataSet projects = new DataSet();
+            adapter.Fill(projects, "Project");
             return Request.CreateResponse(HttpStatusCode.OK, $"Inserted!");
         }
 
@@ -103,24 +104,7 @@ namespace TestApplication.WebApi.Controllers
             connection.Close();
 
             return Request.CreateResponse(HttpStatusCode.OK, $"Project deleted!");
-        }
-
-        //Hardcoded - needs to be changed
-        [HttpPost]
-        [Route("api/CreateProjectTable")]
-        public HttpResponseMessage CreateProject()
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-
-            SqlCommand command = new SqlCommand("CREATE TABLE TestTable;", connection);
-
-            connection.Open();
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            connection.Close();
-            return Request.CreateResponse(HttpStatusCode.OK, $"Table created!");
-        }
+        } 
     }
 
     public class Project

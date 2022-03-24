@@ -5,24 +5,25 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace TestApplication.WebApi.Controllers
 {
     public class ValuesController : ApiController
     {
-        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
-
-        
-
-        // creates, retrieves, updates and deletes instances (or particular information) of developers in a company
-
-        //static List<Developer> listOfDevelopers = new List<Developer>();
-
-        // reader only on select
-        // use adapter for others
+        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
 
 
-        [HttpGet]
+
+           // creates, retrieves, updates and deletes instances (or particular information) of developers in a company
+
+           //static List<Developer> listOfDevelopers = new List<Developer>();
+
+           // reader only on select
+           // use adapter for others
+
+
+           [HttpGet]
         [Route("api/RetrieveListOfDevs")]
         public HttpResponseMessage RetrieveListOfDevelopers()
         {
@@ -96,14 +97,15 @@ namespace TestApplication.WebApi.Controllers
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            SqlCommand command = new SqlCommand($"INSERT INTO Developer (FirstName, LastName, ProjectID) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID})", connection);
+            //SqlCommand command = new SqlCommand($"INSERT INTO Developer (FirstName, LastName, ProjectID) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID})", connection);
+            //connection.Open();
+            //SqlDataReader reader = command.ExecuteReader();
+            //connection.Close();
 
-            connection.Open();
-
-            SqlDataReader reader = command.ExecuteReader();
-
-
-            connection.Close();
+            SqlDataAdapter adapter = new SqlDataAdapter
+                ($"INSERT INTO Developer (FirstName, LastName, ProjectID) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID})", connection);
+            DataSet developers = new DataSet();
+            adapter.Fill(developers, "Developer");
 
             return Request.CreateResponse(HttpStatusCode.OK, $"Inserted!");
         }
@@ -111,10 +113,17 @@ namespace TestApplication.WebApi.Controllers
         
         [HttpPut]
         [Route("api/UpdateDeveloper")]
-        public HttpResponseMessage UpdateDeveloperByID(int projectId, int devId)
+        public HttpResponseMessage UpdateDeveloperByID(int projectId, int devId) // change project on which developer is working
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
+            SqlDataAdapter adapter = new SqlDataAdapter($"UPDATE Developer SET ProjectID='{projectId}' WHERE DeveloperID='{devId}'", connection);
+            DataSet developers = new DataSet();
+            adapter.Fill(developers, "Developer");
+
+            return Request.CreateResponse(HttpStatusCode.OK, $"Updated!");
+
+            /*
             SqlCommand command2 = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{devId}'", connection);
             connection.Open();
             SqlDataReader reader = command2.ExecuteReader();
@@ -129,6 +138,7 @@ namespace TestApplication.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.OK, $"Not found");
             }
+            */
         }
         
 
