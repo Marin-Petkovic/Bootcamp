@@ -23,7 +23,7 @@ namespace TestApplication.WebApi.Controllers
            // use adapter for others
 
 
-           [HttpGet]
+        [HttpGet]
         [Route("api/RetrieveListOfDevs")]
         public HttpResponseMessage RetrieveListOfDevelopers()
         {
@@ -117,13 +117,15 @@ namespace TestApplication.WebApi.Controllers
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            SqlDataAdapter adapter = new SqlDataAdapter($"UPDATE Developer SET ProjectID='{projectId}' WHERE DeveloperID='{devId}'", connection);
-            DataSet developers = new DataSet();
-            adapter.Fill(developers, "Developer");
-
-            return Request.CreateResponse(HttpStatusCode.OK, $"Updated!");
-
             /*
+            SqlDataAdapter adapter = new SqlDataAdapter($"SELECT * FROM Developer;", connection);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds); // data set filled with all rows from Developer table
+            */
+
+
+
+            
             SqlCommand command2 = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{devId}'", connection);
             connection.Open();
             SqlDataReader reader = command2.ExecuteReader();
@@ -138,7 +140,7 @@ namespace TestApplication.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.OK, $"Not found");
             }
-            */
+            
         }
         
 
