@@ -4,111 +4,179 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.SqlClient;
 
 namespace TestApplication.WebApi.Controllers
 {
     public class ValuesController : ApiController
     {
+        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
+
+        
+
         // creates, retrieves, updates and deletes instances (or particular information) of developers in a company
 
-        static List<Developer> listOfDevelopers = new List<Developer>();
-        
+        //static List<Developer> listOfDevelopers = new List<Developer>();
 
-        [HttpPost]
-        [Route("api/AddDeveloper")]
-        public HttpResponseMessage CreateDeveloper(Developer developer)
+        // reader only on select
+        // use adapter for others
+
+
+        [HttpGet]
+        [Route("api/RetrieveListOfDevs")]
+        public HttpResponseMessage RetrieveListOfDevelopers()
         {
-            listOfDevelopers.Add(developer);
-            
-            return Request.CreateResponse(HttpStatusCode.OK, developer);
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            SqlCommand command = new SqlCommand("SELECT * FROM Developer;", connection);
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {               
+                List<Developer> listOfDevelopers1 = new List<Developer>();
+                while (reader.Read())
+                {
+                    Developer developer = new Developer();
+                    developer.DeveloperID = reader.GetInt32(0);
+                    developer.FirstName = reader.GetString(1);
+                    developer.LastName = reader.GetString(2);
+                    developer.ProjectID = reader.GetInt32(3);
+
+                    listOfDevelopers1.Add(developer);
+                }
+                connection.Close();
+                return Request.CreateResponse(HttpStatusCode.OK, listOfDevelopers1);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
         }
-        
+
         
         [HttpGet]
         [Route("api/RetrieveDevsOnProject")]
-        public HttpResponseMessage RetrieveDevelopersOnProject(string projectWorked)
+        public HttpResponseMessage RetrieveDevelopersOnProject(int id)
         {
-            List<Developer> developersWorking = new List<Developer>();
-            
-            foreach (Developer developer in listOfDevelopers)
-            {
-                if (developer.WorkingOnProject == projectWorked)
-                    {
-                        developersWorking.Add(developer);
-                    }
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE ProjectID='{id}'", connection);
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {                
+                List<Developer> listOfDevs = new List<Developer>();
+                while (reader.Read())
+                {
+                    Developer developer = new Developer();
+                    developer.DeveloperID = reader.GetInt32(0);
+                    developer.FirstName = reader.GetString(1);
+                    developer.LastName = reader.GetString(2);
+                    developer.ProjectID = reader.GetInt32(3);
+
+                    listOfDevs.Add(developer);
                 }
-            if (developersWorking.Count > 0)
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, developersWorking);
+                connection.Close();
+                return Request.CreateResponse(HttpStatusCode.OK, listOfDevs);
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"The project doesn't exist");
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Either no such project or no devs working on it");
             }
         }
 
+        [HttpPost]
+        [Route("api/InsertDev")]
+        public HttpResponseMessage InsertDeveloper(Developer developer)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            SqlCommand command = new SqlCommand($"INSERT INTO Developer (FirstName, LastName, ProjectID) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID})", connection);
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+
+            connection.Close();
+
+            return Request.CreateResponse(HttpStatusCode.OK, $"Inserted!");
+        }
+
+        
         [HttpPut]
         [Route("api/UpdateDeveloper")]
-        public HttpResponseMessage UpdateDeveloperProjectByID(string id, string projectWorked)
+        public HttpResponseMessage UpdateDeveloperByID(int projectId, int devId)
         {
-            Developer result = listOfDevelopers.Find(x => x.DeveloperID == id);
-            if (result != null)
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            SqlCommand command2 = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{devId}'", connection);
+            connection.Open();
+            SqlDataReader reader = command2.ExecuteReader();
+            if (reader.HasRows)
             {
-                result.WorkingOnProject = projectWorked;
-                return Request.CreateResponse(HttpStatusCode.OK, result);
+                reader.Close();
+                SqlCommand command = new SqlCommand($"UPDATE Developer SET ProjectID='{projectId}' WHERE DeveloperID='{devId}'", connection);
+                reader = command.ExecuteReader();
+                return Request.CreateResponse(HttpStatusCode.OK, $"Updated!");
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"Developer not found");
-            }     
+                return Request.CreateResponse(HttpStatusCode.OK, $"Not found");
+            }
         }
+        
 
         
         [HttpDelete]
-        [Route("api/DeleteDeveloper")]
-        public HttpResponseMessage DeleteDeveloperByID(string id)
+        [Route("api/DeleteDev")]
+        public HttpResponseMessage DeleteDeveloperByID(int id)
         {
-            Developer result = listOfDevelopers.Find(x => x.DeveloperID == id);
-            
-            if (result != null)
-            {
-                listOfDevelopers.Remove(result);
-                return Request.CreateResponse(HttpStatusCode.OK,result);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"Developer not found");
-            }            
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            SqlCommand command = new SqlCommand($"DELETE FROM Developer WHERE DeveloperID='{id}'", connection);
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            return Request.CreateResponse(HttpStatusCode.OK, $"Deleted!");   
         }
 
-        
 
         [HttpGet]
-        [Route("api/RetrieveList")]
-        public HttpResponseMessage RetrieveList()
+        [Route("api/RetrieveDev")]
+        public HttpResponseMessage RetrieveDeveloperInfoByID(int id)
         {
-            if (listOfDevelopers.Count > 0)
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{id}'", connection);
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, listOfDevelopers);
+                Developer developer = new Developer();
+                while (reader.Read())
+                { 
+                    developer.DeveloperID = reader.GetInt32(0);
+                    developer.FirstName = reader.GetString(1);
+                    developer.LastName = reader.GetString(2);
+                    developer.ProjectID = reader.GetInt32(3);
+                }
+                connection.Close();
+                return Request.CreateResponse(HttpStatusCode.OK, developer);
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"List is empty");
-            }            
-        }
-
-        [HttpGet]
-        [Route("api/RetrieveDeveloper")]
-        public HttpResponseMessage RetrieveDeveloperInfoByID(string id)
-        {
-            Developer result = listOfDevelopers.Find(x => x.DeveloperID == id);
-            if (result != null)
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, result);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"Developer not found");
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
             }
         }
     }
@@ -118,7 +186,7 @@ namespace TestApplication.WebApi.Controllers
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string DeveloperID { get; set; }
-        public string WorkingOnProject { get; set; }     
+        public int DeveloperID { get; set; }
+        public int ProjectID { get; set; }     
     }
 }
