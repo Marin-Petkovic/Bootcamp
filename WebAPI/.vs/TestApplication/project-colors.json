@@ -5,7 +5,17 @@
       "ProjectGuid": "91abb180-e8b8-4e00-aca1-cad81741205f",
       "DisplayName": "TestApplication.WebApi",
       "ColorIndex": 0
+    },
+    "dc49b414-6acc-4940-b84f-797bca6ef19d": {
+      "ProjectGuid": "dc49b414-6acc-4940-b84f-797bca6ef19d",
+      "DisplayName": "TestApplication.Service",
+      "ColorIndex": 1
+    },
+    "c6705cde-ed11-4f9f-b0d6-1fab7a3a388f": {
+      "ProjectGuid": "c6705cde-ed11-4f9f-b0d6-1fab7a3a388f",
+      "DisplayName": "TestApplication.Repository",
+      "ColorIndex": 2
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 3
 }

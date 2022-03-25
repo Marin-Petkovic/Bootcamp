@@ -1,0 +1,9 @@
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\bin\Debug\TestApplication.Repository.dll
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\bin\Debug\TestApplication.Repository.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\bin\Debug\TestApplicationModel.dll
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\bin\Debug\TestApplicationModel.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.csproj.AssemblyReference.cache
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.csproj.CoreCompileInputs.cache
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.csproj.CopyComplete
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.dll
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.pdb

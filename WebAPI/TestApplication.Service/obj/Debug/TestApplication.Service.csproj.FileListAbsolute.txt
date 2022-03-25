@@ -1,0 +1,11 @@
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\obj\Debug\TestApplication.Service.csproj.AssemblyReference.cache
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\obj\Debug\TestApplication.Service.csproj.CoreCompileInputs.cache
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Service.dll
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Service.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Repository.dll
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\bin\Debug\TestApplicationModel.dll
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Repository.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\bin\Debug\TestApplicationModel.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\obj\Debug\TestApplication.Service.csproj.CopyComplete
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\obj\Debug\TestApplication.Service.dll
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\obj\Debug\TestApplication.Service.pdb

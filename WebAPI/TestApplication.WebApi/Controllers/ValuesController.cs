@@ -6,27 +6,58 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data.SqlClient;
 using System.Data;
+using TestApplication.Service;
+using TestApplicationModel;
 
 namespace TestApplication.WebApi.Controllers
 {
+    
     public class ValuesController : ApiController
     {
-        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
+        // creates, retrieves, updates and deletes instances (or particular information) of developers in a company
 
 
-
-           // creates, retrieves, updates and deletes instances (or particular information) of developers in a company
-
-           //static List<Developer> listOfDevelopers = new List<Developer>();
-
-           // reader only on select
-           // use adapter for others
+        // reader only on select
+        // use adapter for others
 
 
         [HttpGet]
         [Route("api/RetrieveListOfDevs")]
         public HttpResponseMessage RetrieveListOfDevelopers()
         {
+            DeveloperService service = new DeveloperService();
+            List<Developer> developers = new List<Developer>();
+            List<DeveloperRest> developersMapped = new List<DeveloperRest>();
+
+            developers = service.RetrieveDevs();
+
+            if (developers != null)
+            {
+                foreach (Developer developer in developers)
+                {
+                    DeveloperRest devRest = new DeveloperRest();
+                    devRest.FirstName = developer.FirstName;
+                    devRest.LastName = developer.LastName;
+                    devRest.ProjectID = developer.ProjectID;
+
+                    developersMapped.Add(devRest);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, developersMapped);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, $"Not found");
+            }
+
+
+
+            
+
+
+            // old code - partially transfered to repository
+            /*
             SqlConnection connection = new SqlConnection(connectionString);
 
             SqlCommand command = new SqlCommand("SELECT * FROM Developer;", connection);
@@ -55,6 +86,7 @@ namespace TestApplication.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
+            */
         }
 
         
@@ -62,6 +94,35 @@ namespace TestApplication.WebApi.Controllers
         [Route("api/RetrieveDevsOnProject")]
         public HttpResponseMessage RetrieveDevelopersOnProject(int id)
         {
+
+            DeveloperService service = new DeveloperService();
+            List<Developer> developers = new List<Developer>();
+            List<DeveloperRest> developersMapped = new List<DeveloperRest>();
+
+            developers = service.DevsOnProject(id);
+
+            if (developers != null)
+            {
+                foreach (Developer developer in developers)
+                {
+                    DeveloperRest devRest = new DeveloperRest();
+                    devRest.FirstName = developer.FirstName;
+                    devRest.LastName = developer.LastName;
+                    devRest.ProjectID = developer.ProjectID;
+
+                    developersMapped.Add(devRest);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, developersMapped);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, $"Not found");
+            }
+
+
+
+            /*
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE ProjectID='{id}'", connection);
 
@@ -89,6 +150,8 @@ namespace TestApplication.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Either no such project or no devs working on it");
             }
+            */
+
         }
 
         [HttpPost]
@@ -157,6 +220,7 @@ namespace TestApplication.WebApi.Controllers
 
             SqlDataReader reader = command.ExecuteReader();
 
+            connection.Close();
             return Request.CreateResponse(HttpStatusCode.OK, $"Deleted!");   
         }
 
@@ -193,12 +257,13 @@ namespace TestApplication.WebApi.Controllers
         }
     }
 
-
-    public class Developer
+    
+    public class DeveloperRest
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int DeveloperID { get; set; }
+        //public int DeveloperID { get; set; }
         public int ProjectID { get; set; }     
     }
+    
 }

@@ -11,10 +11,10 @@ namespace TestApplication.WebApi.Controllers
 {
     public class ProjectsController : ApiController
     {
-        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
 
-        //static List<Project> listOfProjects = new List<Project>();
-     
+           //static List<Project> listOfProjects = new List<Project>();
+
         [HttpGet]
         [Route("api/RetrieveProjects")]
         public HttpResponseMessage RetrieveProjects()
@@ -58,16 +58,22 @@ namespace TestApplication.WebApi.Controllers
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
-            //SqlCommand command = new SqlCommand($"INSERT INTO Project (ProjectID, ProjectName, ClientName) VALUES ({project.ProjectID}, '{project.ProjectName}', '{project.ClientName}')", connection);
-            //connection.Open();
-            //SqlDataReader reader = command.ExecuteReader();
-            //connection.Close();
+            SqlCommand command = new SqlCommand($"INSERT INTO Project (ProjectID, ProjectName, ClientName) VALUES ({project.ProjectID}, '{project.ProjectName}', '{project.ClientName}')", connection);
+            connection.Open();
 
-            SqlDataAdapter adapter = new SqlDataAdapter($"INSERT INTO Project (ProjectID, ProjectName, ClientName) VALUES ({project.ProjectID}, '{project.ProjectName}', '{project.ClientName}')", connection);
-            DataSet projects = new DataSet();
-            adapter.Fill(projects, "Project");
+
+            
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+
+
+            connection.Close();
             return Request.CreateResponse(HttpStatusCode.OK, $"Inserted!");
         }
+
+
 
         /*
         [HttpPut]
