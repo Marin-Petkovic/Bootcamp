@@ -13,8 +13,7 @@ namespace TestApplication.WebApi.Controllers
 {
     public class ProjectsController : ApiController
     {
-        // delete later
-        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
+       
 
 
 
@@ -51,62 +50,71 @@ namespace TestApplication.WebApi.Controllers
 
         [HttpPost]
         [Route("api/InsertProject")]
-        public HttpResponseMessage InsertProject(ProjectRest project)
+        public HttpResponseMessage InsertProject(Project project)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            ProjectService service = new ProjectService();
+            Project newProject = new Project();
 
-            SqlCommand command = new SqlCommand($"INSERT INTO Project (ProjectID, ProjectName, ClientName) VALUES ({project.ProjectID}, '{project.ProjectName}', '{project.ClientName}')", connection);
-            connection.Open();
+            newProject = service.InsertProject(project);
 
+            ProjectRest projectRest = new ProjectRest();
+            projectRest.ProjectID = newProject.ProjectID;
+            projectRest.ProjectName = newProject.ProjectName;
+            projectRest.ClientName = newProject.ClientName;
 
-            
-
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.InsertCommand = command;
-            adapter.InsertCommand.ExecuteNonQuery();
-
-
-            connection.Close();
-            return Request.CreateResponse(HttpStatusCode.OK, $"Inserted!");
+            return Request.CreateResponse(HttpStatusCode.OK, projectRest);
         }
 
 
 
-        /*
+        
         [HttpPut]
         [Route("api/UpdateProject")]
-        public HttpResponseMessage UpdateNumberOfDevsWorking(int id, string number)
+        public HttpResponseMessage UpdateProjectNameByID(int id, string projectName)
         {
-            Project result = listOfProjects.Find(x => x.ProjectID == id);
-            if (result != null)
+            ProjectService service = new ProjectService();
+            Project newProject = new Project();
+            newProject = service.UpdateProjectNameByID(id, projectName);
+
+            if (newProject != null)
             {
-                result.NumberOfDevsWorking = number;
-                return Request.CreateResponse(HttpStatusCode.OK, result);
+                ProjectRest projectMapped = new ProjectRest();
+                projectMapped.ProjectID = newProject.ProjectID;
+                projectMapped.ProjectName = newProject.ProjectName;
+                projectMapped.ClientName = newProject.ClientName;
+
+                return Request.CreateResponse(HttpStatusCode.OK, projectMapped);
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"Project not found");
+                return Request.CreateResponse(HttpStatusCode.OK, $"Not found"); // could return newProject, which is null (?)
             }
         }
-        */
         
-
+        
 
         [HttpDelete]
         [Route("api/DeleteProject")]
         public HttpResponseMessage DeleteProjectByID(int id)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            ProjectService service = new ProjectService();
+            Project newProject = new Project();
 
-            SqlCommand command = new SqlCommand($"DELETE FROM Project WHERE ProjectID='{id}'", connection);
+            newProject = service.DeleteProjectByID(id);
 
-            connection.Open();
+            if (newProject != null)
+            {
+                ProjectRest projectMapped = new ProjectRest();
+                projectMapped.ProjectID = newProject.ProjectID;
+                projectMapped.ProjectName = newProject.ProjectName;
+                projectMapped.ClientName = newProject.ClientName;
 
-            SqlDataReader reader = command.ExecuteReader();
-
-            connection.Close();
-
-            return Request.CreateResponse(HttpStatusCode.OK, $"Project deleted!");
+                return Request.CreateResponse(HttpStatusCode.OK, projectMapped);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
+            }
         } 
     }
 

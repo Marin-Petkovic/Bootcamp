@@ -40,7 +40,7 @@ namespace TestApplication.Repository
 
         public List<Developer> DevsOnProject(int id)
         {    
-            SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE ProjectID='{id}'", connection);
+            SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE ProjectID='{id}';", connection);
 
             connection.Open();
 
@@ -68,7 +68,7 @@ namespace TestApplication.Repository
             connection.Open();
 
             SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.InsertCommand = new SqlCommand($"INSERT INTO Developer (FirstName, LastName, ProjectID) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID})", connection);
+            adapter.InsertCommand = new SqlCommand($"INSERT INTO Developer (FirstName, LastName, ProjectID, Salary) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID}, {developer.Salary});", connection);
             adapter.InsertCommand.ExecuteNonQuery();
 
             connection.Close();
@@ -77,7 +77,7 @@ namespace TestApplication.Repository
 
         public Developer UpdateDevProjectByID(int devId, int projectId)
         {
-            SqlCommand command1 = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{devId}'", connection);
+            SqlCommand command1 = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{devId}';", connection);
             connection.Open();
             SqlDataReader reader = command1.ExecuteReader();
             if (reader.HasRows)
@@ -94,7 +94,7 @@ namespace TestApplication.Repository
                 }
                 reader.Close();
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.UpdateCommand = new SqlCommand($"UPDATE Developer SET ProjectID='{projectId}' WHERE DeveloperID='{devId}'", connection);
+                adapter.UpdateCommand = new SqlCommand($"UPDATE Developer SET ProjectID='{projectId}' WHERE DeveloperID='{devId}';", connection);
                 adapter.UpdateCommand.ExecuteNonQuery();
 
                 connection.Close();

@@ -12,6 +12,8 @@ namespace TestApplication.Repository
     {
         static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
         SqlConnection connection = new SqlConnection(connectionString);
+        
+
         public List<Project> RetrieveProjects()
         {
             SqlCommand command = new SqlCommand($"SELECT * FROM Project;", connection);
@@ -23,14 +25,18 @@ namespace TestApplication.Repository
             if (reader.HasRows)
             {
                 List<Project> listOfProjects = new List<Project>();
-                Project project = new Project();
+                
                 while (reader.Read())
                 {
+                    Project project = new Project();
                     project.ProjectID = reader.GetInt32(0);
                     project.ProjectName = reader.GetString(1);
                     project.ClientName = reader.GetString(2);
+                    project.Budget = reader.GetInt32(3);
+
+                    listOfProjects.Add(project);
                 }
-                listOfProjects.Add(project);
+                
 
                 connection.Close();
                 return listOfProjects;
@@ -39,6 +45,84 @@ namespace TestApplication.Repository
             {
                 return null;
             }
+        }
+
+        public Project InsertProject(Project project)
+        {
+            //SqlCommand command = new SqlCommand($"INSERT INTO Project (ProjectName, ClientName, Budget) VALUES ('{project.ProjectName}', '{project.ClientName}', {project.Budget});", connection);
+            connection.Open();
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.InsertCommand = new SqlCommand($"INSERT INTO Project VALUES ({project.ProjectID}, '{project.ProjectName}', '{project.ClientName}', {project.Budget});", connection);
+            adapter.InsertCommand.ExecuteNonQuery();
+
+            connection.Close();
+            return project;
+        }
+
+        public Project UpdateProjectNameByID(int id, string projectName)
+        {
+            SqlCommand command = new SqlCommand($"SELECT * FROM Project WHERE ProjectID={id};", connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                Project newProject = new Project();
+                while (reader.Read())
+                {
+                    newProject.ProjectID = reader.GetInt32(0);
+                    newProject.ProjectName = projectName;
+                    newProject.ClientName = reader.GetString(2);
+                    newProject.Budget = reader.GetInt32(3);
+                }
+                reader.Close();
+                SqlCommand command2 = new SqlCommand($"UPDATE Project SET ProjectName='{projectName}' WHERE ProjectID={id};", connection);
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.UpdateCommand = command;
+                adapter.UpdateCommand.ExecuteNonQuery();
+
+                connection.Close();
+                return newProject;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Project DeleteProjectByID(int id)
+        {
+            SqlCommand command = new SqlCommand($"SELECT * FROM Project WHERE ProjectID={id};", connection);
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                Project newProject = new Project();
+                while (reader.Read())
+                {
+                    newProject.ProjectID = reader.GetInt32(0);
+                    newProject.ProjectName = reader.GetString(1);
+                    newProject.ClientName = reader.GetString(2);
+                    newProject.Budget = reader.GetInt32(3);
+                }
+                reader.Close();
+                SqlCommand command2 = new SqlCommand($"DELETE FROM Project WHERE ProjectID={id};", connection);
+
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.DeleteCommand = command2;
+                adapter.DeleteCommand.ExecuteNonQuery();
+
+                connection.Close();
+                return newProject;               
+            }
+            else
+            {
+                return null;
+            }
+
+            
+
         }
     }
 }
