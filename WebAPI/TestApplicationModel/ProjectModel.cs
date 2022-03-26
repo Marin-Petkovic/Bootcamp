@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace TestApplicationModel
 {
-    public class Developer
+    public class Project
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int DeveloperID { get; set; }
         public int ProjectID { get; set; }
-        public int Salary { get; set; }
-
+        public string ProjectName { get; set; }
+        public string ClientName { get; set; }
+        public int Budget { get; set; }
     }
 }

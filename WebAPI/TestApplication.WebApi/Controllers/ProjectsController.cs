@@ -6,55 +6,52 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Data.SqlClient;
 using System.Data;
+using TestApplication.Service;
+using TestApplicationModel;
 
 namespace TestApplication.WebApi.Controllers
 {
     public class ProjectsController : ApiController
     {
-        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
+        // delete later
+        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
 
-           //static List<Project> listOfProjects = new List<Project>();
+
 
         [HttpGet]
         [Route("api/RetrieveProjects")]
         public HttpResponseMessage RetrieveProjects()
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            ProjectService service = new ProjectService();
+            List<Project> listOfProjects = new List<Project>();
 
+            listOfProjects = service.RetrieveProjects();
 
-            SqlCommand command = new SqlCommand("SELECT * FROM Project;", connection);
-
-            connection.Open();
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            if (reader.HasRows)
+            if (listOfProjects != null)
             {
-                List<Project> listOfProjects = new List<Project>();
-                while (reader.Read())
+                List<ProjectRest> projectsMapped = new List<ProjectRest>();
+                foreach (Project project in listOfProjects)
                 {
-                    Project project = new Project();
-                    project.ProjectID = reader.GetInt32(0);
-                    project.ProjectName = reader.GetString(1);
-                    project.ClientName = reader.GetString(2);
-                    
+                    ProjectRest projectRest = new ProjectRest();
+                    projectRest.ProjectID = project.ProjectID;
+                    projectRest.ProjectName = project.ProjectName;
+                    projectRest.ClientName = project.ClientName;
 
-                    listOfProjects.Add(project);
+                    projectsMapped.Add(projectRest);
                 }
-                connection.Close();
-                return Request.CreateResponse(HttpStatusCode.OK, listOfProjects);
+                return Request.CreateResponse(HttpStatusCode.OK, projectsMapped);
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"There are no projects");
-            }
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
+            }        
         }
         
 
 
         [HttpPost]
         [Route("api/InsertProject")]
-        public HttpResponseMessage InsertProject(Project project)
+        public HttpResponseMessage InsertProject(ProjectRest project)
         {
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -113,7 +110,7 @@ namespace TestApplication.WebApi.Controllers
         } 
     }
 
-    public class Project
+    public class ProjectRest
     {
         public int ProjectID { get; set; }
         public string ProjectName { get; set; }

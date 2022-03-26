@@ -7,3 +7,12 @@ C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Reposito
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.csproj.CopyComplete
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.dll
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository\bin\Debug\TestApplication.Repository.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository\bin\Debug\TestApplication.Repository.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository\bin\Debug\TestApplicationModel.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository\bin\Debug\TestApplicationModel.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.csproj.AssemblyReference.cache
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.csproj.CoreCompileInputs.cache
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.csproj.CopyComplete
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository\obj\Debug\TestApplication.Repository.pdb

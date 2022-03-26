@@ -23,5 +23,26 @@ namespace TestApplication.Service
 
             return devrep.DevsOnProject(id);
         }
+
+        public Developer InsertDev(Developer developer)
+        {
+            DeveloperRepository devrep = new DeveloperRepository();
+
+            return devrep.InsertDev(developer);
+        }
+
+        public Developer UpdateDevProjectByID(int devId, int projectId)
+        {
+            DeveloperRepository devrep = new DeveloperRepository();
+
+            return devrep.UpdateDevProjectByID(devId, projectId);
+        }
+
+        public Developer DeleteDevByID(int devId)
+        {
+            DeveloperRepository devrep = new DeveloperRepository();
+
+            return devrep.DeleteDevByID(devId);
+        }
     }
 }
