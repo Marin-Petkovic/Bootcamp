@@ -11,7 +11,7 @@ using TestApplicationModel;
 
 namespace TestApplication.WebApi.Controllers
 {
-    public class ProjectsController : ApiController
+    public class ProjectController : ApiController
     {
         [HttpGet]
         [Route("api/RetrieveProjects")]
@@ -22,9 +22,10 @@ namespace TestApplication.WebApi.Controllers
 
             listOfProjects = service.RetrieveProjects();
 
-            if (listOfProjects != null)
+            if (listOfProjects.Count() > 0)
             {
                 List<ProjectRest> projectsMapped = new List<ProjectRest>();
+
                 foreach (Project project in listOfProjects)
                 {
                     ProjectRest projectRest = new ProjectRest();
@@ -38,11 +39,10 @@ namespace TestApplication.WebApi.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"There are no projects currently");
             }        
         }
         
-
 
         [HttpPost]
         [Route("api/InsertProject")]
@@ -61,8 +61,6 @@ namespace TestApplication.WebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, projectRest);
         }
 
-
-
         
         [HttpPut]
         [Route("api/UpdateProject")]
@@ -70,6 +68,7 @@ namespace TestApplication.WebApi.Controllers
         {
             ProjectService service = new ProjectService();
             Project newProject = new Project();
+
             newProject = service.UpdateProjectNameByID(id, projectName);
 
             if (newProject != null)
@@ -83,10 +82,9 @@ namespace TestApplication.WebApi.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, $"Not found"); // could return newProject, which is null (?)
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
             }
-        }
-        
+        }     
         
 
         [HttpDelete]
@@ -113,6 +111,7 @@ namespace TestApplication.WebApi.Controllers
             }
         } 
     }
+
 
     public class ProjectRest
     {

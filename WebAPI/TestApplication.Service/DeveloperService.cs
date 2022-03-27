@@ -8,7 +8,7 @@ using TestApplicationModel;
 
 namespace TestApplication.Service
 {
-    public class DeveloperService // used for additional business logic
+    public class DeveloperService 
     {
         public List<Developer> RetrieveListOfDevelopers()
         {
@@ -17,12 +17,14 @@ namespace TestApplication.Service
             return devrep.RetrieveListOfDevelopers();
         }
         
+
         public List<Developer> RetrieveDevelopersOnProject(int id)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
             return devrep.RetrieveDevelopersOnProject(id);
         }
+
 
         public Developer InsertDeveloper(Developer developer)
         {
@@ -31,12 +33,14 @@ namespace TestApplication.Service
             return devrep.InsertDeveloper(developer);
         }
 
+
         public Developer UpdateDeveloperProjectByID(int devId, int projectId)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
             return devrep.UpdateDeveloperProjectByID(devId, projectId);
         }
+
 
         public Developer DeleteDeveloperByID(int devId)
         {

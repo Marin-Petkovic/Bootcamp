@@ -22,6 +22,7 @@ namespace TestApplication.Repository
             SqlDataReader reader = command.ExecuteReader();
 
             List<Developer> listOfDevelopers1 = new List<Developer>();
+
             while (reader.Read())
             {
                 Developer developer = new Developer();
@@ -47,6 +48,7 @@ namespace TestApplication.Repository
             SqlDataReader reader = command.ExecuteReader();
 
             List<Developer> listOfDevs = new List<Developer>();
+
             while (reader.Read())
             {
                 Developer developer = new Developer();
@@ -65,7 +67,9 @@ namespace TestApplication.Repository
 
         public Developer InsertDeveloper(Developer developer)
         {
-            SqlCommand command = new SqlCommand($"INSERT INTO Developer (FirstName, LastName, ProjectID, Salary) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID}, {developer.Salary});", connection);
+            SqlCommand command = new SqlCommand
+                ($"INSERT INTO Developer (FirstName, LastName, ProjectID, Salary) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID}, {developer.Salary});", connection);
+
             connection.Open();
 
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -75,6 +79,7 @@ namespace TestApplication.Repository
             SqlCommand command2 = new SqlCommand($"SELECT TOP 1 * FROM Developer ORDER BY DeveloperID DESC;", connection);
             SqlDataReader reader = command2.ExecuteReader();
             Developer newDev = new Developer();
+
             while (reader.Read())
             {
                 newDev.DeveloperID = reader.GetInt32(0);
@@ -83,19 +88,21 @@ namespace TestApplication.Repository
                 newDev.ProjectID = reader.GetInt32(3);
                 newDev.Salary = reader.GetInt32(4);
             }
-
             connection.Close();
             return newDev;
         }
+
 
         public Developer UpdateDeveloperProjectByID(int devId, int projectId)
         {
             SqlCommand command1 = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{devId}';", connection);
             connection.Open();
             SqlDataReader reader = command1.ExecuteReader();
+
             if (reader.HasRows)
             {
                 Developer newDev = new Developer();
+
                 while (reader.Read())
                 {
                     newDev.DeveloperID = reader.GetInt32(0);
@@ -119,14 +126,19 @@ namespace TestApplication.Repository
             }
         }
 
+
         public Developer DeleteDeveloperByID(int devId)
         {
             SqlCommand command1 = new SqlCommand($"SELECT * from Developer WHERE DeveloperID={devId}", connection);
+
             connection.Open();
+
             SqlDataReader reader = command1.ExecuteReader();
+
             if (reader.HasRows)
             {
                 Developer newDev = new Developer();
+
                 while (reader.Read())
                 {
                     newDev.DeveloperID = reader.GetInt32(0);

@@ -12,7 +12,7 @@ using TestApplicationModel;
 namespace TestApplication.WebApi.Controllers
 {
     
-    public class ValuesController : ApiController
+    public class DeveloperController : ApiController
     { 
         [HttpGet]
         [Route("api/RetrieveAllDevs")]
@@ -24,7 +24,7 @@ namespace TestApplication.WebApi.Controllers
 
             devs = service.RetrieveListOfDevelopers();
 
-            if (devs != null)
+            if (devs.Count() > 0)
             {
                 foreach (Developer developer in devs)
                 {
@@ -41,7 +41,7 @@ namespace TestApplication.WebApi.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, devs);
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"There are no developers currently");
             }
         }                   
 
@@ -69,7 +69,6 @@ namespace TestApplication.WebApi.Controllers
         [Route("api/UpdateDev")]
         public HttpResponseMessage UpdateDeveloperProjectByID(int devId , int projectId)
         {
-
             DeveloperService service = new DeveloperService();
             Developer dev = new Developer();
 
@@ -87,9 +86,8 @@ namespace TestApplication.WebApi.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, dev);
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
             }
-
         }
         
 
@@ -114,27 +112,22 @@ namespace TestApplication.WebApi.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, dev);
-            }
-
-
-              
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
+            }            
         }
         
-
         
         [HttpGet]
         [Route("api/RetrieveDevsOnProject")]
         public HttpResponseMessage RetrieveDevelopersOnProject(int projectId)
         {
-
             DeveloperService service = new DeveloperService();
             List<Developer> developers = new List<Developer>();
             List<DeveloperRest> developersMapped = new List<DeveloperRest>();
 
             developers = service.RetrieveDevelopersOnProject(projectId);
 
-            if (developers != null)
+            if (developers.Count() > 0)
             {
                 foreach (Developer developer in developers)
                 {
@@ -151,7 +144,7 @@ namespace TestApplication.WebApi.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, $"Not found");
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
             }
         }
     }
