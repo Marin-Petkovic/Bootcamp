@@ -13,7 +13,7 @@ namespace TestApplication.Repository
         static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
         SqlConnection connection = new SqlConnection(connectionString);
 
-        public List<Developer> DeveloperList()
+        public List<Developer> RetrieveListOfDevelopers()
         { 
             SqlCommand command = new SqlCommand("SELECT * FROM Developer;", connection);
 
@@ -38,7 +38,7 @@ namespace TestApplication.Repository
         }
 
 
-        public List<Developer> DevsOnProject(int id)
+        public List<Developer> RetrieveDevelopersOnProject(int id)
         {    
             SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE ProjectID='{id}';", connection);
 
@@ -63,19 +63,32 @@ namespace TestApplication.Repository
         }
 
 
-        public Developer InsertDev(Developer developer)
+        public Developer InsertDeveloper(Developer developer)
         {
+            SqlCommand command = new SqlCommand($"INSERT INTO Developer (FirstName, LastName, ProjectID, Salary) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID}, {developer.Salary});", connection);
             connection.Open();
 
             SqlDataAdapter adapter = new SqlDataAdapter();
-            adapter.InsertCommand = new SqlCommand($"INSERT INTO Developer (FirstName, LastName, ProjectID, Salary) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID}, {developer.Salary});", connection);
+            adapter.InsertCommand = command;
             adapter.InsertCommand.ExecuteNonQuery();
 
+            SqlCommand command2 = new SqlCommand($"SELECT TOP 1 * FROM Developer ORDER BY DeveloperID DESC;", connection);
+            SqlDataReader reader = command2.ExecuteReader();
+            Developer newDev = new Developer();
+            while (reader.Read())
+            {
+                newDev.DeveloperID = reader.GetInt32(0);
+                newDev.FirstName = reader.GetString(1);
+                newDev.LastName = reader.GetString(2);
+                newDev.ProjectID = reader.GetInt32(3);
+                newDev.Salary = reader.GetInt32(4);
+            }
+
             connection.Close();
-            return developer;
+            return newDev;
         }
 
-        public Developer UpdateDevProjectByID(int devId, int projectId)
+        public Developer UpdateDeveloperProjectByID(int devId, int projectId)
         {
             SqlCommand command1 = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{devId}';", connection);
             connection.Open();
@@ -106,7 +119,7 @@ namespace TestApplication.Repository
             }
         }
 
-        public Developer DeleteDevByID(int devId)
+        public Developer DeleteDeveloperByID(int devId)
         {
             SqlCommand command1 = new SqlCommand($"SELECT * from Developer WHERE DeveloperID={devId}", connection);
             connection.Open();

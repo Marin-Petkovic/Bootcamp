@@ -13,10 +13,6 @@ namespace TestApplication.WebApi.Controllers
 {
     public class ProjectsController : ApiController
     {
-       
-
-
-
         [HttpGet]
         [Route("api/RetrieveProjects")]
         public HttpResponseMessage RetrieveProjects()

@@ -10,39 +10,39 @@ namespace TestApplication.Service
 {
     public class DeveloperService // used for additional business logic
     {
-        public List<Developer> RetrieveDevs()
+        public List<Developer> RetrieveListOfDevelopers()
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
-            return devrep.DeveloperList();
+            return devrep.RetrieveListOfDevelopers();
+        }
+        
+        public List<Developer> RetrieveDevelopersOnProject(int id)
+        {
+            DeveloperRepository devrep = new DeveloperRepository();
+
+            return devrep.RetrieveDevelopersOnProject(id);
         }
 
-        public List<Developer> DevsOnProject(int id)
+        public Developer InsertDeveloper(Developer developer)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
-            return devrep.DevsOnProject(id);
+            return devrep.InsertDeveloper(developer);
         }
 
-        public Developer InsertDev(Developer developer)
+        public Developer UpdateDeveloperProjectByID(int devId, int projectId)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
-            return devrep.InsertDev(developer);
+            return devrep.UpdateDeveloperProjectByID(devId, projectId);
         }
 
-        public Developer UpdateDevProjectByID(int devId, int projectId)
+        public Developer DeleteDeveloperByID(int devId)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
-            return devrep.UpdateDevProjectByID(devId, projectId);
-        }
-
-        public Developer DeleteDevByID(int devId)
-        {
-            DeveloperRepository devrep = new DeveloperRepository();
-
-            return devrep.DeleteDevByID(devId);
+            return devrep.DeleteDeveloperByID(devId);
         }
     }
 }

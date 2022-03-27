@@ -19,14 +19,14 @@ namespace TestApplication.WebApi.Controllers
         public HttpResponseMessage RetrieveListOfDevelopers()
         {
             DeveloperService service = new DeveloperService();
-            List<Developer> developers = new List<Developer>();
-            List<DeveloperRest> developersMapped = new List<DeveloperRest>();
+            List<Developer> devs = new List<Developer>();
+            List<DeveloperRest> devsMapped = new List<DeveloperRest>();
 
-            developers = service.RetrieveDevs();
+            devs = service.RetrieveListOfDevelopers();
 
-            if (developers != null)
+            if (devs != null)
             {
-                foreach (Developer developer in developers)
+                foreach (Developer developer in devs)
                 {
                     DeveloperRest devRest = new DeveloperRest();
                     devRest.DeveloperID = developer.DeveloperID;
@@ -34,51 +34,18 @@ namespace TestApplication.WebApi.Controllers
                     devRest.LastName = developer.LastName;
                     devRest.ProjectID = developer.ProjectID;
 
-                    developersMapped.Add(devRest);
+                    devsMapped.Add(devRest);
                 }
 
-                return Request.CreateResponse(HttpStatusCode.OK, developersMapped);
+                return Request.CreateResponse(HttpStatusCode.OK, devsMapped);
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, $"Not found");
+                return Request.CreateResponse(HttpStatusCode.OK, devs);
             }
-        }
-     
+        }                   
+
         
-        [HttpGet]
-        [Route("api/RetrieveDevsOnProject")]
-        public HttpResponseMessage RetrieveDevelopersOnProject(int id)
-        {
-
-            DeveloperService service = new DeveloperService();
-            List<Developer> developers = new List<Developer>();
-            List<DeveloperRest> developersMapped = new List<DeveloperRest>();
-
-            developers = service.DevsOnProject(id);
-
-            if (developers != null)
-            {
-                foreach (Developer developer in developers)
-                {
-                    DeveloperRest devRest = new DeveloperRest();
-                    devRest.DeveloperID = developer.DeveloperID;
-                    devRest.FirstName = developer.FirstName;
-                    devRest.LastName = developer.LastName;
-                    devRest.ProjectID = developer.ProjectID;
-
-                    developersMapped.Add(devRest);
-                }
-
-                return Request.CreateResponse(HttpStatusCode.OK, developersMapped);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, $"Not found");
-            }
-        }
-
-
         [HttpPost]
         [Route("api/InsertDev")]
         public HttpResponseMessage InsertDeveloper(Developer developer)
@@ -86,9 +53,7 @@ namespace TestApplication.WebApi.Controllers
             DeveloperService service = new DeveloperService();
             Developer dev = new Developer();            
 
-            dev = service.InsertDev(developer);
-
-            //mapping - transfer specific data to devRest (data to be displayed to the user), in this case developerID is omitted
+            dev = service.InsertDeveloper(developer);
  
             DeveloperRest devRest = new DeveloperRest();
             devRest.DeveloperID = dev.DeveloperID;
@@ -102,13 +67,13 @@ namespace TestApplication.WebApi.Controllers
 
         [HttpPut]
         [Route("api/UpdateDev")]
-        public HttpResponseMessage UpdateDeveloperByID(int devId , int projectId)
+        public HttpResponseMessage UpdateDeveloperProjectByID(int devId , int projectId)
         {
 
             DeveloperService service = new DeveloperService();
             Developer dev = new Developer();
 
-            dev = service.UpdateDevProjectByID(devId, projectId);
+            dev = service.UpdateDeveloperProjectByID(devId, projectId);
 
             if (dev != null)
             {
@@ -135,7 +100,7 @@ namespace TestApplication.WebApi.Controllers
             DeveloperService service = new DeveloperService();
             Developer dev = new Developer();
 
-            dev = service.DeleteDevByID(devId);
+            dev = service.DeleteDeveloperByID(devId);
             
             if (dev != null)
             {
@@ -155,40 +120,40 @@ namespace TestApplication.WebApi.Controllers
 
               
         }
+        
 
-
-        /*
+        
         [HttpGet]
-        [Route("api/RetrieveDev")]
-        public HttpResponseMessage RetrieveDeveloperInfoByID(int id)
+        [Route("api/RetrieveDevsOnProject")]
+        public HttpResponseMessage RetrieveDevelopersOnProject(int projectId)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
 
-            SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{id}'", connection);
+            DeveloperService service = new DeveloperService();
+            List<Developer> developers = new List<Developer>();
+            List<DeveloperRest> developersMapped = new List<DeveloperRest>();
 
-            connection.Open();
+            developers = service.RetrieveDevelopersOnProject(projectId);
 
-            SqlDataReader reader = command.ExecuteReader();
-
-            if (reader.HasRows)
+            if (developers != null)
             {
-                Developer developer = new Developer();
-                while (reader.Read())
-                { 
-                    developer.DeveloperID = reader.GetInt32(0);
-                    developer.FirstName = reader.GetString(1);
-                    developer.LastName = reader.GetString(2);
-                    developer.ProjectID = reader.GetInt32(3);
+                foreach (Developer developer in developers)
+                {
+                    DeveloperRest devRest = new DeveloperRest();
+                    devRest.DeveloperID = developer.DeveloperID;
+                    devRest.FirstName = developer.FirstName;
+                    devRest.LastName = developer.LastName;
+                    devRest.ProjectID = developer.ProjectID;
+
+                    developersMapped.Add(devRest);
                 }
-                connection.Close();
-                return Request.CreateResponse(HttpStatusCode.OK, developer);
+
+                return Request.CreateResponse(HttpStatusCode.OK, developersMapped);
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
+                return Request.CreateResponse(HttpStatusCode.OK, $"Not found");
             }
         }
-        */
     }
 
     

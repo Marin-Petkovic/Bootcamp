@@ -49,7 +49,7 @@ namespace TestApplication.Repository
 
         public Project InsertProject(Project project)
         {
-            //SqlCommand command = new SqlCommand($"INSERT INTO Project (ProjectName, ClientName, Budget) VALUES ('{project.ProjectName}', '{project.ClientName}', {project.Budget});", connection);
+            
             connection.Open();
 
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -78,7 +78,7 @@ namespace TestApplication.Repository
                 reader.Close();
                 SqlCommand command2 = new SqlCommand($"UPDATE Project SET ProjectName='{projectName}' WHERE ProjectID={id};", connection);
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.UpdateCommand = command;
+                adapter.UpdateCommand = command2;
                 adapter.UpdateCommand.ExecuteNonQuery();
 
                 connection.Close();
