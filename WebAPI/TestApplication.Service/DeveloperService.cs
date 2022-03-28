@@ -10,43 +10,43 @@ namespace TestApplication.Service
 {
     public class DeveloperService 
     {
-        public List<Developer> RetrieveListOfDevelopers()
+        public async Task<List<Developer>> RetrieveListOfDevelopersAsync()
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
-            return devrep.RetrieveListOfDevelopers();
-        }
+            return await devrep.RetrieveListOfDevelopersAsync();
+        }        
         
 
-        public List<Developer> RetrieveDevelopersOnProject(int id)
+        public async Task<Developer> InsertDeveloperAsync(Developer developer)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
-            return devrep.RetrieveDevelopersOnProject(id);
+            return await devrep.InsertDeveloperAsync(developer);
         }
 
 
-        public Developer InsertDeveloper(Developer developer)
+        public async Task<Developer> UpdateDeveloperProjectByIDAsync(int devId, int projectId)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
-            return devrep.InsertDeveloper(developer);
+            return await devrep.UpdateDeveloperProjectByIDAsync(devId, projectId);
         }
 
 
-        public Developer UpdateDeveloperProjectByID(int devId, int projectId)
+        public async Task<Developer> DeleteDeveloperByIDAsync(int devId)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
-            return devrep.UpdateDeveloperProjectByID(devId, projectId);
+            return await devrep.DeleteDeveloperByIDAsync(devId);
         }
 
 
-        public Developer DeleteDeveloperByID(int devId)
+        public async Task<List<Developer>> RetrieveDevelopersOnProjectAsync(int id)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
-            return devrep.DeleteDeveloperByID(devId);
+            return await devrep.RetrieveDevelopersOnProjectAsync(id);
         }
     }
 }

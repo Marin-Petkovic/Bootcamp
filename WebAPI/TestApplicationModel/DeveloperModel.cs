@@ -8,10 +8,10 @@ namespace TestApplicationModel
 {
     public class Developer
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int DeveloperID { get; set; }
-        public int ProjectID { get; set; }
+        public int ProjectId { get; set; }
         public int Salary { get; set; }
 
     }

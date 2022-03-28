@@ -1,17 +1,17 @@
 CREATE TABLE Developer (
-DeveloperID int IDENTITY(100, 1),
+Id int IDENTITY(100, 1),
 FirstName varchar(20),
 Lastname varchar(20),
-ProjectID int,
+ProjectId int,
 Salary int,
-CONSTRAINT PK_DevloperID PRIMARY KEY (DeveloperID),
-CONSTRAINT FK_ProjectDeveloper FOREIGN KEY (ProjectID) REFERENCES Project(ProjectID) ON DELETE CASCADE
+CONSTRAINT PK_DevloperID PRIMARY KEY (Id),
+CONSTRAINT FK_ProjectDeveloper FOREIGN KEY (ProjectId) REFERENCES Project(Id) ON DELETE CASCADE
 );
 
 
 CREATE TABLE Project (
-ProjectID int PRIMARY KEY,
-ProjectName varchar(20),
+Id int PRIMARY KEY,
+Name varchar(20),
 ClientName varchar(20),
 Budget int
 );

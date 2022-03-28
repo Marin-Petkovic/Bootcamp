@@ -10,27 +10,27 @@ namespace TestApplication.Repository
 {
     public class ProjectRepository
     {
-        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
         SqlConnection connection = new SqlConnection(connectionString);
         
 
-        public List<Project> RetrieveProjects()
+        public async Task<List<Project>> RetrieveProjectsAsync()
         {
             SqlCommand command = new SqlCommand($"SELECT * FROM Project;", connection);
 
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
                 List<Project> listOfProjects = new List<Project>();
                 
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
                     Project project = new Project();
-                    project.ProjectID = reader.GetInt32(0);
-                    project.ProjectName = reader.GetString(1);
+                    project.Id = reader.GetInt32(0);
+                    project.Name = reader.GetString(1);
                     project.ClientName = reader.GetString(2);
                     project.Budget = reader.GetInt32(3);
 
@@ -46,50 +46,50 @@ namespace TestApplication.Repository
         }
 
 
-        public Project InsertProject(Project project)
+        public async Task<Project> InsertProjectAsync(Project project)
         { 
             SqlCommand command = new SqlCommand
-                ($"INSERT INTO Project VALUES ({project.ProjectID}, '{project.ProjectName}', '{project.ClientName}', {project.Budget});", connection);
+                ($"INSERT INTO Project VALUES ({project.Id}, '{project.Name}', '{project.ClientName}', {project.Budget});", connection);
 
-            connection.Open();
+            await connection.OpenAsync();
 
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.InsertCommand = command;
-            adapter.InsertCommand.ExecuteNonQuery();
+            await adapter.InsertCommand.ExecuteNonQueryAsync();
 
             connection.Close();
             return project;
         }
 
 
-        public Project UpdateProjectNameByID(int id, string projectName)
+        public async Task<Project> UpdateProjectNameByIdAsync(int projectId, string projectName)
         {
-            SqlCommand command = new SqlCommand($"SELECT * FROM Project WHERE ProjectID={id};", connection);
+            SqlCommand command = new SqlCommand($"SELECT * FROM Project WHERE Id={projectId};", connection);
 
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                Project newProject = new Project();
+                Project updatedProject = new Project();
 
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
-                    newProject.ProjectID = reader.GetInt32(0);
-                    newProject.ProjectName = projectName;
-                    newProject.ClientName = reader.GetString(2);
-                    newProject.Budget = reader.GetInt32(3);
+                    updatedProject.Id = reader.GetInt32(0);
+                    updatedProject.Name = projectName;
+                    updatedProject.ClientName = reader.GetString(2);
+                    updatedProject.Budget = reader.GetInt32(3);
                 }
                 reader.Close();
-                SqlCommand command2 = new SqlCommand($"UPDATE Project SET ProjectName='{projectName}' WHERE ProjectID={id};", connection);
+                SqlCommand command2 = new SqlCommand($"UPDATE Project SET Name='{projectName}' WHERE Id={projectId};", connection);
 
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.UpdateCommand = command2;
-                adapter.UpdateCommand.ExecuteNonQuery();
+                await adapter.UpdateCommand.ExecuteNonQueryAsync();
 
                 connection.Close();
-                return newProject;
+                return updatedProject;
             }
             else
             {
@@ -97,34 +97,35 @@ namespace TestApplication.Repository
             }
         }
 
-        public Project DeleteProjectByID(int id)
+
+        public async Task<Project> DeleteProjectByIdAsync(int projectId)
         {
-            SqlCommand command = new SqlCommand($"SELECT * FROM Project WHERE ProjectID={id};", connection);
+            SqlCommand command = new SqlCommand($"SELECT * FROM Project WHERE Id={projectId};", connection);
 
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                Project newProject = new Project();
+                Project deletedProject = new Project();
 
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
-                    newProject.ProjectID = reader.GetInt32(0);
-                    newProject.ProjectName = reader.GetString(1);
-                    newProject.ClientName = reader.GetString(2);
-                    newProject.Budget = reader.GetInt32(3);
+                    deletedProject.Id = reader.GetInt32(0);
+                    deletedProject.Name = reader.GetString(1);
+                    deletedProject.ClientName = reader.GetString(2);
+                    deletedProject.Budget = reader.GetInt32(3);
                 }
                 reader.Close();
-                SqlCommand command2 = new SqlCommand($"DELETE FROM Project WHERE ProjectID={id};", connection);
+                SqlCommand command2 = new SqlCommand($"DELETE FROM Project WHERE Id={projectId};", connection);
 
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.DeleteCommand = command2;
-                adapter.DeleteCommand.ExecuteNonQuery();
+                await adapter.DeleteCommand.ExecuteNonQueryAsync();
 
                 connection.Close();
-                return newProject;               
+                return deletedProject;               
             }
             else
             {

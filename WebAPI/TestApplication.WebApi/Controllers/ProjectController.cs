@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data;
 using TestApplication.Service;
 using TestApplicationModel;
+using System.Threading.Tasks;
 
 namespace TestApplication.WebApi.Controllers
 {
@@ -15,12 +16,12 @@ namespace TestApplication.WebApi.Controllers
     {
         [HttpGet]
         [Route("api/RetrieveProjects")]
-        public HttpResponseMessage RetrieveProjects()
+        public async Task<HttpResponseMessage> RetrieveProjectsAsync()
         {
             ProjectService service = new ProjectService();
             List<Project> listOfProjects = new List<Project>();
 
-            listOfProjects = service.RetrieveProjects();
+            listOfProjects = await service.RetrieveProjectsAsync();
 
             if (listOfProjects.Count() > 0)
             {
@@ -29,8 +30,8 @@ namespace TestApplication.WebApi.Controllers
                 foreach (Project project in listOfProjects)
                 {
                     ProjectRest projectRest = new ProjectRest();
-                    projectRest.ProjectID = project.ProjectID;
-                    projectRest.ProjectName = project.ProjectName;
+                    projectRest.Id = project.Id;
+                    projectRest.Name = project.Name;
                     projectRest.ClientName = project.ClientName;
 
                     projectsMapped.Add(projectRest);
@@ -46,16 +47,16 @@ namespace TestApplication.WebApi.Controllers
 
         [HttpPost]
         [Route("api/InsertProject")]
-        public HttpResponseMessage InsertProject(Project project)
+        public async Task<HttpResponseMessage> InsertProjectAsync(Project project)
         {
             ProjectService service = new ProjectService();
             Project newProject = new Project();
 
-            newProject = service.InsertProject(project);
+            newProject = await service.InsertProjectAsync(project);
 
             ProjectRest projectRest = new ProjectRest();
-            projectRest.ProjectID = newProject.ProjectID;
-            projectRest.ProjectName = newProject.ProjectName;
+            projectRest.Id = newProject.Id;
+            projectRest.Name = newProject.Name;
             projectRest.ClientName = newProject.ClientName;
 
             return Request.CreateResponse(HttpStatusCode.OK, projectRest);
@@ -64,18 +65,18 @@ namespace TestApplication.WebApi.Controllers
         
         [HttpPut]
         [Route("api/UpdateProject")]
-        public HttpResponseMessage UpdateProjectNameByID(int id, string projectName)
+        public async Task<HttpResponseMessage> UpdateProjectNameByIdAsync(int id, string newProjectName)
         {
             ProjectService service = new ProjectService();
             Project newProject = new Project();
 
-            newProject = service.UpdateProjectNameByID(id, projectName);
+            newProject = await service.UpdateProjectNameByIdAsync(id, newProjectName);
 
             if (newProject != null)
             {
                 ProjectRest projectMapped = new ProjectRest();
-                projectMapped.ProjectID = newProject.ProjectID;
-                projectMapped.ProjectName = newProject.ProjectName;
+                projectMapped.Id = newProject.Id;
+                projectMapped.Name = newProject.Name;
                 projectMapped.ClientName = newProject.ClientName;
 
                 return Request.CreateResponse(HttpStatusCode.OK, projectMapped);
@@ -86,21 +87,21 @@ namespace TestApplication.WebApi.Controllers
             }
         }     
         
-
+        
         [HttpDelete]
         [Route("api/DeleteProject")]
-        public HttpResponseMessage DeleteProjectByID(int id)
+        public async Task<HttpResponseMessage> DeleteProjectByIDAsync(int id)
         {
             ProjectService service = new ProjectService();
             Project newProject = new Project();
 
-            newProject = service.DeleteProjectByID(id);
+            newProject = await service.DeleteProjectByIdAsync(id);
 
             if (newProject != null)
             {
                 ProjectRest projectMapped = new ProjectRest();
-                projectMapped.ProjectID = newProject.ProjectID;
-                projectMapped.ProjectName = newProject.ProjectName;
+                projectMapped.Id = newProject.Id;
+                projectMapped.Name = newProject.Name;
                 projectMapped.ClientName = newProject.ClientName;
 
                 return Request.CreateResponse(HttpStatusCode.OK, projectMapped);
@@ -115,8 +116,8 @@ namespace TestApplication.WebApi.Controllers
 
     public class ProjectRest
     {
-        public int ProjectID { get; set; }
-        public string ProjectName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string ClientName { get; set; }
 
     }

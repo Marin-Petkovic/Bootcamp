@@ -8,8 +8,8 @@ namespace TestApplicationModel
 {
     public class Project
     {
-        public int ProjectID { get; set; }
-        public string ProjectName { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string ClientName { get; set; }
         public int Budget { get; set; }
     }

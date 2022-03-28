@@ -10,52 +10,52 @@ namespace TestApplication.Repository
 {
     public class DeveloperRepository
     {
-        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
         SqlConnection connection = new SqlConnection(connectionString);
 
-        public List<Developer> RetrieveListOfDevelopers()
+        public async Task<List<Developer>> RetrieveListOfDevelopersAsync()
         { 
             SqlCommand command = new SqlCommand("SELECT * FROM Developer;", connection);
 
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
-            List<Developer> listOfDevelopers1 = new List<Developer>();
+            List<Developer> listOfDevelopers = new List<Developer>();
 
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 Developer developer = new Developer();
-                developer.DeveloperID = reader.GetInt32(0);
+                developer.Id = reader.GetInt32(0);
                 developer.FirstName = reader.GetString(1);
                 developer.LastName = reader.GetString(2);
-                developer.ProjectID = reader.GetInt32(3);
+                developer.ProjectId = reader.GetInt32(3);
                 developer.Salary = reader.GetInt32(4);
 
-                listOfDevelopers1.Add(developer);
+                listOfDevelopers.Add(developer);
             }
             connection.Close();
-            return listOfDevelopers1;
+            return listOfDevelopers;
         }
 
 
-        public List<Developer> RetrieveDevelopersOnProject(int id)
+        public async Task<List<Developer>> RetrieveDevelopersOnProjectAsync(int projectId)
         {    
-            SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE ProjectID='{id}';", connection);
+            SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE ProjectId={projectId};", connection);
 
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = command.ExecuteReader();
+            SqlDataReader reader = await command.ExecuteReaderAsync();
 
             List<Developer> listOfDevs = new List<Developer>();
 
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
                 Developer developer = new Developer();
-                developer.DeveloperID = reader.GetInt32(0);
+                developer.Id = reader.GetInt32(0);
                 developer.FirstName = reader.GetString(1);
                 developer.LastName = reader.GetString(2);
-                developer.ProjectID = reader.GetInt32(3);
+                developer.ProjectId = reader.GetInt32(3);
                 developer.Salary = reader.GetInt32(4);
 
                 listOfDevs.Add(developer);
@@ -64,61 +64,61 @@ namespace TestApplication.Repository
             return listOfDevs;
         }
 
-
-        public Developer InsertDeveloper(Developer developer)
+        
+        public async Task<Developer> InsertDeveloperAsync(Developer developer)
         {
             SqlCommand command = new SqlCommand
-                ($"INSERT INTO Developer (FirstName, LastName, ProjectID, Salary) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectID}, {developer.Salary});", connection);
+                ($"INSERT INTO Developer (FirstName, LastName, ProjectId, Salary) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectId}, {developer.Salary});", connection);
 
-            connection.Open();
+            await connection.OpenAsync();
 
             SqlDataAdapter adapter = new SqlDataAdapter();
             adapter.InsertCommand = command;
-            adapter.InsertCommand.ExecuteNonQuery();
+            await adapter.InsertCommand.ExecuteNonQueryAsync();
 
-            SqlCommand command2 = new SqlCommand($"SELECT TOP 1 * FROM Developer ORDER BY DeveloperID DESC;", connection);
-            SqlDataReader reader = command2.ExecuteReader();
-            Developer newDev = new Developer();
+            SqlCommand command2 = new SqlCommand($"SELECT TOP 1 * FROM Developer ORDER BY Id DESC;", connection);
+            SqlDataReader reader = await command2.ExecuteReaderAsync();
+            Developer insertedDev = new Developer();
 
-            while (reader.Read())
+            while (await reader.ReadAsync())
             {
-                newDev.DeveloperID = reader.GetInt32(0);
-                newDev.FirstName = reader.GetString(1);
-                newDev.LastName = reader.GetString(2);
-                newDev.ProjectID = reader.GetInt32(3);
-                newDev.Salary = reader.GetInt32(4);
+                insertedDev.Id = reader.GetInt32(0);
+                insertedDev.FirstName = reader.GetString(1);
+                insertedDev.LastName = reader.GetString(2);
+                insertedDev.ProjectId = reader.GetInt32(3);
+                insertedDev.Salary = reader.GetInt32(4);
             }
             connection.Close();
-            return newDev;
+            return insertedDev;
         }
 
 
-        public Developer UpdateDeveloperProjectByID(int devId, int projectId)
+        public async Task<Developer> UpdateDeveloperProjectByIDAsync(int devId, int newProjectId)
         {
-            SqlCommand command1 = new SqlCommand($"SELECT * FROM Developer WHERE DeveloperID='{devId}';", connection);
-            connection.Open();
-            SqlDataReader reader = command1.ExecuteReader();
+            SqlCommand command1 = new SqlCommand($"SELECT * FROM Developer WHERE Id={devId};", connection);
+            await connection.OpenAsync();
+            SqlDataReader reader = await command1.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                Developer newDev = new Developer();
+                Developer updatedDev = new Developer();
 
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
-                    newDev.DeveloperID = reader.GetInt32(0);
-                    newDev.FirstName = reader.GetString(1);
-                    newDev.LastName = reader.GetString(2);
-                    newDev.ProjectID = projectId;
-                    newDev.Salary = reader.GetInt32(4);
+                    updatedDev.Id = reader.GetInt32(0);
+                    updatedDev.FirstName = reader.GetString(1);
+                    updatedDev.LastName = reader.GetString(2);
+                    updatedDev.ProjectId = newProjectId;
+                    updatedDev.Salary = reader.GetInt32(4);
                     
                 }
                 reader.Close();
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.UpdateCommand = new SqlCommand($"UPDATE Developer SET ProjectID='{projectId}' WHERE DeveloperID='{devId}';", connection);
-                adapter.UpdateCommand.ExecuteNonQuery();
+                adapter.UpdateCommand = new SqlCommand($"UPDATE Developer SET ProjectId={newProjectId} WHERE Id={devId};", connection);
+                await adapter.UpdateCommand.ExecuteNonQueryAsync();
 
                 connection.Close();
-                return newDev;
+                return updatedDev;
             }
             else
             {
@@ -126,34 +126,34 @@ namespace TestApplication.Repository
             }
         }
 
-
-        public Developer DeleteDeveloperByID(int devId)
+        
+        public async Task<Developer> DeleteDeveloperByIDAsync(int devId)
         {
-            SqlCommand command1 = new SqlCommand($"SELECT * from Developer WHERE DeveloperID={devId}", connection);
+            SqlCommand command1 = new SqlCommand($"SELECT * from Developer WHERE Id={devId}", connection);
 
-            connection.Open();
+            await connection.OpenAsync();
 
-            SqlDataReader reader = command1.ExecuteReader();
+            SqlDataReader reader = await command1.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                Developer newDev = new Developer();
+                Developer deletedDev = new Developer();
 
-                while (reader.Read())
+                while (await reader.ReadAsync())
                 {
-                    newDev.DeveloperID = reader.GetInt32(0);
-                    newDev.FirstName = reader.GetString(1);
-                    newDev.LastName = reader.GetString(2);
-                    newDev.ProjectID = reader.GetInt32(3);
-                    newDev.Salary = reader.GetInt32(4);
+                    deletedDev.Id = reader.GetInt32(0);
+                    deletedDev.FirstName = reader.GetString(1);
+                    deletedDev.LastName = reader.GetString(2);
+                    deletedDev.ProjectId = reader.GetInt32(3);
+                    deletedDev.Salary = reader.GetInt32(4);
                 }
                 reader.Close();
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.DeleteCommand = new SqlCommand($"DELETE FROM Developer WHERE DeveloperID={devId}", connection);
-                adapter.DeleteCommand.ExecuteNonQuery();
+                adapter.DeleteCommand = new SqlCommand($"DELETE FROM Developer WHERE Id={devId}", connection);
+                await adapter.DeleteCommand.ExecuteNonQueryAsync();
 
                 connection.Close();
-                return newDev;
+                return deletedDev;
             }
             else
             {

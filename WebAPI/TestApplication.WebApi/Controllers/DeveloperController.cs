@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data;
 using TestApplication.Service;
 using TestApplicationModel;
+using System.Threading.Tasks;
 
 namespace TestApplication.WebApi.Controllers
 {
@@ -16,23 +17,24 @@ namespace TestApplication.WebApi.Controllers
     { 
         [HttpGet]
         [Route("api/RetrieveAllDevs")]
-        public HttpResponseMessage RetrieveListOfDevelopers()
+        public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync()
         {
             DeveloperService service = new DeveloperService();
-            List<Developer> devs = new List<Developer>();
-            List<DeveloperRest> devsMapped = new List<DeveloperRest>();
+            List<Developer> devs = new List<Developer>();            
 
-            devs = service.RetrieveListOfDevelopers();
+            devs = await service.RetrieveListOfDevelopersAsync();
 
             if (devs.Count() > 0)
             {
+                List<DeveloperRest> devsMapped = new List<DeveloperRest>();
+
                 foreach (Developer developer in devs)
                 {
                     DeveloperRest devRest = new DeveloperRest();
-                    devRest.DeveloperID = developer.DeveloperID;
+                    devRest.Id = developer.Id;
                     devRest.FirstName = developer.FirstName;
                     devRest.LastName = developer.LastName;
-                    devRest.ProjectID = developer.ProjectID;
+                    devRest.ProjectId = developer.ProjectId;
 
                     devsMapped.Add(devRest);
                 }
@@ -48,18 +50,18 @@ namespace TestApplication.WebApi.Controllers
         
         [HttpPost]
         [Route("api/InsertDev")]
-        public HttpResponseMessage InsertDeveloper(Developer developer)
+        public async Task<HttpResponseMessage> InsertDeveloperAsync(Developer developer)
         {
             DeveloperService service = new DeveloperService();
             Developer dev = new Developer();            
 
-            dev = service.InsertDeveloper(developer);
+            dev = await service.InsertDeveloperAsync(developer);
  
             DeveloperRest devRest = new DeveloperRest();
-            devRest.DeveloperID = dev.DeveloperID;
+            devRest.Id = dev.Id;
             devRest.FirstName = dev.FirstName;
             devRest.LastName = dev.LastName;
-            devRest.ProjectID = dev.ProjectID;
+            devRest.ProjectId = dev.ProjectId;
 
             return Request.CreateResponse(HttpStatusCode.OK, devRest);   
         }
@@ -67,20 +69,20 @@ namespace TestApplication.WebApi.Controllers
 
         [HttpPut]
         [Route("api/UpdateDev")]
-        public HttpResponseMessage UpdateDeveloperProjectByID(int devId , int projectId)
+        public async Task<HttpResponseMessage> UpdateDeveloperProjectByIDAsync(int devId , int newProjectId)
         {
             DeveloperService service = new DeveloperService();
             Developer dev = new Developer();
 
-            dev = service.UpdateDeveloperProjectByID(devId, projectId);
+            dev = await service.UpdateDeveloperProjectByIDAsync(devId, newProjectId);
 
             if (dev != null)
             {
                 DeveloperRest devRest = new DeveloperRest();
-                devRest.DeveloperID = dev.DeveloperID;
+                devRest.Id = dev.Id;
                 devRest.FirstName = dev.FirstName;
                 devRest.LastName = dev.LastName;
-                devRest.ProjectID = dev.ProjectID;
+                devRest.ProjectId = dev.ProjectId;
 
                 return Request.CreateResponse(HttpStatusCode.OK, devRest);
             }
@@ -93,20 +95,20 @@ namespace TestApplication.WebApi.Controllers
 
         [HttpDelete]
         [Route("api/DeleteDev")]
-        public HttpResponseMessage DeleteDeveloperByID(int devId)
+        public async Task<HttpResponseMessage> DeleteDeveloperByIDAsync(int devId)
         {
             DeveloperService service = new DeveloperService();
             Developer dev = new Developer();
 
-            dev = service.DeleteDeveloperByID(devId);
+            dev = await service.DeleteDeveloperByIDAsync(devId);
             
             if (dev != null)
             {
                 DeveloperRest devRest = new DeveloperRest();
-                devRest.DeveloperID = dev.DeveloperID;
+                devRest.Id = dev.Id;
                 devRest.FirstName = dev.FirstName;
                 devRest.LastName = dev.LastName;
-                devRest.ProjectID = dev.ProjectID;
+                devRest.ProjectId = dev.ProjectId;
 
                 return Request.CreateResponse(HttpStatusCode.OK, devRest);
             }
@@ -119,23 +121,23 @@ namespace TestApplication.WebApi.Controllers
         
         [HttpGet]
         [Route("api/RetrieveDevsOnProject")]
-        public HttpResponseMessage RetrieveDevelopersOnProject(int projectId)
+        public async Task<HttpResponseMessage> RetrieveDevelopersOnProjectAsync(int projectId)
         {
             DeveloperService service = new DeveloperService();
             List<Developer> developers = new List<Developer>();
             List<DeveloperRest> developersMapped = new List<DeveloperRest>();
 
-            developers = service.RetrieveDevelopersOnProject(projectId);
+            developers = await service.RetrieveDevelopersOnProjectAsync(projectId);
 
             if (developers.Count() > 0)
             {
                 foreach (Developer developer in developers)
                 {
                     DeveloperRest devRest = new DeveloperRest();
-                    devRest.DeveloperID = developer.DeveloperID;
+                    devRest.Id = developer.Id;
                     devRest.FirstName = developer.FirstName;
                     devRest.LastName = developer.LastName;
-                    devRest.ProjectID = developer.ProjectID;
+                    devRest.ProjectId = developer.ProjectId;
 
                     developersMapped.Add(devRest);
                 }
@@ -152,10 +154,10 @@ namespace TestApplication.WebApi.Controllers
     
     public class DeveloperRest
     {
-        public int DeveloperID { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int ProjectID { get; set; }     
+        public int ProjectId { get; set; }     
     }
     
 }

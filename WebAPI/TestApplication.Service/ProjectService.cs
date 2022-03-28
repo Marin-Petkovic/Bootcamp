@@ -10,35 +10,35 @@ namespace TestApplication.Service
 {
     public class ProjectService
     {
-        public List<Project> RetrieveProjects()
+        public async Task<List<Project>> RetrieveProjectsAsync()
         {
             ProjectRepository projectRepo = new ProjectRepository();
 
-            return projectRepo.RetrieveProjects();
+            return await projectRepo.RetrieveProjectsAsync();
         }
 
 
-        public Project InsertProject(Project project)
+        public async Task<Project> InsertProjectAsync(Project project)
         {
             ProjectRepository projectRepo = new ProjectRepository();
 
-            return projectRepo.InsertProject(project);
+            return await projectRepo.InsertProjectAsync(project);
         }
 
 
-        public Project UpdateProjectNameByID(int id, string projectName)
+        public async Task<Project> UpdateProjectNameByIdAsync(int id, string projectName)
         {
             ProjectRepository projectRepo = new ProjectRepository();
 
-            return projectRepo.UpdateProjectNameByID(id, projectName);
+            return await projectRepo.UpdateProjectNameByIdAsync(id, projectName);
         }
 
 
-        public Project DeleteProjectByID(int id)
+        public async Task<Project> DeleteProjectByIdAsync(int id)
         {
             ProjectRepository projectRepo = new ProjectRepository();
 
-            return projectRepo.DeleteProjectByID(id);
+            return await projectRepo.DeleteProjectByIdAsync(id);
         }
     }
 }
