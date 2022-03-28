@@ -10,7 +10,7 @@ namespace TestApplication.Repository
 {
     public class DeveloperRepository
     {
-        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
         SqlConnection connection = new SqlConnection(connectionString);
 
         public async Task<List<Developer>> RetrieveListOfDevelopersAsync()
@@ -21,21 +21,30 @@ namespace TestApplication.Repository
 
             SqlDataReader reader = await command.ExecuteReaderAsync();
 
-            List<Developer> listOfDevelopers = new List<Developer>();
-
-            while (await reader.ReadAsync())
+            if (reader.HasRows)
             {
-                Developer developer = new Developer();
-                developer.Id = reader.GetInt32(0);
-                developer.FirstName = reader.GetString(1);
-                developer.LastName = reader.GetString(2);
-                developer.ProjectId = reader.GetInt32(3);
-                developer.Salary = reader.GetInt32(4);
+                List<Developer> listOfDevelopers = new List<Developer>();
 
-                listOfDevelopers.Add(developer);
+                while (await reader.ReadAsync())
+                {
+                    Developer developer = new Developer();
+                    developer.Id = reader.GetInt32(0);
+                    developer.FirstName = reader.GetString(1);
+                    developer.LastName = reader.GetString(2);
+                    developer.ProjectId = reader.GetInt32(3);
+                    developer.Salary = reader.GetInt32(4);
+
+                    listOfDevelopers.Add(developer);
+                }
+                connection.Close();
+                return listOfDevelopers;
             }
-            connection.Close();
-            return listOfDevelopers;
+            else
+            {
+                return null;
+            }
+
+            
         }
 
 
@@ -45,23 +54,32 @@ namespace TestApplication.Repository
 
             await connection.OpenAsync();
 
-            SqlDataReader reader = await command.ExecuteReaderAsync();
+            SqlDataReader reader = await command.ExecuteReaderAsync();            
 
-            List<Developer> listOfDevs = new List<Developer>();
-
-            while (await reader.ReadAsync())
+            if (reader.HasRows)
             {
-                Developer developer = new Developer();
-                developer.Id = reader.GetInt32(0);
-                developer.FirstName = reader.GetString(1);
-                developer.LastName = reader.GetString(2);
-                developer.ProjectId = reader.GetInt32(3);
-                developer.Salary = reader.GetInt32(4);
+                List<Developer> listOfDevs = new List<Developer>();
 
-                listOfDevs.Add(developer);
+                while (await reader.ReadAsync())
+                {
+                    Developer developer = new Developer();
+                    developer.Id = reader.GetInt32(0);
+                    developer.FirstName = reader.GetString(1);
+                    developer.LastName = reader.GetString(2);
+                    developer.ProjectId = reader.GetInt32(3);
+                    developer.Salary = reader.GetInt32(4);
+
+                    listOfDevs.Add(developer);
+                }
+                connection.Close();
+                return listOfDevs;
             }
-            connection.Close();
-            return listOfDevs;
+            else
+            {
+                return null;
+            }
+
+            
         }
 
         

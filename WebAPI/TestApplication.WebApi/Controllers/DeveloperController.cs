@@ -24,7 +24,7 @@ namespace TestApplication.WebApi.Controllers
 
             devs = await service.RetrieveListOfDevelopersAsync();
 
-            if (devs.Count() > 0)
+            if (devs != null)
             {
                 List<DeveloperRest> devsMapped = new List<DeveloperRest>();
 
@@ -129,7 +129,7 @@ namespace TestApplication.WebApi.Controllers
 
             developers = await service.RetrieveDevelopersOnProjectAsync(projectId);
 
-            if (developers.Count() > 0)
+            if (developers != null)
             {
                 foreach (Developer developer in developers)
                 {

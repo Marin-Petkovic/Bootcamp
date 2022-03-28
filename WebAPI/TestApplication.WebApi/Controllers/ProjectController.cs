@@ -23,7 +23,7 @@ namespace TestApplication.WebApi.Controllers
 
             listOfProjects = await service.RetrieveProjectsAsync();
 
-            if (listOfProjects.Count() > 0)
+            if (listOfProjects != null)
             {
                 List<ProjectRest> projectsMapped = new List<ProjectRest>();
 
