@@ -28,11 +28,13 @@ namespace TestApplication.Repository
                 
                 while (await reader.ReadAsync())
                 {
-                    Project project = new Project();
-                    project.Id = reader.GetInt32(0);
-                    project.Name = reader.GetString(1);
-                    project.ClientName = reader.GetString(2);
-                    project.Budget = reader.GetInt32(3);
+                    Project project = new Project
+                    {
+                        Id = reader.GetInt32(0),
+                        Name = reader.GetString(1),
+                        ClientName = reader.GetString(2),
+                        Budget = reader.GetInt32(3)
+                    };
 
                     listOfProjects.Add(project);
                 } 

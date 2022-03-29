@@ -15,7 +15,32 @@
       "ProjectGuid": "c6705cde-ed11-4f9f-b0d6-1fab7a3a388f",
       "DisplayName": "TestApplication.Repository",
       "ColorIndex": 2
+    },
+    "0b4b4cca-2171-4fa5-806c-c48e2f99eae7": {
+      "ProjectGuid": "0b4b4cca-2171-4fa5-806c-c48e2f99eae7",
+      "DisplayName": "TestApplication.Repository.Common",
+      "ColorIndex": 3
+    },
+    "ab0e319e-b79f-4fe9-b298-16628b734b3b": {
+      "ProjectGuid": "ab0e319e-b79f-4fe9-b298-16628b734b3b",
+      "DisplayName": "TestApplication.Model.Common",
+      "ColorIndex": 4
+    },
+    "a57a135a-1acc-4483-8bab-c2b0235dbec6": {
+      "ProjectGuid": "a57a135a-1acc-4483-8bab-c2b0235dbec6",
+      "DisplayName": "TestApplication.Service.Common",
+      "ColorIndex": 5
+    },
+    "5f368ab0-f112-4247-9176-f0bbcb695ad3": {
+      "ProjectGuid": "5f368ab0-f112-4247-9176-f0bbcb695ad3",
+      "DisplayName": "TestApplicationModel",
+      "ColorIndex": 6
+    },
+    "03f94c21-9e0a-4ff9-b4af-89de41037dec": {
+      "ProjectGuid": "03f94c21-9e0a-4ff9-b4af-89de41037dec",
+      "DisplayName": "TestApplication.Repository",
+      "ColorIndex": 7
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 8
 }

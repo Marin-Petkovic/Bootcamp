@@ -1,0 +1,9 @@
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Service.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Service.Common.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Model.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Model.Common.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.csproj.AssemblyReference.cache
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.csproj.CoreCompileInputs.cache
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.csproj.CopyComplete
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.pdb

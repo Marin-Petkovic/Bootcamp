@@ -1,0 +1,6 @@
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Model.Common\bin\Debug\TestApplication.Model.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Model.Common\bin\Debug\TestApplication.Model.Common.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Model.Common\obj\Debug\TestApplication.Model.Common.csproj.AssemblyReference.cache
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Model.Common\obj\Debug\TestApplication.Model.Common.csproj.CoreCompileInputs.cache
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Model.Common\obj\Debug\TestApplication.Model.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Model.Common\obj\Debug\TestApplication.Model.Common.pdb

@@ -13,6 +13,7 @@ namespace TestApplication.Repository
         static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
         SqlConnection connection = new SqlConnection(connectionString);
 
+
         public async Task<List<Developer>> RetrieveListOfDevelopersAsync()
         { 
             SqlCommand command = new SqlCommand("SELECT * FROM Developer;", connection);
@@ -27,12 +28,14 @@ namespace TestApplication.Repository
 
                 while (await reader.ReadAsync())
                 {
-                    Developer developer = new Developer();
-                    developer.Id = reader.GetInt32(0);
-                    developer.FirstName = reader.GetString(1);
-                    developer.LastName = reader.GetString(2);
-                    developer.ProjectId = reader.GetInt32(3);
-                    developer.Salary = reader.GetInt32(4);
+                    Developer developer = new Developer
+                    {
+                        Id = reader.GetInt32(0),
+                        FirstName = reader.GetString(1),
+                        LastName = reader.GetString(2),
+                        ProjectId = reader.GetInt32(3),
+                        Salary = reader.GetInt32(4)
+                    };
 
                     listOfDevelopers.Add(developer);
                 }
@@ -42,9 +45,7 @@ namespace TestApplication.Repository
             else
             {
                 return null;
-            }
-
-            
+            }           
         }
 
 
@@ -62,12 +63,14 @@ namespace TestApplication.Repository
 
                 while (await reader.ReadAsync())
                 {
-                    Developer developer = new Developer();
-                    developer.Id = reader.GetInt32(0);
-                    developer.FirstName = reader.GetString(1);
-                    developer.LastName = reader.GetString(2);
-                    developer.ProjectId = reader.GetInt32(3);
-                    developer.Salary = reader.GetInt32(4);
+                    Developer developer = new Developer
+                    {
+                        Id = reader.GetInt32(0),
+                        FirstName = reader.GetString(1),
+                        LastName = reader.GetString(2),
+                        ProjectId = reader.GetInt32(3),
+                        Salary = reader.GetInt32(4)
+                    };
 
                     listOfDevs.Add(developer);
                 }
@@ -77,9 +80,7 @@ namespace TestApplication.Repository
             else
             {
                 return null;
-            }
-
-            
+            }   
         }
 
         

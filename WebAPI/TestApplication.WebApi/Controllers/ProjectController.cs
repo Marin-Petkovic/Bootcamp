@@ -29,10 +29,12 @@ namespace TestApplication.WebApi.Controllers
 
                 foreach (Project project in listOfProjects)
                 {
-                    ProjectRest projectRest = new ProjectRest();
-                    projectRest.Id = project.Id;
-                    projectRest.Name = project.Name;
-                    projectRest.ClientName = project.ClientName;
+                    ProjectRest projectRest = new ProjectRest
+                    {
+                        Id = project.Id,
+                        Name = project.Name,
+                        ClientName = project.ClientName
+                    };
 
                     projectsMapped.Add(projectRest);
                 }
@@ -47,19 +49,27 @@ namespace TestApplication.WebApi.Controllers
 
         [HttpPost]
         [Route("api/InsertProject")]
-        public async Task<HttpResponseMessage> InsertProjectAsync(Project project)
-        {
-            ProjectService service = new ProjectService();
-            Project newProject = new Project();
+        public async Task<HttpResponseMessage> InsertProjectAsync(ProjectRestInsert projectRestInsert)
+        { 
+            if (projectRestInsert != null)
+            {
+                ProjectService service = new ProjectService();
+                Project newProject = new Project
+                {
+                    Id = projectRestInsert.Id,
+                    Name = projectRestInsert.Name,
+                    ClientName = projectRestInsert.ClientName,
+                    Budget = projectRestInsert.Budget
+                };
 
-            newProject = await service.InsertProjectAsync(project);
+                await service.InsertProjectAsync(newProject);
 
-            ProjectRest projectRest = new ProjectRest();
-            projectRest.Id = newProject.Id;
-            projectRest.Name = newProject.Name;
-            projectRest.ClientName = newProject.ClientName;
-
-            return Request.CreateResponse(HttpStatusCode.OK, projectRest);
+                return Request.CreateResponse(HttpStatusCode.OK, $"Project inserted!");
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, $"Invalid input");
+            }
         }
 
         
@@ -68,18 +78,10 @@ namespace TestApplication.WebApi.Controllers
         public async Task<HttpResponseMessage> UpdateProjectNameByIdAsync(int id, string newProjectName)
         {
             ProjectService service = new ProjectService();
-            Project newProject = new Project();
 
-            newProject = await service.UpdateProjectNameByIdAsync(id, newProjectName);
-
-            if (newProject != null)
+            if (await service.UpdateProjectNameByIdAsync(id, newProjectName) != null)
             {
-                ProjectRest projectMapped = new ProjectRest();
-                projectMapped.Id = newProject.Id;
-                projectMapped.Name = newProject.Name;
-                projectMapped.ClientName = newProject.ClientName;
-
-                return Request.CreateResponse(HttpStatusCode.OK, projectMapped);
+                return Request.CreateResponse(HttpStatusCode.OK, $"Project updated!");
             }
             else
             {
@@ -90,21 +92,13 @@ namespace TestApplication.WebApi.Controllers
         
         [HttpDelete]
         [Route("api/DeleteProject")]
-        public async Task<HttpResponseMessage> DeleteProjectByIDAsync(int id)
+        public async Task<HttpResponseMessage> DeleteProjectByIdAsync(int id)
         {
             ProjectService service = new ProjectService();
-            Project newProject = new Project();
 
-            newProject = await service.DeleteProjectByIdAsync(id);
-
-            if (newProject != null)
-            {
-                ProjectRest projectMapped = new ProjectRest();
-                projectMapped.Id = newProject.Id;
-                projectMapped.Name = newProject.Name;
-                projectMapped.ClientName = newProject.ClientName;
-
-                return Request.CreateResponse(HttpStatusCode.OK, projectMapped);
+            if (await service.DeleteProjectByIdAsync(id) != null)
+            {    
+                return Request.CreateResponse(HttpStatusCode.OK, $"Project deleted!");
             }
             else
             {
@@ -120,5 +114,13 @@ namespace TestApplication.WebApi.Controllers
         public string Name { get; set; }
         public string ClientName { get; set; }
 
+    }
+
+    public class ProjectRestInsert
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string ClientName { get; set; }
+        public int Budget { get; set; }
     }
 }

@@ -31,25 +31,26 @@ namespace TestApplication.WebApi.Controllers
         public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync()
         {
             DeveloperService service = new DeveloperService();
-            List<Developer> devs = new List<Developer>();            
+            List<Developer> developers = new List<Developer>();            
 
-            devs = await service.RetrieveListOfDevelopersAsync();
+            developers = await service.RetrieveListOfDevelopersAsync();
 
-            if (devs != null)
+            if (developers != null)
             {
                 List<DeveloperRest> devsMapped = new List<DeveloperRest>();
 
-                foreach (Developer developer in devs)
+                foreach (Developer developer in developers)
                 {
-                    DeveloperRest devRest = new DeveloperRest();
-                    devRest.Id = developer.Id;
-                    devRest.FirstName = developer.FirstName;
-                    devRest.LastName = developer.LastName;
-                    devRest.ProjectId = developer.ProjectId;
+                    DeveloperRest devRest = new DeveloperRest
+                    {
+                        Id = developer.Id,
+                        FirstName = developer.FirstName,
+                        LastName = developer.LastName,
+                        ProjectId = developer.ProjectId
+                    };
 
                     devsMapped.Add(devRest);
                 }
-
                 return Request.CreateResponse(HttpStatusCode.OK, devsMapped);
             }
             else
@@ -61,20 +62,29 @@ namespace TestApplication.WebApi.Controllers
         
         [HttpPost]
         [Route("api/InsertDev")]
-        public async Task<HttpResponseMessage> InsertDeveloperAsync(Developer developer)
+        public async Task<HttpResponseMessage> InsertDeveloperAsync(DeveloperRestInsert developerRestInsert)
         {
-            DeveloperService service = new DeveloperService();
-            Developer dev = new Developer();            
+            if (developerRestInsert != null)
+            {
+                DeveloperService service = new DeveloperService();
+                Developer newDeveloper = new Developer
+                {
+                    Id = developerRestInsert.Id,
+                    FirstName = developerRestInsert.FirstName,
+                    LastName = developerRestInsert.LastName,
+                    ProjectId = developerRestInsert.ProjectId,
+                    Salary = developerRestInsert.Salary
+                };
 
-            dev = await service.InsertDeveloperAsync(developer);
- 
-            DeveloperRest devRest = new DeveloperRest();
-            devRest.Id = dev.Id;
-            devRest.FirstName = dev.FirstName;
-            devRest.LastName = dev.LastName;
-            devRest.ProjectId = dev.ProjectId;
+                await service.InsertDeveloperAsync(newDeveloper);
 
-            return Request.CreateResponse(HttpStatusCode.OK, devRest);   
+                return Request.CreateResponse(HttpStatusCode.OK, $"Developer inserted!");
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, $"Invalid input");
+            }
+             
         }
 
 
@@ -82,20 +92,11 @@ namespace TestApplication.WebApi.Controllers
         [Route("api/UpdateDev")]
         public async Task<HttpResponseMessage> UpdateDeveloperProjectByIDAsync(int devId , int newProjectId)
         {
-            DeveloperService service = new DeveloperService();
-            Developer dev = new Developer();
+            DeveloperService service = new DeveloperService();           
 
-            dev = await service.UpdateDeveloperProjectByIdAsync(devId, newProjectId);
-
-            if (dev != null)
+            if (await service.UpdateDeveloperProjectByIdAsync(devId, newProjectId) != null)
             {
-                DeveloperRest devRest = new DeveloperRest();
-                devRest.Id = dev.Id;
-                devRest.FirstName = dev.FirstName;
-                devRest.LastName = dev.LastName;
-                devRest.ProjectId = dev.ProjectId;
-
-                return Request.CreateResponse(HttpStatusCode.OK, devRest);
+                return Request.CreateResponse(HttpStatusCode.OK, $"Developer updated!");
             }
             else
             {
@@ -109,19 +110,10 @@ namespace TestApplication.WebApi.Controllers
         public async Task<HttpResponseMessage> DeleteDeveloperByIDAsync(int devId)
         {
             DeveloperService service = new DeveloperService();
-            Developer dev = new Developer();
-
-            dev = await service.DeleteDeveloperByIdAsync(devId);
             
-            if (dev != null)
-            {
-                DeveloperRest devRest = new DeveloperRest();
-                devRest.Id = dev.Id;
-                devRest.FirstName = dev.FirstName;
-                devRest.LastName = dev.LastName;
-                devRest.ProjectId = dev.ProjectId;
-
-                return Request.CreateResponse(HttpStatusCode.OK, devRest);
+            if (await service.DeleteDeveloperByIdAsync(devId) != null)
+            {   
+                return Request.CreateResponse(HttpStatusCode.OK, $"Developer deleted!");
             }
             else
             {
@@ -136,23 +128,25 @@ namespace TestApplication.WebApi.Controllers
         {
             DeveloperService service = new DeveloperService();
             List<Developer> developers = new List<Developer>();
-            List<DeveloperRest> developersMapped = new List<DeveloperRest>();
-
+            
             developers = await service.RetrieveDevelopersOnProjectAsync(projectId);
 
             if (developers != null)
             {
+                List<DeveloperRest> developersMapped = new List<DeveloperRest>();
+
                 foreach (Developer developer in developers)
                 {
-                    DeveloperRest devRest = new DeveloperRest();
-                    devRest.Id = developer.Id;
-                    devRest.FirstName = developer.FirstName;
-                    devRest.LastName = developer.LastName;
-                    devRest.ProjectId = developer.ProjectId;
+                    DeveloperRest devRest = new DeveloperRest
+                    {
+                        Id = developer.Id,
+                        FirstName = developer.FirstName,
+                        LastName = developer.LastName,
+                        ProjectId = developer.ProjectId
+                    };
 
                     developersMapped.Add(devRest);
                 }
-
                 return Request.CreateResponse(HttpStatusCode.OK, developersMapped);
             }
             else
@@ -169,6 +163,15 @@ namespace TestApplication.WebApi.Controllers
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int ProjectId { get; set; }     
+    }
+
+    public class DeveloperRestInsert
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int ProjectId { get; set; }
+        public int Salary { get; set; }
     }
     
 }
