@@ -26,15 +26,15 @@ namespace TestApplication.Service
         }
 
 
-        public async Task<Developer> UpdateDeveloperProjectByIDAsync(int devId, int projectId)
+        public async Task<Developer> UpdateDeveloperProjectByIdAsync(int devId, int projectId)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 
             return await devrep.UpdateDeveloperProjectByIDAsync(devId, projectId);
         }
 
-
-        public async Task<Developer> DeleteDeveloperByIDAsync(int devId)
+        
+        public async Task<Developer> DeleteDeveloperByIdAsync(int devId)
         {
             DeveloperRepository devrep = new DeveloperRepository();
 

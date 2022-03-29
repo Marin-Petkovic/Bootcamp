@@ -9,12 +9,23 @@ using System.Data;
 using TestApplication.Service;
 using TestApplicationModel;
 using System.Threading.Tasks;
+using TestApplication.Service.Common;
 
 namespace TestApplication.WebApi.Controllers
 {
     
     public class DeveloperController : ApiController
-    { 
+    {
+        /*
+        protected IDeveloperService service;
+
+        public DeveloperController(IDeveloperService service)
+        {
+            this.service = service;
+        }
+        */
+
+        
         [HttpGet]
         [Route("api/RetrieveAllDevs")]
         public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync()
@@ -74,7 +85,7 @@ namespace TestApplication.WebApi.Controllers
             DeveloperService service = new DeveloperService();
             Developer dev = new Developer();
 
-            dev = await service.UpdateDeveloperProjectByIDAsync(devId, newProjectId);
+            dev = await service.UpdateDeveloperProjectByIdAsync(devId, newProjectId);
 
             if (dev != null)
             {
@@ -100,7 +111,7 @@ namespace TestApplication.WebApi.Controllers
             DeveloperService service = new DeveloperService();
             Developer dev = new Developer();
 
-            dev = await service.DeleteDeveloperByIDAsync(devId);
+            dev = await service.DeleteDeveloperByIdAsync(devId);
             
             if (dev != null)
             {
