@@ -9,19 +9,26 @@ using System.Data;
 using TestApplication.Service;
 using TestApplicationModel;
 using System.Threading.Tasks;
+using TestApplication.Service.Common;
+using TestApplication.Model.Common;
 
 namespace TestApplication.WebApi.Controllers
 {
     public class ProjectController : ApiController
     {
+        protected IProjectService Service { get; set; }
+
+        public ProjectController(IProjectService service)
+        {
+            Service = service;
+        }
+
+
         [HttpGet]
         [Route("api/RetrieveProjects")]
         public async Task<HttpResponseMessage> RetrieveProjectsAsync()
         {
-            ProjectService service = new ProjectService();
-            List<Project> listOfProjects = new List<Project>();
-
-            listOfProjects = await service.RetrieveProjectsAsync();
+            var listOfProjects = await Service.RetrieveProjectsAsync();
 
             if (listOfProjects != null)
             {
@@ -53,7 +60,6 @@ namespace TestApplication.WebApi.Controllers
         { 
             if (projectRestInsert != null)
             {
-                ProjectService service = new ProjectService();
                 Project newProject = new Project
                 {
                     Id = projectRestInsert.Id,
@@ -62,7 +68,7 @@ namespace TestApplication.WebApi.Controllers
                     Budget = projectRestInsert.Budget
                 };
 
-                await service.InsertProjectAsync(newProject);
+                await Service.InsertProjectAsync((IProject)newProject);
 
                 return Request.CreateResponse(HttpStatusCode.OK, $"Project inserted!");
             }
@@ -77,9 +83,8 @@ namespace TestApplication.WebApi.Controllers
         [Route("api/UpdateProject")]
         public async Task<HttpResponseMessage> UpdateProjectNameByIdAsync(int id, string newProjectName)
         {
-            ProjectService service = new ProjectService();
 
-            if (await service.UpdateProjectNameByIdAsync(id, newProjectName) != null)
+            if (await Service.UpdateProjectNameByIdAsync(id, newProjectName) != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, $"Project updated!");
             }
@@ -94,9 +99,8 @@ namespace TestApplication.WebApi.Controllers
         [Route("api/DeleteProject")]
         public async Task<HttpResponseMessage> DeleteProjectByIdAsync(int id)
         {
-            ProjectService service = new ProjectService();
 
-            if (await service.DeleteProjectByIdAsync(id) != null)
+            if (await Service.DeleteProjectByIdAsync(id) != null)
             {    
                 return Request.CreateResponse(HttpStatusCode.OK, $"Project deleted!");
             }

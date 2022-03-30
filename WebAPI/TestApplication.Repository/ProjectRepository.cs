@@ -4,17 +4,18 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Model.Common;
 using TestApplicationModel;
 
 namespace TestApplication.Repository
 {
     public class ProjectRepository
     {
-        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
         SqlConnection connection = new SqlConnection(connectionString);
         
 
-        public async Task<List<Project>> RetrieveProjectsAsync()
+        public async Task<List<IProject>> RetrieveProjectsAsync()
         {
             SqlCommand command = new SqlCommand($"SELECT * FROM Project;", connection);
 
@@ -24,7 +25,7 @@ namespace TestApplication.Repository
 
             if (reader.HasRows)
             {
-                List<Project> listOfProjects = new List<Project>();
+                List<IProject> listOfProjects = new List<IProject>();
                 
                 while (await reader.ReadAsync())
                 {
@@ -36,7 +37,7 @@ namespace TestApplication.Repository
                         Budget = reader.GetInt32(3)
                     };
 
-                    listOfProjects.Add(project);
+                    listOfProjects.Add((IProject)project);
                 } 
                 connection.Close();
                 return listOfProjects;
@@ -48,7 +49,7 @@ namespace TestApplication.Repository
         }
 
 
-        public async Task<Project> InsertProjectAsync(Project project)
+        public async Task<IProject> InsertProjectAsync(IProject project)
         { 
             SqlCommand command = new SqlCommand
                 ($"INSERT INTO Project VALUES ({project.Id}, '{project.Name}', '{project.ClientName}', {project.Budget});", connection);

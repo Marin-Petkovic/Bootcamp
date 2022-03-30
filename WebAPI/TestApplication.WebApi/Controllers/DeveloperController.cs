@@ -10,44 +10,39 @@ using TestApplication.Service;
 using TestApplicationModel;
 using System.Threading.Tasks;
 using TestApplication.Service.Common;
+using TestApplication.Model.Common;
 
 namespace TestApplication.WebApi.Controllers
 {
     
     public class DeveloperController : ApiController
     {
-        /*
-        protected IDeveloperService service;
-
+        
+        protected IDeveloperService Service { get; set; }
+        
+        
         public DeveloperController(IDeveloperService service)
         {
-            this.service = service;
-        }
-        */
-
+            Service = service;               
+        }       
         
+     
         [HttpGet]
         [Route("api/RetrieveAllDevs")]
         public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync()
         {
-            DeveloperService service = new DeveloperService();
-            List<Developer> developers = new List<Developer>();            
+            var developerList = await Service.RetrieveListOfDevelopersAsync();
 
-            developers = await service.RetrieveListOfDevelopersAsync();
-
-            if (developers != null)
+            if (developerList != null)
             {
-                List<DeveloperRest> devsMapped = new List<DeveloperRest>();
-
-                foreach (Developer developer in developers)
+                var devsMapped = new List<DeveloperRest>();
+                foreach (Developer developer in developerList)
                 {
-                    DeveloperRest devRest = new DeveloperRest
-                    {
-                        Id = developer.Id,
-                        FirstName = developer.FirstName,
-                        LastName = developer.LastName,
-                        ProjectId = developer.ProjectId
-                    };
+                    var devRest = new DeveloperRest();
+                    devRest.Id = developer.Id;
+                    devRest.FirstName = developer.FirstName;
+                    devRest.LastName = developer.LastName;
+                    devRest.ProjectId = developer.ProjectId;
 
                     devsMapped.Add(devRest);
                 }
@@ -66,7 +61,6 @@ namespace TestApplication.WebApi.Controllers
         {
             if (developerRestInsert != null)
             {
-                DeveloperService service = new DeveloperService();
                 Developer newDeveloper = new Developer
                 {
                     Id = developerRestInsert.Id,
@@ -76,7 +70,7 @@ namespace TestApplication.WebApi.Controllers
                     Salary = developerRestInsert.Salary
                 };
 
-                await service.InsertDeveloperAsync(newDeveloper);
+                await Service.InsertDeveloperAsync(newDeveloper);
 
                 return Request.CreateResponse(HttpStatusCode.OK, $"Developer inserted!");
             }
@@ -87,14 +81,12 @@ namespace TestApplication.WebApi.Controllers
              
         }
 
-
+        
         [HttpPut]
         [Route("api/UpdateDev")]
         public async Task<HttpResponseMessage> UpdateDeveloperProjectByIDAsync(int devId , int newProjectId)
-        {
-            DeveloperService service = new DeveloperService();           
-
-            if (await service.UpdateDeveloperProjectByIdAsync(devId, newProjectId) != null)
+        {         
+            if (await Service.UpdateDeveloperProjectByIdAsync(devId, newProjectId) != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, $"Developer updated!");
             }
@@ -108,10 +100,8 @@ namespace TestApplication.WebApi.Controllers
         [HttpDelete]
         [Route("api/DeleteDev")]
         public async Task<HttpResponseMessage> DeleteDeveloperByIDAsync(int devId)
-        {
-            DeveloperService service = new DeveloperService();
-            
-            if (await service.DeleteDeveloperByIdAsync(devId) != null)
+        {     
+            if (await Service.DeleteDeveloperByIdAsync(devId) != null)
             {   
                 return Request.CreateResponse(HttpStatusCode.OK, $"Developer deleted!");
             }
@@ -122,14 +112,12 @@ namespace TestApplication.WebApi.Controllers
         }
         
         
+
         [HttpGet]
         [Route("api/RetrieveDevsOnProject")]
         public async Task<HttpResponseMessage> RetrieveDevelopersOnProjectAsync(int projectId)
-        {
-            DeveloperService service = new DeveloperService();
-            List<Developer> developers = new List<Developer>();
-            
-            developers = await service.RetrieveDevelopersOnProjectAsync(projectId);
+        {            
+            var developers = await Service.RetrieveDevelopersOnProjectAsync(projectId);
 
             if (developers != null)
             {
@@ -154,6 +142,8 @@ namespace TestApplication.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
             }
         }
+        
+        
     }
 
     

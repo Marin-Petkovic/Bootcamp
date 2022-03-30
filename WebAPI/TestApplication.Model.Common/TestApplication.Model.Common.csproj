@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDeveloper.cs" />
+    <Compile Include="IDeveloperRest.cs" />
     <Compile Include="IProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,12 +9,12 @@ namespace TestApplication.Service.Common
 {
     public interface IProjectService
     {
-        List<IProject> RetrieveProjectsAsync();
+        Task<List<IProject>> RetrieveProjectsAsync();
 
-        IProject InsertProjectAsync();
+        Task<IProject> InsertProjectAsync(IProject project);
 
-        IProject UpdateProjectNameByIdAsync();
+        Task<IProject> UpdateProjectNameByIdAsync(int id, string projectName);
 
-        IProject DeleteProjectById();
+        Task<IProject> DeleteProjectByIdAsync(int id);
     }
 }

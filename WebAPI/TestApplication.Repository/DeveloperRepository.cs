@@ -4,18 +4,20 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Model.Common;
+using TestApplication.Repository.Common;
 using TestApplicationModel;
 
 namespace TestApplication.Repository
 {
-    public class DeveloperRepository
+    public class DeveloperRepository : IDeveloperRepository
     {
-        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
         SqlConnection connection = new SqlConnection(connectionString);
+        
 
-
-        public async Task<List<Developer>> RetrieveListOfDevelopersAsync()
-        { 
+        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync()
+        {
             SqlCommand command = new SqlCommand("SELECT * FROM Developer;", connection);
 
             await connection.OpenAsync();
@@ -24,32 +26,31 @@ namespace TestApplication.Repository
 
             if (reader.HasRows)
             {
-                List<Developer> listOfDevelopers = new List<Developer>();
-
+                List<IDeveloper> listOfDevelopers = new List<IDeveloper>();
+                
                 while (await reader.ReadAsync())
                 {
-                    Developer developer = new Developer
-                    {
-                        Id = reader.GetInt32(0),
-                        FirstName = reader.GetString(1),
-                        LastName = reader.GetString(2),
-                        ProjectId = reader.GetInt32(3),
-                        Salary = reader.GetInt32(4)
-                    };
+                    Developer newDeveloper = new Developer();
+                    newDeveloper.Id = reader.GetInt32(0);
+                    newDeveloper.FirstName = reader.GetString(1);
+                    newDeveloper.LastName = reader.GetString(2);
+                    newDeveloper.ProjectId = reader.GetInt32(3);
+                    newDeveloper.Salary = reader.GetInt32(4);
 
-                    listOfDevelopers.Add(developer);
+                    listOfDevelopers.Add(newDeveloper);
                 }
                 connection.Close();
                 return listOfDevelopers;
             }
             else
             {
+                connection.Close();
                 return null;
-            }           
+            }
         }
 
-
-        public async Task<List<Developer>> RetrieveDevelopersOnProjectAsync(int projectId)
+        
+        public async Task<List<IDeveloper>> RetrieveDevelopersOnProjectAsync(int projectId)
         {    
             SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE ProjectId={projectId};", connection);
 
@@ -59,7 +60,7 @@ namespace TestApplication.Repository
 
             if (reader.HasRows)
             {
-                List<Developer> listOfDevs = new List<Developer>();
+                List<IDeveloper> listOfDevs = new List<IDeveloper>();
 
                 while (await reader.ReadAsync())
                 {
@@ -79,12 +80,13 @@ namespace TestApplication.Repository
             }
             else
             {
+                connection.Close();
                 return null;
             }   
         }
 
         
-        public async Task<Developer> InsertDeveloperAsync(Developer developer)
+        public async Task<IDeveloper> InsertDeveloperAsync(IDeveloper developer)
         {
             SqlCommand command = new SqlCommand
                 ($"INSERT INTO Developer (FirstName, LastName, ProjectId, Salary) VALUES ('{developer.FirstName}', '{developer.LastName}', {developer.ProjectId}, {developer.Salary});", connection);
@@ -95,6 +97,7 @@ namespace TestApplication.Repository
             adapter.InsertCommand = command;
             await adapter.InsertCommand.ExecuteNonQueryAsync();
 
+            
             SqlCommand command2 = new SqlCommand($"SELECT TOP 1 * FROM Developer ORDER BY Id DESC;", connection);
             SqlDataReader reader = await command2.ExecuteReaderAsync();
             Developer insertedDev = new Developer();
@@ -107,16 +110,17 @@ namespace TestApplication.Repository
                 insertedDev.ProjectId = reader.GetInt32(3);
                 insertedDev.Salary = reader.GetInt32(4);
             }
+            
             connection.Close();
             return insertedDev;
         }
 
 
-        public async Task<Developer> UpdateDeveloperProjectByIDAsync(int devId, int newProjectId)
+        public async Task<IDeveloper> UpdateDeveloperProjectByIdAsync(int devId, int newProjectId)
         {
             SqlCommand command1 = new SqlCommand($"SELECT * FROM Developer WHERE Id={devId};", connection);
             await connection.OpenAsync();
-            SqlDataReader reader = await command1.ExecuteReaderAsync();
+            SqlDataReader reader = command1.ExecuteReader();
 
             if (reader.HasRows)
             {
@@ -141,12 +145,13 @@ namespace TestApplication.Repository
             }
             else
             {
+                connection.Close();
                 return null;
             }
         }
 
         
-        public async Task<Developer> DeleteDeveloperByIDAsync(int devId)
+        public async Task<IDeveloper> DeleteDeveloperByIdAsync(int devId)
         {
             SqlCommand command1 = new SqlCommand($"SELECT * from Developer WHERE Id={devId}", connection);
 
@@ -169,15 +174,17 @@ namespace TestApplication.Repository
                 reader.Close();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.DeleteCommand = new SqlCommand($"DELETE FROM Developer WHERE Id={devId}", connection);
-                await adapter.DeleteCommand.ExecuteNonQueryAsync();
+                adapter.DeleteCommand.ExecuteNonQuery();
 
                 connection.Close();
                 return deletedDev;
             }
             else
             {
+                connection.Close();
                 return null;
             }
-        }
+        }  
+        
     }
 }

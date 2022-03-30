@@ -46,6 +46,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TestApplication.Model.Common\TestApplication.Model.Common.csproj">
+      <Project>{AB0E319E-B79F-4FE9-B298-16628B734B3B}</Project>
+      <Name>TestApplication.Model.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestApplication.Repository.Common\TestApplication.Repository.Common.csproj">
+      <Project>{0B4B4CCA-2171-4FA5-806C-C48E2F99EAE7}</Project>
+      <Name>TestApplication.Repository.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestApplicationModel\TestApplicationModel.csproj">
       <Project>{5F368AB0-F112-4247-9176-F0BBCB695AD3}</Project>
       <Name>TestApplicationModel</Name>

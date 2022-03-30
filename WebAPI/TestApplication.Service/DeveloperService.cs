@@ -3,50 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Model.Common;
 using TestApplication.Repository;
+using TestApplication.Repository.Common;
+using TestApplication.Service.Common;
 using TestApplicationModel;
 
 namespace TestApplication.Service
 {
-    public class DeveloperService 
+    public class DeveloperService : IDeveloperService
     {
-        public async Task<List<Developer>> RetrieveListOfDevelopersAsync()
-        {
-            DeveloperRepository devrep = new DeveloperRepository();
+        public IDeveloperRepository DeveloperRepository;
 
-            return await devrep.RetrieveListOfDevelopersAsync();
-        }        
+        // Constructor
+        public DeveloperService(IDeveloperRepository developerRepository)
+        {
+            this.DeveloperRepository = developerRepository;
+        }       
+        
+        
+        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync()
+        {
+            return await DeveloperRepository.RetrieveListOfDevelopersAsync();
+        }
         
 
-        public async Task<Developer> InsertDeveloperAsync(Developer developer)
+        public async Task<IDeveloper> InsertDeveloperAsync(IDeveloper developer)
         {
-            DeveloperRepository devrep = new DeveloperRepository();
-
-            return await devrep.InsertDeveloperAsync(developer);
-        }
-
-
-        public async Task<Developer> UpdateDeveloperProjectByIdAsync(int devId, int projectId)
-        {
-            DeveloperRepository devrep = new DeveloperRepository();
-
-            return await devrep.UpdateDeveloperProjectByIDAsync(devId, projectId);
+            return await DeveloperRepository.InsertDeveloperAsync(developer);
         }
 
         
-        public async Task<Developer> DeleteDeveloperByIdAsync(int devId)
+        public async Task<IDeveloper> UpdateDeveloperProjectByIdAsync(int devId, int projectId)
         {
-            DeveloperRepository devrep = new DeveloperRepository();
-
-            return await devrep.DeleteDeveloperByIDAsync(devId);
+            return await DeveloperRepository.UpdateDeveloperProjectByIdAsync(devId, projectId);
         }
 
-
-        public async Task<List<Developer>> RetrieveDevelopersOnProjectAsync(int id)
+        
+        public async Task<IDeveloper> DeleteDeveloperByIdAsync(int devId)
         {
-            DeveloperRepository devrep = new DeveloperRepository();
-
-            return await devrep.RetrieveDevelopersOnProjectAsync(id);
+            return await DeveloperRepository.DeleteDeveloperByIdAsync(devId);
         }
+        
+
+        public async Task<List<IDeveloper>> RetrieveDevelopersOnProjectAsync(int id)
+        {
+            return await DeveloperRepository.RetrieveDevelopersOnProjectAsync(id);
+        }
+        
     }
 }

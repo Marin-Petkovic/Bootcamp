@@ -9,14 +9,15 @@ namespace TestApplication.Service.Common
 {
     public interface IDeveloperService
     {
-        List<IDeveloper> RetrieveListOfDevelopersAsync();
+        Task<List<IDeveloper>> RetrieveListOfDevelopersAsync();
+        
+        Task<IDeveloper> InsertDeveloperAsync(IDeveloper developer);
 
-        IDeveloper InsertDeveloperAsync();
+        Task<IDeveloper> UpdateDeveloperProjectByIdAsync(int devId, int projectId);
 
-        IDeveloper UpdateDeveloperProjectByIdAsync();
+        Task<IDeveloper> DeleteDeveloperByIdAsync(int devId);
 
-        IDeveloper DeleteDeveloperByIdAsync();
-
-        List<IDeveloper> RetrieveDevelopersOnProjectAsync();
+        Task<List<IDeveloper>> RetrieveDevelopersOnProjectAsync(int id);
+        
     }
 }

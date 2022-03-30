@@ -11,7 +11,7 @@ namespace TestApplication.Model.Common
         int Id { get; set; }
         string FirstName { get; set; }
         string LastName { get; set; }
-        int projectId { get; set; }
-        int salary { get; set; }
+        int ProjectId { get; set; }
+        int Salary { get; set; }
     }
 }

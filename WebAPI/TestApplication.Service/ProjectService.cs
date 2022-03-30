@@ -3,42 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Model.Common;
 using TestApplication.Repository;
+using TestApplication.Repository.Common;
 using TestApplicationModel;
 
 namespace TestApplication.Service
 {
     public class ProjectService
     {
-        public async Task<List<Project>> RetrieveProjectsAsync()
-        {
-            ProjectRepository projectRepo = new ProjectRepository();
+        protected IProjectRepository ProjectRepository { get; set; }
 
-            return await projectRepo.RetrieveProjectsAsync();
+        public ProjectService(IProjectRepository projectRepository)
+        {
+            ProjectRepository = projectRepository;
+        }
+
+        public async Task<List<IProject>> RetrieveProjectsAsync()
+        {
+
+
+            return await ProjectRepository.RetrieveProjectsAsync();
         }
 
 
-        public async Task<Project> InsertProjectAsync(Project project)
+        public async Task<IProject> InsertProjectAsync(IProject project)
         {
-            ProjectRepository projectRepo = new ProjectRepository();
 
-            return await projectRepo.InsertProjectAsync(project);
+            return await ProjectRepository.InsertProjectAsync(project);
         }
 
 
-        public async Task<Project> UpdateProjectNameByIdAsync(int id, string projectName)
+        public async Task<IProject> UpdateProjectNameByIdAsync(int id, string projectName)
         {
-            ProjectRepository projectRepo = new ProjectRepository();
 
-            return await projectRepo.UpdateProjectNameByIdAsync(id, projectName);
+            return await ProjectRepository.UpdateProjectNameByIdAsync(id, projectName);
         }
 
 
-        public async Task<Project> DeleteProjectByIdAsync(int id)
+        public async Task<IProject> DeleteProjectByIdAsync(int id)
         {
-            ProjectRepository projectRepo = new ProjectRepository();
 
-            return await projectRepo.DeleteProjectByIdAsync(id);
+            return await ProjectRepository.DeleteProjectByIdAsync(id);
         }
     }
 }

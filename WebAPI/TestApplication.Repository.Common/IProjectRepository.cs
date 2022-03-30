@@ -9,12 +9,12 @@ namespace TestApplication.Repository.Common
 {
     public interface IProjectRepository
     {
-        List<IProject> RetrieveProjectsAsync();
+        Task<List<IProject>> RetrieveProjectsAsync();
 
-        IProject InsertProjectAsync();
+        Task<IProject> InsertProjectAsync(IProject project);
 
-        IProject UpdateProjectNameById();
+        Task<IProject> UpdateProjectNameByIdAsync(int projectId, string projectName);
 
-        IProject DeleteProjectById();
+        Task<IProject> DeleteProjectByIdAsync(int projectId);
     }
 }
