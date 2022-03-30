@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using TestApplication.Model.Common;
 using TestApplication.Repository;
 using TestApplication.Repository.Common;
+using TestApplication.Service.Common;
 using TestApplicationModel;
 
 namespace TestApplication.Service
 {
-    public class ProjectService
+    public class ProjectService : IProjectService
     {
         protected IProjectRepository ProjectRepository { get; set; }
 
@@ -19,10 +20,12 @@ namespace TestApplication.Service
             ProjectRepository = projectRepository;
         }
 
+
+
+
+
         public async Task<List<IProject>> RetrieveProjectsAsync()
         {
-
-
             return await ProjectRepository.RetrieveProjectsAsync();
         }
 
@@ -40,7 +43,7 @@ namespace TestApplication.Service
             return await ProjectRepository.UpdateProjectNameByIdAsync(id, projectName);
         }
 
-
+        
         public async Task<IProject> DeleteProjectByIdAsync(int id)
         {
 

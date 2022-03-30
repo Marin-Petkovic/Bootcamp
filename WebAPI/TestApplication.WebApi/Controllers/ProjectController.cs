@@ -16,7 +16,9 @@ namespace TestApplication.WebApi.Controllers
 {
     public class ProjectController : ApiController
     {
+
         protected IProjectService Service { get; set; }
+
 
         public ProjectController(IProjectService service)
         {
@@ -68,7 +70,7 @@ namespace TestApplication.WebApi.Controllers
                     Budget = projectRestInsert.Budget
                 };
 
-                await Service.InsertProjectAsync((IProject)newProject);
+                await Service.InsertProjectAsync(newProject);
 
                 return Request.CreateResponse(HttpStatusCode.OK, $"Project inserted!");
             }
@@ -109,6 +111,7 @@ namespace TestApplication.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
             }
         } 
+        
     }
 
 

@@ -26,3 +26,9 @@ C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Repository.Common.pdb
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Service.Common.dll
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Service.Common.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Model.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Repository.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Service.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Model.Common.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Repository.Common.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service\bin\Debug\TestApplication.Service.Common.pdb

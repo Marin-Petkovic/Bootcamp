@@ -15,6 +15,8 @@ namespace TestApplication.Repository.Common
 
         Task<IProject> UpdateProjectNameByIdAsync(int projectId, string projectName);
 
+        
         Task<IProject> DeleteProjectByIdAsync(int projectId);
+        
     }
 }

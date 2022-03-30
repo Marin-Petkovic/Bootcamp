@@ -40,7 +40,12 @@
       "ProjectGuid": "03f94c21-9e0a-4ff9-b4af-89de41037dec",
       "DisplayName": "TestApplication.Repository",
       "ColorIndex": 7
+    },
+    "d1f3e955-69f9-40a5-aa13-6f85d235f891": {
+      "ProjectGuid": "d1f3e955-69f9-40a5-aa13-6f85d235f891",
+      "DisplayName": "TestApplication.Common",
+      "ColorIndex": 8
     }
   },
-  "NextColorIndex": 8
+  "NextColorIndex": 9
 }

@@ -5,15 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestApplication.Model.Common;
+using TestApplication.Repository.Common;
 using TestApplicationModel;
 
 namespace TestApplication.Repository
 {
-    public class ProjectRepository
+    public class ProjectRepository : IProjectRepository
     {
-        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog=master;Integrated Security=True";
         SqlConnection connection = new SqlConnection(connectionString);
-        
+
 
         public async Task<List<IProject>> RetrieveProjectsAsync()
         {
@@ -37,7 +38,7 @@ namespace TestApplication.Repository
                         Budget = reader.GetInt32(3)
                     };
 
-                    listOfProjects.Add((IProject)project);
+                    listOfProjects.Add(project);
                 } 
                 connection.Close();
                 return listOfProjects;
@@ -65,7 +66,7 @@ namespace TestApplication.Repository
         }
 
 
-        public async Task<Project> UpdateProjectNameByIdAsync(int projectId, string projectName)
+        public async Task<IProject> UpdateProjectNameByIdAsync(int projectId, string projectName)
         {
             SqlCommand command = new SqlCommand($"SELECT * FROM Project WHERE Id={projectId};", connection);
 
@@ -100,8 +101,8 @@ namespace TestApplication.Repository
             }
         }
 
-
-        public async Task<Project> DeleteProjectByIdAsync(int projectId)
+        
+        public async Task<IProject> DeleteProjectByIdAsync(int projectId)
         {
             SqlCommand command = new SqlCommand($"SELECT * FROM Project WHERE Id={projectId};", connection);
 

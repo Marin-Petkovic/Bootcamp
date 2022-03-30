@@ -13,3 +13,6 @@ C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplicationModel\obj\D
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplicationModel\bin\Debug\TestApplication.Model.Common.dll
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplicationModel\bin\Debug\TestApplication.Model.Common.pdb
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplicationModel\obj\Debug\TestApplicationModel.csproj.CopyComplete
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplicationModel\bin\Debug\TestApplication.Model.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplicationModel\bin\Debug\TestApplication.Model.Common.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplicationModel\obj\Debug\TestApplicationModel.csproj.CopyComplete
