@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace TestApplication.Common
 {
-    public class Filtering
+    public class Filtering : IFiltering
     {
-        public Nullable<int> Id { get; set; }
+        public string Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Nullable<int> ProjectId { get; set; }
-        public Nullable<int> Salary { get; set; }
+        public string ProjectId { get; set; }
+        public string Salary { get; set; }
+        
     }
 }

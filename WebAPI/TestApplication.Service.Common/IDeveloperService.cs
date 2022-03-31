@@ -10,7 +10,7 @@ namespace TestApplication.Service.Common
 {
     public interface IDeveloperService
     {
-        Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(Sorting sorting, Paging paging, Filtering filtering);
+        Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(ISorting sorting, IPaging paging, IFiltering filtering);
         
         Task<IDeveloper> InsertDeveloperAsync(IDeveloper developer);
 

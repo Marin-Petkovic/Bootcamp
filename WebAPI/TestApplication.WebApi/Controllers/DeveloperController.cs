@@ -25,14 +25,16 @@ namespace TestApplication.WebApi.Controllers
         public DeveloperController(IDeveloperService service)
         {
             Service = service;               
-        }       
-        
-     
+        }
+
+
+
         [HttpGet]
         [Route("api/RetrieveAllDevs")]
-        public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync([FromUri]Sorting sorting, [FromUri]Paging paging, [FromUri]Filtering filtering)
+        public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync([FromUri]Sorting sorting, [FromUri]Paging paging, [FromUri]Filtering filtering)   
         {
-            var developerList = await Service.RetrieveListOfDevelopersAsync(sorting, paging, filtering);
+
+            List<IDeveloper> developerList = await Service.RetrieveListOfDevelopersAsync(sorting, paging, filtering);
 
             if (developerList != null)
             {

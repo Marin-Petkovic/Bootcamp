@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace TestApplication.Common
 {
-    public class Paging : IPaging
+    public interface ISorting
     {
-        public int PageNumber { get; set; }
+        string SortBy { get; set; }
+        string SortOrder { get; set; }
 
-        public int PageSize { get; set; }
-
-        
     }
 }

@@ -489,3 +489,5 @@ C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.WebApi\bin
 C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.WebApi\bin\System.Threading.Tasks.Extensions.xml
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.WebApi\bin\TestApplication.Common.dll
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.WebApi\bin\TestApplication.Common.pdb
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.WebApi\bin\TestApplication.Common.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.WebApi\bin\TestApplication.Common.pdb

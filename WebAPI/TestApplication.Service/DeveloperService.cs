@@ -23,7 +23,7 @@ namespace TestApplication.Service
         }       
         
         
-        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(Sorting sorting, Paging paging, Filtering filtering)
+        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(ISorting sorting, IPaging paging, IFiltering filtering)
         {
             return await DeveloperRepository.RetrieveListOfDevelopersAsync(sorting, paging, filtering);
         }

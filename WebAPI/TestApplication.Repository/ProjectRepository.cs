@@ -12,7 +12,7 @@ namespace TestApplication.Repository
 {
     public class ProjectRepository : IProjectRepository
     {
-        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog=master;Integrated Security=True";
         SqlConnection connection = new SqlConnection(connectionString);
 
 

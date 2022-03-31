@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace TestApplication.Common
 {
-    public class Paging : IPaging
+    public interface IPaging
     {
-        public int PageNumber { get; set; }
+        int PageNumber { get; set; }
 
-        public int PageSize { get; set; }
-
-        
+        int PageSize { get; set; }
     }
 }

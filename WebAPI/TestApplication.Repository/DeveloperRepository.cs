@@ -13,53 +13,53 @@ namespace TestApplication.Repository
 {
     public class DeveloperRepository : IDeveloperRepository
     {
-        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
+        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog=master;Integrated Security=True";
         SqlConnection connection = new SqlConnection(connectionString);
         
         
-        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(Sorting sorting, Paging paging, Filtering filtering)
+        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(ISorting sorting, IPaging paging, IFiltering filtering)
         {
             StringBuilder queryString = new StringBuilder($"SELECT * FROM Developer ");
+
+            if (filtering.Id != null)
+            {
+                queryString.Append($"WHERE 1=1 ");
+
+                if (!string.IsNullOrWhiteSpace(filtering.Id))
+                {
+                    queryString.Append($"AND Id='{filtering.Id}' ");
+                }
+                if (!string.IsNullOrWhiteSpace(filtering.FirstName))
+                {
+                    queryString.Append($"AND FirstName LIKE '%{filtering.FirstName}'% ");
+                }
+                if (!string.IsNullOrWhiteSpace(filtering.LastName))
+                {
+                    queryString.Append($"AND LastName LIKE '%{filtering.LastName}%' ");
+                }
+                if (!string.IsNullOrWhiteSpace(filtering.ProjectId))
+                {
+                    queryString.Append($"AND ProjectId='{filtering.ProjectId}' ");
+                }
+                if (!string.IsNullOrWhiteSpace(filtering.Salary))
+                {
+                    queryString.Append($"AND Salary='{filtering.Salary}' ");
+                }
+            }
+            
 
             if (sorting != null)
             {
                 queryString.Append($"ORDER BY {sorting.SortBy} {sorting.SortOrder} ");
             }
-            if (paging != null)
+            
+            if (paging.PageNumber > 0 && paging.PageSize > 0)
             {
-                queryString.Append($"OFFSET {paging.Offset - 1} * {paging.Fetch} ROWS FETCH NEXT {paging.Fetch} ROWS ONLY ");
+                queryString.Append($"OFFSET ({paging.PageNumber} - 1) * {paging.PageSize} ROWS FETCH NEXT {paging.PageSize} ROWS ONLY ");
             }
-
-            if (filtering != null)
-            {
-                queryString.Append($" WHERE 1=1 ");
-                if (filtering.Id != null)
-                {
-                    queryString.Append($"AND Id={filtering.Id} ");
-                }
-                if (filtering.FirstName != null)
-                {
-                    queryString.Append($"AND FirstName={filtering.FirstName} ");
-                }
-                if (filtering.LastName != null)
-                {
-                    queryString.Append($"AND LastName={filtering.LastName} ");
-                }
-                if (filtering.ProjectId != null)
-                {
-                    queryString.Append($"AND ProjectId={filtering.ProjectId} ");
-                }
-                if (filtering.Salary != null)
-                {
-                    queryString.Append($"AND Salary={filtering.Salary}");
-                }
-            }
+            
 
             
-            
-                
-           
-
             SqlCommand command = new SqlCommand(queryString.ToString(), connection);
 
             await connection.OpenAsync();

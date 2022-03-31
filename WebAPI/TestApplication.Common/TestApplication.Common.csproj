@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filtering.cs" />
+    <Compile Include="IFiltering.cs" />
+    <Compile Include="IPaging.cs" />
+    <Compile Include="ISorting.cs" />
     <Compile Include="Paging.cs" />
     <Compile Include="Sorting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

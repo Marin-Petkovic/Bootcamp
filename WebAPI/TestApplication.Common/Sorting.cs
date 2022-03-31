@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace TestApplication.Common
 {
-    public class Sorting
+    public class Sorting : ISorting
     {
         public string SortBy { get; set; }
 
         public string SortOrder { get; set; }
+
+        
     }
 }
