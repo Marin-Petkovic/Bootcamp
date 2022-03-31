@@ -16,3 +16,5 @@ C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository
 C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository.Common\obj\Debug\TestApplication.Repository.Common.csproj.CopyComplete
 C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository.Common\obj\Debug\TestApplication.Repository.Common.dll
 C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Repository.Common\obj\Debug\TestApplication.Repository.Common.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository.Common\bin\Debug\TestApplication.Common.dll
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Repository.Common\bin\Debug\TestApplication.Common.pdb

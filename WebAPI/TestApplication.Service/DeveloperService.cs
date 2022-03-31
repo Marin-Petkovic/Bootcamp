@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Common;
 using TestApplication.Model.Common;
 using TestApplication.Repository;
 using TestApplication.Repository.Common;
@@ -22,9 +23,9 @@ namespace TestApplication.Service
         }       
         
         
-        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync()
+        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(Sorting sorting, Paging paging, Filtering filtering)
         {
-            return await DeveloperRepository.RetrieveListOfDevelopersAsync();
+            return await DeveloperRepository.RetrieveListOfDevelopersAsync(sorting, paging, filtering);
         }
         
 

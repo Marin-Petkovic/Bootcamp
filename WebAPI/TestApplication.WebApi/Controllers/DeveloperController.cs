@@ -11,6 +11,7 @@ using TestApplicationModel;
 using System.Threading.Tasks;
 using TestApplication.Service.Common;
 using TestApplication.Model.Common;
+using TestApplication.Common;
 
 namespace TestApplication.WebApi.Controllers
 {
@@ -29,9 +30,9 @@ namespace TestApplication.WebApi.Controllers
      
         [HttpGet]
         [Route("api/RetrieveAllDevs")]
-        public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync()
+        public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync([FromUri]Sorting sorting, [FromUri]Paging paging, [FromUri]Filtering filtering)
         {
-            var developerList = await Service.RetrieveListOfDevelopersAsync();
+            var developerList = await Service.RetrieveListOfDevelopersAsync(sorting, paging, filtering);
 
             if (developerList != null)
             {

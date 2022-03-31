@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TestApplication.Common
 {
-    public class Common
+    public class Sorting
     {
-        
+        public string SortBy { get; set; }
+
+        public string SortOrder { get; set; }
     }
 }

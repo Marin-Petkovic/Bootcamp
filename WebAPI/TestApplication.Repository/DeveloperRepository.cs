@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Common;
 using TestApplication.Model.Common;
 using TestApplication.Repository.Common;
 using TestApplicationModel;
@@ -12,16 +13,57 @@ namespace TestApplication.Repository
 {
     public class DeveloperRepository : IDeveloperRepository
     {
-        static string connectionString = @"Data Source=MARIN\SQLEXPRESS01;Initial Catalog=master;Integrated Security=True";
+        static string connectionString = @"Data Source=ST-02\SQLEXPRESS;Initial Catalog = master; Integrated Security = True";
         SqlConnection connection = new SqlConnection(connectionString);
         
         
-        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync()
+        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(Sorting sorting, Paging paging, Filtering filtering)
         {
-            SqlCommand command = new SqlCommand("SELECT * FROM Developer;", connection);
+            StringBuilder queryString = new StringBuilder($"SELECT * FROM Developer ");
+
+            if (sorting != null)
+            {
+                queryString.Append($"ORDER BY {sorting.SortBy} {sorting.SortOrder} ");
+            }
+            if (paging != null)
+            {
+                queryString.Append($"OFFSET {paging.Offset - 1} * {paging.Fetch} ROWS FETCH NEXT {paging.Fetch} ROWS ONLY ");
+            }
+
+            if (filtering != null)
+            {
+                queryString.Append($" WHERE 1=1 ");
+                if (filtering.Id != null)
+                {
+                    queryString.Append($"AND Id={filtering.Id} ");
+                }
+                if (filtering.FirstName != null)
+                {
+                    queryString.Append($"AND FirstName={filtering.FirstName} ");
+                }
+                if (filtering.LastName != null)
+                {
+                    queryString.Append($"AND LastName={filtering.LastName} ");
+                }
+                if (filtering.ProjectId != null)
+                {
+                    queryString.Append($"AND ProjectId={filtering.ProjectId} ");
+                }
+                if (filtering.Salary != null)
+                {
+                    queryString.Append($"AND Salary={filtering.Salary}");
+                }
+            }
+
+            
+            
+                
+           
+
+            SqlCommand command = new SqlCommand(queryString.ToString(), connection);
 
             await connection.OpenAsync();
-
+            
             SqlDataReader reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)

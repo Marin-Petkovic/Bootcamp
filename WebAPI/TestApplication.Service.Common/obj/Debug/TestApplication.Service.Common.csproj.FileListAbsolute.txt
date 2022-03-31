@@ -16,3 +16,5 @@ C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service.
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Model.Common.dll
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Model.Common.pdb
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.csproj.CopyComplete
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Common.dll
+C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Common.pdb

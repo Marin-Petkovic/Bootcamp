@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Common;
 using TestApplication.Model.Common;
 
 namespace TestApplication.Service.Common
 {
     public interface IDeveloperService
     {
-        Task<List<IDeveloper>> RetrieveListOfDevelopersAsync();
+        Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(Sorting sorting, Paging paging, Filtering filtering);
         
         Task<IDeveloper> InsertDeveloperAsync(IDeveloper developer);
 
