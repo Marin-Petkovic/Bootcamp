@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApplication.Common
 {
-    public class Filtering : IFiltering
+    public class DeveloperFiltering : IDeveloperFiltering
     {
         public string Id { get; set; }
         public string FirstName { get; set; }

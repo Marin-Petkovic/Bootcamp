@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Common.GETProject;
 using TestApplication.Model.Common;
 using TestApplication.Repository.Common;
 using TestApplicationModel;
@@ -16,9 +17,43 @@ namespace TestApplication.Repository
         SqlConnection connection = new SqlConnection(connectionString);
 
 
-        public async Task<List<IProject>> RetrieveProjectsAsync()
+        public async Task<List<IProject>> RetrieveProjectsAsync(IProjectSorting sorting, IProjectPaging paging, IProjectFiltering filtering)
         {
-            SqlCommand command = new SqlCommand($"SELECT * FROM Project;", connection);
+            StringBuilder queryString = new StringBuilder($"SELECT * FROM Project ");
+
+            if (filtering != null)
+            {
+                queryString.Append($"WHERE 1=1 ");
+
+                if (!string.IsNullOrWhiteSpace(filtering.Id))
+                {
+                    queryString.Append($"AND Id='{filtering.Id}' ");
+                }
+                if (!string.IsNullOrWhiteSpace(filtering.Name))
+                {
+                    queryString.Append($"AND Name LIKE '{filtering.Name}' ");
+                }
+                if (!string.IsNullOrWhiteSpace(filtering.ClientName))
+                {
+                    queryString.Append($"AND ClientName LIKE '{filtering.ClientName}' ");
+                }
+                if (!string.IsNullOrWhiteSpace(filtering.Budget))
+                {
+                    queryString.Append($"AND Budget='{filtering.Budget}' ");
+                }
+            }
+
+            if (sorting != null)
+            {
+                queryString.Append($"ORDER BY {sorting.SortBy} {sorting.SortOrder} ");
+            }
+
+            if (paging != null && paging.PageNumber > 0 && paging.PageSize > 0)
+            {
+                queryString.Append($"OFFSET ({paging.PageNumber} - 1) * {paging.PageSize} ROWS FETCH NEXT {paging.PageSize} ROWS ONLY ");
+            }
+
+            SqlCommand command = new SqlCommand(queryString.ToString(), connection);
 
             await connection.OpenAsync();
 

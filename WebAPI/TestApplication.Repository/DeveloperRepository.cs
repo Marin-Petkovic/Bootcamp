@@ -17,11 +17,11 @@ namespace TestApplication.Repository
         SqlConnection connection = new SqlConnection(connectionString);
         
         
-        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(ISorting sorting, IPaging paging, IFiltering filtering)
+        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(IDeveloperSorting sorting, IDeveloperPaging paging, IDeveloperFiltering filtering)
         {
             StringBuilder queryString = new StringBuilder($"SELECT * FROM Developer ");
 
-            if (filtering.Id != null)
+            if (filtering != null)
             {
                 queryString.Append($"WHERE 1=1 ");
 
@@ -31,11 +31,11 @@ namespace TestApplication.Repository
                 }
                 if (!string.IsNullOrWhiteSpace(filtering.FirstName))
                 {
-                    queryString.Append($"AND FirstName LIKE '%{filtering.FirstName}'% ");
+                    queryString.Append($"AND FirstName LIKE '{filtering.FirstName}' ");
                 }
                 if (!string.IsNullOrWhiteSpace(filtering.LastName))
                 {
-                    queryString.Append($"AND LastName LIKE '%{filtering.LastName}%' ");
+                    queryString.Append($"AND LastName LIKE '{filtering.LastName}' ");
                 }
                 if (!string.IsNullOrWhiteSpace(filtering.ProjectId))
                 {
@@ -53,7 +53,7 @@ namespace TestApplication.Repository
                 queryString.Append($"ORDER BY {sorting.SortBy} {sorting.SortOrder} ");
             }
             
-            if (paging.PageNumber > 0 && paging.PageSize > 0)
+            if (paging != null && paging.PageNumber > 0 && paging.PageSize > 0)
             {
                 queryString.Append($"OFFSET ({paging.PageNumber} - 1) * {paging.PageSize} ROWS FETCH NEXT {paging.PageSize} ROWS ONLY ");
             }
@@ -90,42 +90,7 @@ namespace TestApplication.Repository
                 return null;
             }
         }
-
-        
-        public async Task<List<IDeveloper>> RetrieveDevelopersOnProjectAsync(int projectId)
-        {    
-            SqlCommand command = new SqlCommand($"SELECT * FROM Developer WHERE ProjectId={projectId};", connection);
-
-            await connection.OpenAsync();
-
-            SqlDataReader reader = await command.ExecuteReaderAsync();            
-
-            if (reader.HasRows)
-            {
-                List<IDeveloper> listOfDevs = new List<IDeveloper>();
-
-                while (await reader.ReadAsync())
-                {
-                    Developer developer = new Developer
-                    {
-                        Id = reader.GetInt32(0),
-                        FirstName = reader.GetString(1),
-                        LastName = reader.GetString(2),
-                        ProjectId = reader.GetInt32(3),
-                        Salary = reader.GetInt32(4)
-                    };
-
-                    listOfDevs.Add(developer);
-                }
-                connection.Close();
-                return listOfDevs;
-            }
-            else
-            {
-                connection.Close();
-                return null;
-            }   
-        }
+      
 
         
         public async Task<IDeveloper> InsertDeveloperAsync(IDeveloper developer)

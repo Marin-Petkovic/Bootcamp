@@ -11,6 +11,7 @@ using TestApplicationModel;
 using System.Threading.Tasks;
 using TestApplication.Service.Common;
 using TestApplication.Model.Common;
+using TestApplication.Common.GETProject;
 
 namespace TestApplication.WebApi.Controllers
 {
@@ -28,9 +29,13 @@ namespace TestApplication.WebApi.Controllers
 
         [HttpGet]
         [Route("api/RetrieveProjects")]
-        public async Task<HttpResponseMessage> RetrieveProjectsAsync()
+        public async Task<HttpResponseMessage> RetrieveProjectsAsync([FromUri]ProjectSorting sortInfo, [FromUri]ProjectPaging pageInfo, [FromUri]ProjectFiltering filterInfo)
         {
-            var listOfProjects = await Service.RetrieveProjectsAsync();
+            IProjectSorting sorting = sortInfo;
+            IProjectPaging paging = pageInfo;
+            IProjectFiltering filtering = filterInfo;
+
+            var listOfProjects = await Service.RetrieveProjectsAsync(sorting, paging, filtering);
 
             if (listOfProjects != null)
             {
@@ -129,5 +134,27 @@ namespace TestApplication.WebApi.Controllers
         public string Name { get; set; }
         public string ClientName { get; set; }
         public int Budget { get; set; }
+    }
+
+    public class ProjectFilteringRest : IProjectFiltering
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string ClientName { get; set; }
+        public string Budget { get; set; }
+    }
+
+    class ProjectPagingRest : IProjectPaging
+    {
+        public int PageNumber { get; set; }
+
+        public int PageSize { get; set; }
+    }
+
+    public class ProjectSortingRest : IProjectSorting
+    {
+        public string SortBy { get; set; }
+
+        public string SortOrder { get; set; }
     }
 }

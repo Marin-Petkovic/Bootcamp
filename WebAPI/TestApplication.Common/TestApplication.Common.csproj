@@ -41,13 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Filtering.cs" />
-    <Compile Include="IFiltering.cs" />
-    <Compile Include="IPaging.cs" />
-    <Compile Include="ISorting.cs" />
-    <Compile Include="Paging.cs" />
-    <Compile Include="Sorting.cs" />
+    <Compile Include="GETDeveloper\DeveloperFiltering.cs" />
+    <Compile Include="GETDeveloper\IDeveloperFiltering.cs" />
+    <Compile Include="GETDeveloper\IDeveloperPaging.cs" />
+    <Compile Include="GETDeveloper\IDeveloperSorting.cs" />
+    <Compile Include="GETDeveloper\DeveloperPaging.cs" />
+    <Compile Include="GETDeveloper\DeveloperSorting.cs" />
+    <Compile Include="GETProject\IProjectFiltering.cs" />
+    <Compile Include="GETProject\IProjectPaging.cs" />
+    <Compile Include="GETProject\IProjectSorting.cs" />
+    <Compile Include="GETProject\ProjectFiltering.cs" />
+    <Compile Include="GETProject\ProjectPaging.cs" />
+    <Compile Include="GETProject\ProjectSorting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

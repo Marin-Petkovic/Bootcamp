@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Common.GETProject;
 using TestApplication.Model.Common;
 
 namespace TestApplication.Repository.Common
 {
     public interface IProjectRepository
     {
-        Task<List<IProject>> RetrieveProjectsAsync();
+        Task<List<IProject>> RetrieveProjectsAsync(IProjectSorting sorting, IProjectPaging paging, IProjectFiltering filtering);
 
         Task<IProject> InsertProjectAsync(IProject project);
 

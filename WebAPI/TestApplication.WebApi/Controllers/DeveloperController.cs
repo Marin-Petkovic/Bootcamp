@@ -31,8 +31,12 @@ namespace TestApplication.WebApi.Controllers
 
         [HttpGet]
         [Route("api/RetrieveAllDevs")]
-        public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync([FromUri]Sorting sorting, [FromUri]Paging paging, [FromUri]Filtering filtering)   
+        public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync
+            ([FromUri]DeveloperSortingRest sortInfo, [FromUri]DeveloperPagingRest pageInfo, [FromUri]DeveloperFilteringRest filterInfo)   
         {
+            IDeveloperSorting sorting = sortInfo;
+            IDeveloperPaging paging = pageInfo;
+            IDeveloperFiltering filtering = filterInfo;
 
             List<IDeveloper> developerList = await Service.RetrieveListOfDevelopersAsync(sorting, paging, filtering);
 
@@ -115,38 +119,6 @@ namespace TestApplication.WebApi.Controllers
         }
         
         
-
-        [HttpGet]
-        [Route("api/RetrieveDevsOnProject")]
-        public async Task<HttpResponseMessage> RetrieveDevelopersOnProjectAsync(int projectId)
-        {            
-            var developers = await Service.RetrieveDevelopersOnProjectAsync(projectId);
-
-            if (developers != null)
-            {
-                List<DeveloperRest> developersMapped = new List<DeveloperRest>();
-
-                foreach (Developer developer in developers)
-                {
-                    DeveloperRest devRest = new DeveloperRest
-                    {
-                        Id = developer.Id,
-                        FirstName = developer.FirstName,
-                        LastName = developer.LastName,
-                        ProjectId = developer.ProjectId
-                    };
-
-                    developersMapped.Add(devRest);
-                }
-                return Request.CreateResponse(HttpStatusCode.OK, developersMapped);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"Not found");
-            }
-        }
-        
-        
     }
 
     
@@ -166,5 +138,33 @@ namespace TestApplication.WebApi.Controllers
         public int ProjectId { get; set; }
         public int Salary { get; set; }
     }
-    
+
+    public class DeveloperSortingRest : IDeveloperSorting
+    {
+        public string SortBy { get; set; }
+
+        public string SortOrder { get; set; }
+
+
+    }
+
+    public class DeveloperPagingRest : IDeveloperPaging
+    {
+        public int PageNumber { get; set; }
+
+        public int PageSize { get; set; }
+
+
+    }
+
+    public class DeveloperFilteringRest : IDeveloperFiltering
+    {
+        public string Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ProjectId { get; set; }
+        public string Salary { get; set; }
+
+    }
+
 }

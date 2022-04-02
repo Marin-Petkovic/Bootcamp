@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApplication.Common
 {
-    public interface IPaging
+    public interface IDeveloperPaging
     {
         int PageNumber { get; set; }
 

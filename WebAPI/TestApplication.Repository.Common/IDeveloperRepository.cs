@@ -10,7 +10,7 @@ namespace TestApplication.Repository.Common
 {
     public interface IDeveloperRepository
     {
-        Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(ISorting sort, IPaging paging, IFiltering filtering);        
+        Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(IDeveloperSorting sort, IDeveloperPaging paging, IDeveloperFiltering filtering);        
         
         Task<IDeveloper> InsertDeveloperAsync(IDeveloper developer);
 
@@ -18,7 +18,6 @@ namespace TestApplication.Repository.Common
 
         Task<IDeveloper> DeleteDeveloperByIdAsync(int devId);        
 
-        Task<List<IDeveloper>> RetrieveDevelopersOnProjectAsync(int projectId);
         
     }
 }

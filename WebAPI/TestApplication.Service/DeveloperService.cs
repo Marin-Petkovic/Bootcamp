@@ -16,14 +16,14 @@ namespace TestApplication.Service
     {
         public IDeveloperRepository DeveloperRepository;
 
-        // Constructor
+
         public DeveloperService(IDeveloperRepository developerRepository)
         {
-            this.DeveloperRepository = developerRepository;
+            DeveloperRepository = developerRepository;
         }       
         
         
-        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(ISorting sorting, IPaging paging, IFiltering filtering)
+        public async Task<List<IDeveloper>> RetrieveListOfDevelopersAsync(IDeveloperSorting sorting, IDeveloperPaging paging, IDeveloperFiltering filtering)
         {
             return await DeveloperRepository.RetrieveListOfDevelopersAsync(sorting, paging, filtering);
         }
@@ -47,10 +47,7 @@ namespace TestApplication.Service
         }
         
 
-        public async Task<List<IDeveloper>> RetrieveDevelopersOnProjectAsync(int id)
-        {
-            return await DeveloperRepository.RetrieveDevelopersOnProjectAsync(id);
-        }
+        
         
     }
 }

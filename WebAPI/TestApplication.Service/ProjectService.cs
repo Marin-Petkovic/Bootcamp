@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestApplication.Common.GETProject;
 using TestApplication.Model.Common;
 using TestApplication.Repository;
 using TestApplication.Repository.Common;
@@ -24,9 +25,9 @@ namespace TestApplication.Service
 
 
 
-        public async Task<List<IProject>> RetrieveProjectsAsync()
+        public async Task<List<IProject>> RetrieveProjectsAsync(IProjectSorting sorting, IProjectPaging paging, IProjectFiltering filtering)
         {
-            return await ProjectRepository.RetrieveProjectsAsync();
+            return await ProjectRepository.RetrieveProjectsAsync(sorting, paging, filtering);
         }
 
 
