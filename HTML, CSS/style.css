@@ -1,0 +1,36 @@
+#divNav{
+    background-color: lightgrey;
+    padding: 10px;
+}
+
+#navBar{
+    list-style-type: none;
+}
+
+.navLi{
+    display: inline;
+    font-size: 30px;
+}
+
+.navA{
+    margin: 25px;
+}
+
+#programImg{
+    height: 250px;
+    width: auto;
+}
+
+#imageDiv{
+    height: 250px;
+}
+
+#profileLink{
+    margin-bottom: 10px;
+}
+
+#center{
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+}
