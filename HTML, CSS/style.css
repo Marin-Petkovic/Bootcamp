@@ -1,6 +1,12 @@
 #divNav{
     background-color: lightgrey;
-    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+#date{
+    left: 100px;
 }
 
 #navBar{
@@ -9,7 +15,7 @@
 
 .navLi{
     display: inline;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .navA{
@@ -17,13 +23,10 @@
 }
 
 #programImg{
-    height: 250px;
-    width: auto;
+    margin-top: 60px;
+    width: 25%;
 }
 
-#imageDiv{
-    height: 250px;
-}
 
 #profileLink{
     margin-bottom: 10px;
@@ -34,3 +37,41 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+#dd_button{
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: lightblue;
+    padding: 5px;
+}
+
+#dd_button:hover{
+    background-color: rgb(67, 188, 228);
+}
+
+
+#dropdown_content{
+    display: none;
+}
+.show{
+    display:block;
+}
+
+p{
+    width: 30%;
+    word-wrap: break-word;
+}
+
+form{
+    border: 2px solid;
+    padding: 15px;
+    background-color:lavender;
+    width: 50%;
+}
+
+#date{
+    margin-top:10px;
+}
+

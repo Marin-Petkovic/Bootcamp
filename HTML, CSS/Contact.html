@@ -12,9 +12,14 @@
                 <li class="navLi"><a class="navA" href="About.html">About</a></li>
             </ul>
         </div>
-        <h1>Provide info below</h1></p>
+        <br>
+        <br>
+        <div>
+            <h1>Provide info below</h1></p>
+        </div>
+        
 
-        <form>
+        <form name="mainForm" onsubmit="validateMainForm()" method="post">
             <label for="fname">First name: </label>
             <input type="text" id="fname" name="fname"><br><br>
 
@@ -46,8 +51,16 @@
             <label for="proflang3">Javascript</label>
             <br>
             <br>
-
-            <input type="submit" value="Submit">
+            <input id="submit_button" type="submit" value="Submit">
+            
+            
         </form>
+
+
+
+
+        <script src="script1.js">
+
+        </script>
     </body>
 </html>
