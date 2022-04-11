@@ -1,12 +1,38 @@
+const person = {
+    firstName: '',
+    lastName: '',
+    email: ""
+};
+const people = [];
 function validateMainForm(){
-    let x1 = document.forms["mainForm"]["fname"].value;
-    let x2 = document.forms["mainForm"]["lname"].value;
+    event.preventDefault();
+    let firstNameInput = document.forms["mainForm"]["fname"].value;
+    let lastNameInput = document.forms["mainForm"]["lname"].value;
+    let emailInput = document.forms["mainForm"]["email"].value;
 
-    if (x1 == "" || x2 == ""){
-        alert("All input fields must be filled out");
-        return false;
+    checkInput(firstNameInput, "fnameMessage");
+    checkInput(lastNameInput, "lnameMessage");
+    checkInput(emailInput, "emailMessage" )
+
+    if (firstNameInput != "" &&  lastNameInput != "" && emailInput != ""){
+        person.firstName = document.getElementById("fname").value;
+        person.lastName = document.getElementById("lname").value;
+        person.email = document.getElementById("email").value;
+        people[people.length] = person;
+        document.getElementById("display").innerHTML = JSON.stringify(people, null, 2);
     }
 }
+
+
+function checkInput(x, elem){
+    if (x == ""){
+        document.getElementById(elem).textContent = "Invalid input";
+    }
+    else{
+        document.getElementById(elem).textContent = "";
+    }
+}
+
 
 
 function activateDropdown(){
@@ -21,11 +47,6 @@ function changeColor(){
 
 
 
-document.getElementById("submit_button").onclick = function() {writeSubmitMessage()}
-
-function writeSubmitMessage(){
-    document.getElementById("submit_message").innerHTML = "Submitted!";
-}
 
 
 

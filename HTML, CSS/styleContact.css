@@ -1,0 +1,55 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    background: lavender;
+    padding: .7rem;
+}
+section{
+    background-color: white;
+    margin-left: 10px;
+}
+footer{
+    background-color: lavender;
+}
+
+li{
+    display: inline;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    font-size: 1.5rem;
+}
+
+/* -------------- */
+
+#dd_button{
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: lightblue;
+    padding: 5px;
+}
+
+
+#dd_button:hover{
+    background-color: rgb(67, 188, 228);
+}
+
+form{
+    border: 2px solid;
+    padding: 15px;
+    background-color:lavender;
+    width: 50%;
+}
+
+.invalidInput{
+    color: red;
+}
+
+#list{
+    width:35%;
+}
+

@@ -1,77 +1,35 @@
-#divNav{
-    background-color: lightgrey;
-    position: fixed;
-    width: 100%;
-    top: 0;
+body{
+    margin: 0;
+    padding: 0;
 }
 
-#date{
-    left: 100px;
+header{
+    background: lavender;
+    padding: .7rem;
+}
+section{
+    background-color: white;
+}
+footer{
+    background-color: lavender;
 }
 
-#navBar{
-    list-style-type: none;
-}
-
-.navLi{
+li{
     display: inline;
-    font-size: 20px;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    font-size: 1.5rem;
 }
 
-.navA{
-    margin: 25px;
-}
-
-#programImg{
-    margin-top: 60px;
-    width: 25%;
-}
-
-
-#profileLink{
-    margin-bottom: 10px;
-}
-
-#center{
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#dd_button{
-    margin-top: 10px;
-    margin-left: 10px;
-    border-radius: 10px;
-    text-align: center;
-    background-color: lightblue;
-    padding: 5px;
-}
-
-#dd_button:hover{
-    background-color: rgb(67, 188, 228);
-}
-
-
-#dropdown_content{
-    display: none;
-}
-.show{
-    display:block;
-}
-
-p{
-    width: 30%;
-    word-wrap: break-word;
-}
-
-form{
-    border: 2px solid;
-    padding: 15px;
-    background-color:lavender;
+button{
     width: 50%;
+    margin-top: 2rem;
+    margin-left: 2rem;
 }
 
-#date{
-    margin-top:10px;
+button:hover{
+    background-color: darkgray;
+    transform: scale(1.1);
+    transition : all .5s;
+    cursor: pointer;
 }
-
