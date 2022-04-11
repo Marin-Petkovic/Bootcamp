@@ -5,10 +5,10 @@ INSERT INTO Developer (FirstName, LastName, ProjectID, Salary) VALUES
 ('Paula', 'Terry', 2, 12000),
 ('Jon', 'Joseph', 3, 5500);
 
-INSERT INTO Project VALUES
-(1, 'BookInventory', 'GISKO', 55000),
-(2, 'WebApp', 'GISKO', 32500),
-(3, 'FitnessApp', 'PolleoSport', 88200);
+INSERT INTO Project (Name, ClientName, Budget) VALUES
+('BookInventory', 'GISKO', 55000),
+('WebApp', 'GISKO', 32500),
+('FitnessApp', 'PolleoSport', 88200);
 
 
 

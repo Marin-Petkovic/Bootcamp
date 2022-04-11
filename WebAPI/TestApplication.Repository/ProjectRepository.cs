@@ -88,7 +88,7 @@ namespace TestApplication.Repository
         public async Task<IProject> InsertProjectAsync(IProject project)
         { 
             SqlCommand command = new SqlCommand
-                ($"INSERT INTO Project VALUES ({project.Id}, '{project.Name}', '{project.ClientName}', {project.Budget});", connection);
+                ($"INSERT INTO Project (Name, ClientName, Budget) VALUES ('{project.Name}', '{project.ClientName}', {project.Budget});", connection);
 
             await connection.OpenAsync();
 
