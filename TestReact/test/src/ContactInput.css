@@ -1,0 +1,19 @@
+
+
+
+form{
+    padding: 1.5rem;
+}
+
+input{
+    height: 2rem;
+}
+
+pre{
+    font-size: 1rem;
+}
+
+.inputMessage{
+    color: red;
+}
+

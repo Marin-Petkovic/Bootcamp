@@ -1,0 +1,13 @@
+
+.listElem{
+    display: inline;
+    list-style-type: none;
+    margin-left: 1rem;
+    color: white;
+    font-size: 2rem;
+}
+
+#navDiv{
+    background-color: rgb(75, 165, 224);
+    padding: 10px;
+}
