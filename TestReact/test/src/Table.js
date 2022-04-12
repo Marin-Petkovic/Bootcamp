@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import './Table.css'
-import InsertTableRow from './InsertTableRow';
 
 class Table extends Component{
     render(){
@@ -11,9 +10,11 @@ class Table extends Component{
                         <th>First Name</th>
                         <th>Last Name</th>
                     </tr>
-                    <InsertTableRow />
-
-
+                    <tr>
+                        <td id="fnameToInsert"></td>
+                        <td id="lnameToInsert"></td>
+                    </tr>
+                    
                 </table>
             </div>
         );

@@ -1,6 +1,5 @@
 import './ContactInput.css';
 import './Table.js';
-import './InsertTableRow.js';
 
 function ContactInput(){
     return (
@@ -28,10 +27,8 @@ function ContactInput(){
     );
 }
 
-let person = {
-    firstName: "",
-    lastName: ""
-}
+
+
 const listOfPeople = [];
 
 
@@ -44,13 +41,19 @@ function validateForm(event){
     checkInput(lastNameInput, "lnameMessage");
 
     if (firstNameInput != "" && lastNameInput != ""){
+        let person = {
+            firstName: "",
+            lastName: ""
+        }
         person.firstName = document.getElementById("fname").value;
         person.lastName = document.getElementById("lname").value;
 
         listOfPeople.push(person);
 
+        
         document.getElementById("fnameToInsert").innerHTML = person.firstName;
         document.getElementById("lnameToInsert").innerHTML = person.lastName;
+
 
 
         //document.getElementById("fnameData").innerHTML = person.firstName;
@@ -60,6 +63,7 @@ function validateForm(event){
     }
 
 }
+
 
 
 function checkInput(x, elem){

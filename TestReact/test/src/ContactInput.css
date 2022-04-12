@@ -1,6 +1,4 @@
 
-
-
 form{
     padding: 1.5rem;
 }
@@ -17,3 +15,13 @@ pre{
     color: red;
 }
 
+
+#submitBtn{
+    width: 50%;
+}
+#submitBtn:hover{
+    transform: scale(1.5);
+    transition-duration: .5s;
+    background-color: aliceblue;
+    cursor: pointer;
+}
