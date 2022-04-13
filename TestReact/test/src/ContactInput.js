@@ -1,25 +1,69 @@
+import { useState } from 'react';
 import './ContactInput.css';
-import './Table.js';
 
 function ContactInput(){
+    const person = {firstName: "", lastName: ""};
+    const [people, setPeople] = useState([person]);
+    const listOfPeople = people.map(person => <li>{person.firstName} {person.lastName}</li>);
+
+    function validateForm(event){
+        event.preventDefault();
+
+        let firstNameInput = "";
+        let lastNameInput = "";
+
+    
+        firstNameInput = document.forms["mainForm"]["fname"].value;
+        lastNameInput = document.forms["mainForm"]["lname"].value;
+    
+        checkInput(firstNameInput, "fnameMessage");
+        checkInput(lastNameInput, "lnameMessage");
+    
+        if (firstNameInput != "" && lastNameInput != ""){
+            const newPerson = {
+                firstName: firstNameInput,
+                lastName: lastNameInput
+            };
+            
+            const newPeople = [...people, newPerson];
+            setPeople(newPeople);
+
+            listOfPeople = people.map(person => <li>{person.firstName} {person.lastName}</li>);
+            }
+
+        
+        }
+
+
     return (
-        <div class="contactDiv">
+        <div className="contactDiv">
             <form name="mainForm">
-                <lable for="fname">First name:</lable><br></br>
+                <lable htmlFor="fname">First name:</lable><br></br>
                 <input type="text" id="fname" name="fname"></input>
-                <span id="fnameMessage" class="inputMessage"></span>
+                <span id="fnameMessage" className="inputMessage"></span>
                 
                 <br></br>
                 <br></br>
 
-                <label for="lname">Last name:</label><br></br>
+                <label htmlFor="lname">Last name:</label><br></br>
                 <input type="text" id="lname" name="lname"></input>
-                <span id="lnameMessage" class="inputMessage"></span>
+                <span id="lnameMessage" className="inputMessage"></span>
 
                 <br></br>
                 <br></br>
 
                 <input onClick={validateForm} id="submitBtn" type="submit" value="Submit"></input>
+
+                <table>
+                    <tr>
+                        <th>Names</th>
+                        
+                    </tr>
+                    <ul>
+                        {listOfPeople}
+                    </ul>
+                    
+                </table>
             </form>
 
             <pre id="display"></pre>
@@ -29,30 +73,6 @@ function ContactInput(){
 
 
 
-const listOfPeople = [];
-
-
-function validateForm(event){
-    event.preventDefault();
-    let firstNameInput = document.forms["mainForm"]["fname"].value;
-    let lastNameInput = document.forms["mainForm"]["lname"].value;
-
-    checkInput(firstNameInput, "fnameMessage");
-    checkInput(lastNameInput, "lnameMessage");
-
-    if (firstNameInput != "" && lastNameInput != ""){
-        let person = {
-            firstName: "",
-            lastName: ""
-        }
-        person.firstName = document.getElementById("fname").value;
-        person.lastName = document.getElementById("lname").value;
-
-        listOfPeople.push(person);
-
-        
-        document.getElementById("fnameToInsert").innerHTML = person.firstName;
-        document.getElementById("lnameToInsert").innerHTML = person.lastName;
 
 
 
@@ -60,9 +80,9 @@ function validateForm(event){
         //document.getElementById("lnameData").innerHTML = person.lastName;
 
         //document.getElementById("display").innerHTML = JSON.stringify(listOfPeople, null, 2);
-    }
+    
 
-}
+
 
 
 

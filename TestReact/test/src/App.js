@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import NavBar from './NavBar';
 import ContactInput from './ContactInput';
-import Table from './Table';
 
 function App() {
   return (
@@ -10,7 +9,7 @@ function App() {
       <NavBar />
       <header className="App-header">
       <ContactInput />
-      <Table />
+     
         <img src={logo} className="App-logo" alt="logo" />
         
         <a
