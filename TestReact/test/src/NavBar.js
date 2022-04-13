@@ -4,36 +4,38 @@ import { useState } from 'react';
 function NavBar(){
     const rgb = {red: 75, green: 165, blue: 224};
     const [color, setColor] = useState(rgb);
-
-    function ChangeColor(){
-        
-        const newColor = {
+    let rgbString = "rgb(" + color.red + "," + color.green + "," + color.blue + ")";
+    let styleInline = {
+        background: rgbString
+    }
+    
+    function ChangeColorDark(){
+        const newColorDark = {
             red: (color.red - 10),
             green: (color.green - 10),
             blue: (color.blue - 10)
         };
-
-        setColor(newColor);
-
-        var inlineStyle = {
-            backgroundColor: "rgb( {newColor.red} {newColor.green} {newColor.blue})"
-        };
-        
-        console.log(newColor);
-
-        document.getElementById("navDiv").style.backgroundColor = {color:"red"};
-
-
-        
+        setColor(newColorDark);
     }
 
+    function ChangeColorBright(){
+        const newColorBright = {
+            red: (color.red + 10),
+            green: (color.green + 10),
+            blue: (color.blue + 10)
+        };
+        setColor(newColorBright);
+    }
+    
     return (
-        <div id="navDiv">
+        <div style={styleInline} id="navDiv">
             <ul>
                 <li className="listElem">Home</li>
                 <li className="listElem">Contact</li>
                 <li className="listElem">About</li>
-                <li id="listButton"><button onClick={ChangeColor} id="button">Click to make the navbar darker</button></li>
+                <li><button onClick={ChangeColorDark} className="button">-</button></li>
+                <li>Adjust brigtness of the navbar</li>
+                <li><button onclick={ChangeColorBright} className="button">+</button></li>
             </ul>
         </div>
     );
