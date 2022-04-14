@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import NavBar from './NavBar';
 import ContactInput from './ContactInput';
+import LanguageForm from './LanguageForm';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <NavBar />
       <header className="App-header">
       <ContactInput />
+      <LanguageForm />
      
         <img src={logo} className="App-logo" alt="logo" />
         

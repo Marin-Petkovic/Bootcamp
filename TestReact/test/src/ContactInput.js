@@ -4,17 +4,13 @@ import './ContactInput.css';
 function ContactInput(){
     const person = {firstName: "", lastName: ""};
     const [people, setPeople] = useState([person]);
-    const listOfPeople = people.map(person => <li>{person.firstName} {person.lastName}</li>);
+    let listOfPeople = people.map(person => <li>{person.firstName} {person.lastName}</li>);
 
     function validateForm(event){
         event.preventDefault();
 
-        let firstNameInput = "";
-        let lastNameInput = "";
-
-    
-        firstNameInput = document.forms["mainForm"]["fname"].value;
-        lastNameInput = document.forms["mainForm"]["lname"].value;
+        let firstNameInput = document.forms["mainForm"]["fname"].value;
+        let lastNameInput = document.forms["mainForm"]["lname"].value;
     
         checkInput(firstNameInput, "fnameMessage");
         checkInput(lastNameInput, "lnameMessage");
@@ -38,7 +34,7 @@ function ContactInput(){
     return (
         <div className="contactDiv">
             <form name="mainForm">
-                <lable htmlFor="fname">First name:</lable><br></br>
+                <label htmlFor="fname">First name:</label><br></br>
                 <input type="text" id="fname" name="fname"></input>
                 <span id="fnameMessage" className="inputMessage"></span>
                 
@@ -59,9 +55,15 @@ function ContactInput(){
                         <th>Names</th>
                         
                     </tr>
+                    <tr>
+
+                    
+
                     <ul>
                         {listOfPeople}
                     </ul>
+                    </tr>
+                    
                     
                 </table>
             </form>
@@ -70,19 +72,6 @@ function ContactInput(){
         </div>
     );
 }
-
-
-
-
-
-
-        //document.getElementById("fnameData").innerHTML = person.firstName;
-        //document.getElementById("lnameData").innerHTML = person.lastName;
-
-        //document.getElementById("display").innerHTML = JSON.stringify(listOfPeople, null, 2);
-    
-
-
 
 
 

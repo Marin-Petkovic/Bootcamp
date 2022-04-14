@@ -7,7 +7,8 @@ function NavBar(){
     let rgbString = "rgb(" + color.red + "," + color.green + "," + color.blue + ")";
     let styleInline = {
         background: rgbString
-    }
+    };
+    
     
     function ChangeColorDark(){
         const newColorDark = {
@@ -17,14 +18,17 @@ function NavBar(){
         };
         setColor(newColorDark);
     }
+    
 
     function ChangeColorBright(){
+        console.log("Hello");
         const newColorBright = {
             red: (color.red + 10),
             green: (color.green + 10),
             blue: (color.blue + 10)
         };
         setColor(newColorBright);
+        console.log(newColorBright); 
     }
     
     return (
@@ -35,7 +39,7 @@ function NavBar(){
                 <li className="listElem">About</li>
                 <li><button onClick={ChangeColorDark} className="button">-</button></li>
                 <li>Adjust brigtness of the navbar</li>
-                <li><button onclick={ChangeColorBright} className="button">+</button></li>
+                <li><button onClick={ChangeColorBright} className="button">+</button></li>
             </ul>
         </div>
     );
