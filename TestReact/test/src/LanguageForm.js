@@ -4,8 +4,7 @@ import './LanguageForm.css';
 class LanguageForm extends React.Component {
     constructor(props) {
         super(props);
-        let languageInfo = {favoriteLang: "", leastFavoriteLang: ""};
-        // add "Id" to be used as a key later (when mapping)
+        let languageInfo = {favoriteLang: "", leastFavoriteLang: "", id: 0};
         this.state = {
             list: [languageInfo]
         };
@@ -22,9 +21,9 @@ class LanguageForm extends React.Component {
         if (favLangInput != "" && leastFavLangInput != ""){
             const newInfo = {
                 favoriteLang: favLangInput,
-                leastFavoriteLang: leastFavLangInput
+                leastFavoriteLang: leastFavLangInput,
+                id: this.state.list.id + 1
             };
-            
             const newState = {
                 list: [...this.state.list, newInfo]
             } 
@@ -61,7 +60,7 @@ class LanguageForm extends React.Component {
 
                         {this.state.list.map(item => (
                             <tr>
-                                <td>{item.favoriteLang}</td>
+                                <td key={item.id}>{item.favoriteLang}</td>
                                 <td>{item.leastFavoriteLang}</td>
                             </tr>
                         ))}
