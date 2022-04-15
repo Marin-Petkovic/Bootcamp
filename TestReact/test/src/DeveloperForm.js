@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
-import './ContactInput.css';
+import './DeveloperForm.css';
 import GetDevelopers from './GetDevelopers';
 
 
-function ContactInput(){
+function DeveloperForm(){
     //const person = {firstName: "", lastName: ""};
     const [people, setPeople] = useState([]);
     let listOfPeople = people.map(person => <li>{person.firstName} {person.lastName}</li>);
@@ -52,7 +52,7 @@ function ContactInput(){
 
 
     return (
-        <div className="contactDiv">
+        <div className="formDiv">
             <form name="mainForm">
                 <label htmlFor="fname">First name:</label><br></br>
                 <input type="text" id="fname" name="fname"></input>
@@ -104,4 +104,4 @@ function checkInput(x, elem){
     }
 }
 
-export default ContactInput;
+export default DeveloperForm;

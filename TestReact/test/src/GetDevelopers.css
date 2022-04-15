@@ -1,5 +1,5 @@
 th{
-    border: 2px solid;
+    /*border: 2px solid;*/
     padding: 5px;
 }
 
@@ -9,7 +9,9 @@ th{
 }
 
 #searchDiv{
-    border: 2px solid;
+    /*border: 2px solid;*/
+    background-color: #282c34;
+    color: white;
 }
 
 #clickBtn{
@@ -20,6 +22,7 @@ th{
     margin-right: 80%;
 }
 
+/*
 #filterDiv{
     border: 2px solid;
-}
+}*/

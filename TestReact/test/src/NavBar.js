@@ -1,5 +1,11 @@
 import './NavBar.css';
 import { useState } from 'react';
+import InsertPage from './InsertPage';
+import {Link} from 'react-router-dom';
+import React from 'react';
+import App from './App';
+import UpdatePage from './UpdatePage';
+
 
 function NavBar(){
     const rgb = {red: 75, green: 165, blue: 224};
@@ -34,9 +40,9 @@ function NavBar(){
     return (
         <div style={styleInline} id="navDiv">
             <ul>
-                <li className="listElem">Home</li>
-                <li className="listElem">Contact</li>
-                <li className="listElem">About</li>
+                <li className="listElem"><Link to="/" component={<App />}>Retrieve Developers</Link></li>
+                <li className="listElem"><Link to="/insert" component={<InsertPage />}>Insert new Developer</Link></li>
+                <li className="listElem"><Link to="/update" component={<UpdatePage />}>Update a Developer</Link></li>
                 <li><button onClick={changeColorDark} className="button">-</button></li>
                 <li>Adjust brigtness of the navbar</li>
                 <li><button onClick={changeColorBright} className="button">+</button></li>

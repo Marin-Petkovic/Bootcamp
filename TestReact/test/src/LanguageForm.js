@@ -1,3 +1,4 @@
+/*
 import React from 'react';
 import './LanguageForm.css';
 
@@ -75,16 +76,7 @@ class LanguageForm extends React.Component {
 
 export default LanguageForm;
 
-
-/*
-IncreaseCounter = () => {
-        this.setState({counter: this.state.counter + 1});
-    }
-
-
-<button onClick={this.IncreaseCounter}>Click me</button>
-                <h2>You clicked the button {this.state.counter} times</h2>
-                */
+                
 
 function checkInput(x, elem){
     if(x == ""){
@@ -94,3 +86,4 @@ function checkInput(x, elem){
         document.getElementById(elem).textContent = "";
     }
 }
+*/

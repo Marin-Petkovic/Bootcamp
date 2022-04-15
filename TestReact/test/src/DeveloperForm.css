@@ -1,24 +1,21 @@
 
-form{
+.formDiv{
     padding: 1.5rem;
+    color: white;
 }
 
 input{
     height: 2rem;
 }
 
-pre{
-    font-size: 1rem;
-}
+
 
 .inputMessage{
     color: red;
 }
 
 
-#submitBtn{
-    width: 50%;
-}
+
 #submitBtn:hover{
     transform: scale(1.5);
     transition-duration: .5s;

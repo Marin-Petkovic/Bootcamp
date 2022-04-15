@@ -494,3 +494,6 @@ C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.WebApi\bin
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.WebApi\bin\System.Web.Cors.dll
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.WebApi\bin\System.Web.Http.Cors.dll
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.WebApi\bin\System.Web.Http.Cors.xml
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.WebApi\bin\System.Web.Cors.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.WebApi\bin\System.Web.Http.Cors.dll
+C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.WebApi\bin\System.Web.Http.Cors.xml
