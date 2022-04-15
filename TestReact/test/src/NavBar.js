@@ -10,7 +10,7 @@ function NavBar(){
     };
     
     
-    function ChangeColorDark(){
+    function changeColorDark(){
         const newColorDark = {
             red: (color.red - 10),
             green: (color.green - 10),
@@ -20,7 +20,7 @@ function NavBar(){
     }
     
 
-    function ChangeColorBright(){
+    function changeColorBright(){
         console.log("Hello");
         const newColorBright = {
             red: (color.red + 10),
@@ -37,9 +37,9 @@ function NavBar(){
                 <li className="listElem">Home</li>
                 <li className="listElem">Contact</li>
                 <li className="listElem">About</li>
-                <li><button onClick={ChangeColorDark} className="button">-</button></li>
+                <li><button onClick={changeColorDark} className="button">-</button></li>
                 <li>Adjust brigtness of the navbar</li>
-                <li><button onClick={ChangeColorBright} className="button">+</button></li>
+                <li><button onClick={changeColorBright} className="button">+</button></li>
             </ul>
         </div>
     );

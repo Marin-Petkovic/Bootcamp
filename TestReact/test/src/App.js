@@ -3,15 +3,21 @@ import './App.css';
 import NavBar from './NavBar';
 import ContactInput from './ContactInput';
 import LanguageForm from './LanguageForm';
+import GetDevelopers from './GetDevelopers';
 
 function App() {
+
+
   return (
     <div className="App">
+      
       <NavBar />
+      
       <header className="App-header">
+      <GetDevelopers />
       <ContactInput />
       <LanguageForm />
-     
+      
         <img src={logo} className="App-logo" alt="logo" />
         
         <a

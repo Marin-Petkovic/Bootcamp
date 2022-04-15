@@ -12,12 +12,15 @@ using System.Threading.Tasks;
 using TestApplication.Service.Common;
 using TestApplication.Model.Common;
 using TestApplication.Common;
+using System.Web.Http.Cors;
 
 namespace TestApplication.WebApi.Controllers
 {
-    
+
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DeveloperController : ApiController
     {
+        
         
         protected IDeveloperService Service { get; set; }
         
@@ -28,12 +31,13 @@ namespace TestApplication.WebApi.Controllers
         }
 
 
-
+        
         [HttpGet]
         [Route("api/RetrieveAllDevs")]
         public async Task<HttpResponseMessage> RetrieveListOfDevelopersAsync
             ([FromUri]DeveloperSortingRest sortInfo, [FromUri]DeveloperPagingRest pageInfo, [FromUri]DeveloperFilteringRest filterInfo)   
         {
+            
             IDeveloperSorting sorting = sortInfo;
             IDeveloperPaging paging = pageInfo;
             IDeveloperFiltering filtering = filterInfo;
