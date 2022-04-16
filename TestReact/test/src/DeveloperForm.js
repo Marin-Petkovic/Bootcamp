@@ -6,15 +6,12 @@ import GetDevelopers from './GetDevelopers';
 
 function DeveloperForm(){
     //const person = {firstName: "", lastName: ""};
-    const [people, setPeople] = useState([]);
-    let listOfPeople = people.map(person => <li>{person.firstName} {person.lastName}</li>);
+    //const [people, setPeople] = useState([]);
+    //let listOfPeople = people.map(person => <li>{person.firstName} {person.lastName}</li>);
 
     function validateForm(event){
         event.preventDefault();
-
- 
         
-
         let firstNameInput = document.forms["mainForm"]["fname"].value;
         let lastNameInput = document.forms["mainForm"]["lname"].value;
         let projectIdInput = document.forms["mainForm"]["projectId"].value;
@@ -33,18 +30,15 @@ function DeveloperForm(){
             
             let urlString = "https://localhost:44346/api/InsertDev";
             axios.post(urlString, newPerson).then((response) => {
-                let insertedDev = response.data;
-                console.log(insertedDev);
-                if (insertedDev != null){
-                    setPeople([...people, newPerson])
-                }
+                //let insertedDev = response.data;
+                document.getElementById("submitMessage").textContent = "Successfully submitted!";
+                
+                
                 
             })
 
             //const newPeople = [...people, newPerson];
             //setPeople(newPeople);
-
-            listOfPeople = people.map(person => <li>{person.firstName} {person.lastName}</li>);
             }
 
         
@@ -76,19 +70,10 @@ function DeveloperForm(){
                 <br></br>
 
                 <input onClick={validateForm} id="submitBtn" type="submit" value="Submit"></input>
-
-                <table>
-                    <tr>
-                    <ul>
-                        {listOfPeople}
-                    </ul>
-                    </tr>
-                    
-                    
-                </table>
+                <p id="submitMessage"></p>
             </form>
 
-            <pre id="display"></pre>
+
         </div>
     );
 }
@@ -98,9 +83,10 @@ function DeveloperForm(){
 function checkInput(x, elem){
     if(x == ""){
         document.getElementById(elem).textContent = "!!";
+        document.getElementById("submitMessage").textContent = "";
     }
     else{
-        document.getElementById(elem).textContent = "";
+        document.getElementById(elem).textContent = "";  
     }
 }
 

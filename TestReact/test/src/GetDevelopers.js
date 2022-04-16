@@ -17,13 +17,12 @@ function GetDevelopers(){
         
         let sortByChecked = document.querySelector('input[name="sortByForm"]:checked');
         let sortOrderChecked = document.querySelector('input[name="sortOrderForm"]:checked');
-        let sortBy = sortByChecked.value;
-        let sortOrder = sortOrderChecked.value;
+
         let urlString = "https://localhost:44346/api/RetrieveAllDevs";
         if (sortByChecked != null){
-            urlString = urlString + "?SortBy=" + sortBy;
+            urlString = urlString + "?SortBy=" + sortByChecked.value;
             if (sortOrderChecked != null){
-                urlString = urlString + "&SortOrder=" + sortOrder;
+                urlString = urlString + "&SortOrder=" + sortOrderChecked.value;
             }
         }
 

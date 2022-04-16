@@ -1,9 +1,18 @@
+import NavBar from "./NavBar";
+import './UpdatePage.css';
+import UpdateForm from "./¸UpdateForm";
 
 
 function UpdatePage(){
     return (
         <div>
-            <h1>This is update page</h1>
+            <header>
+                <NavBar />
+            </header>
+            
+            <section>
+                <UpdateForm />
+            </section>
         </div>
     );
 }
