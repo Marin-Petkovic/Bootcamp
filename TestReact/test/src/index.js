@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import InsertPage from './InsertPage.js';
 import UpdatePage from './UpdatePage';
+import DeletePage from './DeletePage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,9 +15,9 @@ ReactDOM.render(
         <Route path="/" element={<App />}/>
         <Route path="/insert" element={<InsertPage />}/>
         <Route path="/update" element={<UpdatePage />}/>
+        <Route path="/delete" element={<DeletePage />}/>
       </Routes>
     </Router>
-    
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -28,6 +28,7 @@ function UpdateForm(){
     return (
         <div>
             <form id="updateFormDiv" name="updateForm">
+                <h1>Update a developer</h1>
                 <label htmlFor="devId">Developer ID:</label><br></br>
                 <input type="text" id="devId"></input>
                 <span id="devIdMessage" className="updateMessage"></span>

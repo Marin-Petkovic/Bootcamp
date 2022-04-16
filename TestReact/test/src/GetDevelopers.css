@@ -6,16 +6,19 @@ th{
 #table{
     margin-left: auto;
     margin-right: auto;
+    font-size: 2rem;
 }
 
 #searchDiv{
     /*border: 2px solid;*/
     background-color: #282c34;
     color: white;
+    padding: 1.5rem;
 }
 
 #clickBtn{
     position: relative;
+    margin-top: 1rem;
 }
 #filter{
     position: relative;

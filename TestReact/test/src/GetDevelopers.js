@@ -46,8 +46,8 @@ function GetDevelopers(){
 
     return (
         <div id="searchDiv">
-            <button id="clickBtn" onClick={writeData}>Click me to show devs</button>
-            <div id="filterDiv">
+            <h1>Retrieve Developers</h1>
+            <div id="sortDiv">
 
                 <form name="sortByForm">
                     <span>Sort by: </span>
@@ -70,9 +70,8 @@ function GetDevelopers(){
                     <label htmlFor="sortDesc">DESC</label>
 
                 </form>
-
-                
             </div>
+            <button id="clickBtn" onClick={writeData}>Click me to show devs</button>
             
 
             <table id="table">

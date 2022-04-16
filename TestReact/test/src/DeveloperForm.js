@@ -48,6 +48,7 @@ function DeveloperForm(){
     return (
         <div className="formDiv">
             <form name="mainForm">
+                <h1>Insert a developer</h1>
                 <label htmlFor="fname">First name:</label><br></br>
                 <input type="text" id="fname" name="fname"></input>
                 <span id="fnameMessage" className="inputMessage"></span>

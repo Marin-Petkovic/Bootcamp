@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import React from 'react';
 import App from './App';
 import UpdatePage from './UpdatePage';
+import DeletePage from './DeletePage';
 
 
 function NavBar(){
@@ -43,6 +44,7 @@ function NavBar(){
                 <li className="listElem"><Link to="/" component={<App />}>Retrieve Developers</Link></li>
                 <li className="listElem"><Link to="/insert" component={<InsertPage />}>Insert new Developer</Link></li>
                 <li className="listElem"><Link to="/update" component={<UpdatePage />}>Update a Developer</Link></li>
+                <li className="listElem"><Link to="/delete" component={<DeletePage />}>Delete a developer</Link></li>
                 <li><button onClick={changeColorDark} className="button">-</button></li>
                 <li>Adjust brigtness of the navbar</li>
                 <li><button onClick={changeColorBright} className="button">+</button></li>
