@@ -1,11 +1,10 @@
-import NavBar from './NavBar';
-import DeleteForm from './DeleteForm';
+import NavBar from '../NavBar';
+import DeleteForm from '../Forms/DeleteForm';
 
 function DeletePage(){
     return (
         <div>
             <header>
-                <NavBar />
             </header>
 
             <section>

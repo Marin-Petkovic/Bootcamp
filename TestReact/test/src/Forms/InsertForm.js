@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import './DeveloperForm.css';
-import GetDevelopers from './GetDevelopers';
+import './InsertForm.css';
 
 
 function DeveloperForm(){

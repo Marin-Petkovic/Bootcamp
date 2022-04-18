@@ -1,11 +1,11 @@
 import './NavBar.css';
 import { useState } from 'react';
-import InsertPage from './InsertPage';
+import InsertPage from './Pages/InsertPage';
 import {Link} from 'react-router-dom';
 import React from 'react';
-import App from './App';
-import UpdatePage from './UpdatePage';
-import DeletePage from './DeletePage';
+import App from './Pages/RetrievePage';
+import UpdatePage from './Pages/UpdatePage';
+import DeletePage from './Pages/DeletePage';
 
 
 function NavBar(){
@@ -28,14 +28,12 @@ function NavBar(){
     
 
     function changeColorBright(){
-        console.log("Hello");
         const newColorBright = {
             red: (color.red + 10),
             green: (color.green + 10),
             blue: (color.blue + 10)
         };
         setColor(newColorBright);
-        console.log(newColorBright); 
     }
     
     return (

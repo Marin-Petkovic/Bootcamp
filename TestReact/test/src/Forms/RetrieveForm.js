@@ -1,18 +1,21 @@
 import axios from 'axios';
-import { useState } from 'react';
-import './GetDevelopers.css';
+import { useEffect, useState } from 'react';
+import './RetrieveForm.css';
 
 
-function GetDevelopers(){
+function RetrieveForm(){
     const [developers, setDevelopers] = useState([{}]);
     const listOfDevs = developers.map(dev =>
     <tr key={dev.Id}>
-        {/*<td>{dev.Id}</td>*/}
         <td>{dev.FirstName}</td>
         <td>{dev.LastName}</td>
         <td>{dev.ProjectId}</td>
     </tr>)
-
+   
+    useEffect(() => {
+        console.log("new render");
+    }, [developers])
+        
     function writeData(){
         
         let sortByChecked = document.querySelector('input[name="sortByForm"]:checked');
@@ -26,10 +29,6 @@ function GetDevelopers(){
             }
         }
 
-
-        console.log(urlString);
-        
-
         axios.get(urlString).then((response) => {
             const retrievedData = response.data;
             
@@ -38,7 +37,6 @@ function GetDevelopers(){
             setDevelopers(retrievedData);
             
         })
-        .catch(error => console.error('Error: ' + {error}));
     }
 
 
@@ -76,7 +74,6 @@ function GetDevelopers(){
 
             <table id="table">
                 <tr>
-                    {/*<th>Id</th>*/}
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Project Id</th>
@@ -89,4 +86,4 @@ function GetDevelopers(){
     );
 }
 
-export default GetDevelopers;
+export default RetrieveForm;

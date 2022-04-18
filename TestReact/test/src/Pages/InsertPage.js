@@ -1,16 +1,15 @@
-import NavBar from './NavBar.js';
-import './NavBar.css';
-import DeveloperForm from './DeveloperForm';
+import NavBar from '../NavBar.js';
+import '../NavBar.css';
+import InsertForm from '../Forms/InsertForm';
 
 function InsertPage(){
     return (
         <div>
             <header>
-                <NavBar /> 
             </header>
             
             <section>
-                <DeveloperForm />
+                <InsertForm />
             </section>
             
         </div>

@@ -1,23 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import InsertPage from './InsertPage.js';
-import UpdatePage from './UpdatePage';
-import DeletePage from './DeletePage';
+import InsertPage from './Pages/InsertPage';
+import UpdatePage from './Pages/UpdatePage';
+import DeletePage from './Pages/DeletePage';
+import RetrievePage from './Pages/RetrievePage';
+import App from './App';
+import NavBar from './NavBar';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />}/>
-        <Route path="/insert" element={<InsertPage />}/>
-        <Route path="/update" element={<UpdatePage />}/>
-        <Route path="/delete" element={<DeletePage />}/>
-      </Routes>
-    </Router>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,13 +1,12 @@
-import NavBar from "./NavBar";
-import './UpdatePage.css';
-import UpdateForm from "./UpdateForm";
+import NavBar from "../NavBar";
+import '../UpdatePage.css';
+import UpdateForm from "../Forms/UpdateForm";
 
 
 function UpdatePage(){
     return (
         <div>
             <header>
-                <NavBar />
             </header>
             
             <section>
@@ -18,3 +17,4 @@ function UpdatePage(){
 }
 
 export default UpdatePage;
+
