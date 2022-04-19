@@ -20,3 +20,14 @@ C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service.
 C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Common.pdb
 C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Common.dll
 C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplication.Service.Common\bin\Debug\TestApplication.Common.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\bin\Debug\TestApplication.Service.Common.dll
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\bin\Debug\TestApplication.Service.Common.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\bin\Debug\TestApplication.Common.dll
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\bin\Debug\TestApplication.Model.Common.dll
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\bin\Debug\TestApplication.Common.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\bin\Debug\TestApplication.Model.Common.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.csproj.AssemblyReference.cache
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.csproj.CoreCompileInputs.cache
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.csproj.CopyComplete
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.dll
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplication.Service.Common\obj\Debug\TestApplication.Service.Common.pdb

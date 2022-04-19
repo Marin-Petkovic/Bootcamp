@@ -4,21 +4,21 @@ import InsertPage from './Pages/InsertPage';
 import UpdatePage from './Pages/UpdatePage';
 import DeletePage from './Pages/DeletePage';
 import RetrievePage from './Pages/RetrievePage';
+import SpecifiedUpdate from "./Forms/SpecifiedUpdate";
+import SpecifiedDelete from "./Forms/SpecifiedDelete";
 
 function App (){
     return (
         <Router>
-            <div>
                 <NavBar />
-                <div>
                     <Routes>
-                    <Route path="/" element={<RetrievePage />}/>
-                    <Route path="/insert" element={<InsertPage />}/>
-                    <Route path="/update" element={<UpdatePage />}/>
-                    <Route path="/delete" element={<DeletePage />}/>
+                        <Route path="/" element={<RetrievePage />}/>
+                        <Route path="/insert" element={<InsertPage />}/>
+                        <Route path="/update" element={<UpdatePage />}/>
+                        <Route path="/delete" element={<DeletePage />}/>
+                        <Route path="/update/:id" element={<SpecifiedUpdate />}/>
+                        <Route path="/delete/:id" element={<SpecifiedDelete />}/>
                     </Routes>
-                </div>
-            </div>
         </Router>
     );
 }

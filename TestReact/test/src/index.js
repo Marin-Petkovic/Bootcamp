@@ -2,13 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import InsertPage from './Pages/InsertPage';
-import UpdatePage from './Pages/UpdatePage';
-import DeletePage from './Pages/DeletePage';
-import RetrievePage from './Pages/RetrievePage';
 import App from './App';
-import NavBar from './NavBar';
+
 
 ReactDOM.render(
   <React.StrictMode>

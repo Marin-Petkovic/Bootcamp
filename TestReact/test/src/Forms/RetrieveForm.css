@@ -25,7 +25,15 @@ th{
     margin-right: 80%;
 }
 
-/*
-#filterDiv{
-    border: 2px solid;
-}*/
+
+.tableBtn{
+    margin-right: 1rem;
+}
+
+#tableDeleteBtn{
+    background-color: darkred;
+}
+
+#tableUpdateBtn{
+    background-color: darkblue;
+}

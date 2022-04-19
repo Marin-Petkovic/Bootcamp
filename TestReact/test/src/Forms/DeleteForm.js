@@ -2,8 +2,7 @@ import axios from "axios";
 import './DeleteForm.css';
 
 
-function DeleteForm(){
-    
+function DeleteForm({idToDelete}){
     function validateDeleteForm(event){
         event.preventDefault();
 
@@ -26,7 +25,7 @@ function DeleteForm(){
             <form id="deleteForm" name="deleteForm">
                 <h1>Delete a developer</h1>
                 <label htmlFor="devId">Developer ID:</label><br></br>
-                <input type="number" id="devId"></input>
+                <input type="number" id="devId" value={idToDelete} placeholder={idToDelete}></input>
                 <span id="deleteInputMessage" class="deleteMessage"></span>
 
                 <br></br>

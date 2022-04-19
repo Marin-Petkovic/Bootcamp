@@ -16,3 +16,12 @@ C:\Users\student\Documents\Repositories\Bootcamp\WebAPI\TestApplicationModel\obj
 C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplicationModel\bin\Debug\TestApplication.Model.Common.dll
 C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplicationModel\bin\Debug\TestApplication.Model.Common.pdb
 C:\Users\ProBook\Desktop\Bootcamp\BootcampRepo\WebAPI\TestApplicationModel\obj\Debug\TestApplicationModel.csproj.CopyComplete
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplicationModel\bin\Debug\TestApplicationModel.dll
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplicationModel\bin\Debug\TestApplicationModel.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplicationModel\bin\Debug\TestApplication.Model.Common.dll
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplicationModel\bin\Debug\TestApplication.Model.Common.pdb
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplicationModel\obj\Debug\TestApplicationModel.csproj.AssemblyReference.cache
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplicationModel\obj\Debug\TestApplicationModel.csproj.CoreCompileInputs.cache
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplicationModel\obj\Debug\TestApplicationModel.csproj.CopyComplete
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplicationModel\obj\Debug\TestApplicationModel.dll
+C:\Users\student\Documents\Repositories\Bootcamp\TestApplication\TestApplicationModel\obj\Debug\TestApplicationModel.pdb

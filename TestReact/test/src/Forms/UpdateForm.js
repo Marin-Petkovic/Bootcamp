@@ -1,7 +1,7 @@
 import axios from 'axios';
 import './UpdateForm.css';
 
-function UpdateForm(){
+function UpdateForm({idToUpdate}){
 
     function validateUpdateForm(event){
         event.preventDefault();
@@ -30,7 +30,7 @@ function UpdateForm(){
             <form id="updateFormDiv" name="updateForm">
                 <h1>Update a developer</h1>
                 <label htmlFor="devId">Developer ID:</label><br></br>
-                <input type="text" id="devId"></input>
+                <input type="text" id="devId" value={idToUpdate} placeholder={idToUpdate}></input>
                 <span id="devIdMessage" className="updateMessage"></span>
 
                 <br></br>

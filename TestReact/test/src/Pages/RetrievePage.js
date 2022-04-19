@@ -1,5 +1,4 @@
 import '../RetrievePage.css';
-import NavBar from '../NavBar';
 import RetrieveForm from '../Forms/RetrieveForm';
 
 function RetrievePage() {
