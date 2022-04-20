@@ -6,6 +6,7 @@ import DeletePage from './Pages/DeletePage';
 import RetrievePage from './Pages/RetrievePage';
 import SpecifiedUpdate from "./Forms/SpecifiedUpdate";
 import SpecifiedDelete from "./Forms/SpecifiedDelete";
+import TestPage from "./Pages/TestPage";
 
 function App (){
     return (
@@ -18,6 +19,7 @@ function App (){
                         <Route path="/delete" element={<DeletePage />}/>
                         <Route path="/update/:id" element={<SpecifiedUpdate />}/>
                         <Route path="/delete/:id" element={<SpecifiedDelete />}/>
+                        <Route path="/test" element={<TestPage />}/>
                     </Routes>
         </Router>
     );
